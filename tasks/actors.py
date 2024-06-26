@@ -1,4 +1,4 @@
-import models
+import tasks.models
 import abc
 
 
@@ -16,7 +16,7 @@ class Actor(abc.ABC):
 class LLMActor(Actor):
 
     def __init__(self, 
-                 model: models.LlamaModel, 
+                 model: tasks.models.LlamaModel, 
                  name: str,
                  role: str, 
                  attributes: list[str], 

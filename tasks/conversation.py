@@ -1,4 +1,4 @@
-import actors
+import tasks.actors
 import pandas as pd
 
 import collections
@@ -7,7 +7,7 @@ import time
 
 class ConversationManager:
 
-    def __init__(self, actors: list[actors.Actor], history_len: int=5, conv_len: int=5) -> None:
+    def __init__(self, actors: list[tasks.actors.Actor], history_len: int=5, conv_len: int=5) -> None:
         self.actors = actors
         self.history_len = history_len
         self.conv_len = conv_len

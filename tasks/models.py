@@ -2,9 +2,10 @@ import abc
 import llama_cpp
 
 
-class LLM(abc.ABC):
+class GeneratingAgent(abc.ABC):
     """
-    Abstract class encapsulating all LLMs to be used in the 
+    Abstract class encapsulating any agent that can generate text,
+    (be it a human, an LLM, a retrieval system ...) to be used in the 
     simulated convesational framework.
     """
 
@@ -23,7 +24,7 @@ class LLM(abc.ABC):
         return ""
 
 
-class LlamaModel(LLM):
+class LlamaModel(GeneratingAgent):
 
     @staticmethod
     def _get_response_from_output(json_output) -> str:
@@ -59,4 +60,3 @@ class LlamaModel(LLM):
         return response
  
 
-   

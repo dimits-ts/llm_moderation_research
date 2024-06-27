@@ -10,14 +10,12 @@ class GeneratingAgent(abc.ABC):
     """
 
     @abc.abstractmethod
-    def prompt(self, prompt: str, history: str) -> str:
+    def prompt(self, prompt: str) -> str:
         """
         Prompt the LLM and get its response.
 
         :param prompt: The prompt to the LLM.
         :type prompt: str
-        :param history: The previous conversational context.
-        :type history: str
         :return: The LLM's response.
         :rtype: str
         """
@@ -36,24 +34,21 @@ class LlamaModel(GeneratingAgent):
         _, _, answer = prompt_and_answer.partition("A:")
         return answer
     
-    @staticmethod
-    def get_actual_prompt(prompt: str, history: str):
-        return prompt + "\n" + history
 
     def __init__(self, model: llama_cpp.Llama, max_out_tokens: int, seed: int):
         self.model = model
         self.max_out_tokens = max_out_tokens
         self.seed = seed
 
-    def prompt(self, prompt: str, history: str) -> str:
-        full_prompt = self.get_actual_prompt(prompt, history)
-
+    def prompt(self, prompt: str) -> str:
         output = self.model.create_completion(
-                        prompt=f"Q: {full_prompt} A:",
+                        prompt=f"Q: {prompt} A:",
                         max_tokens=self.max_out_tokens,
                         stop=["Q:", "\n"], # Stop generating just before the model would generate a new question
                         echo=True,
                         seed=self.seed)
+        # debug
+        #print(output["choices"][0]["text"])
         
         response = self._get_response_from_output(output)
 

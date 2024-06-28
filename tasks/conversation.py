@@ -3,6 +3,7 @@ import pandas as pd
 
 import collections
 import time
+import textwrap
 
 
 class ConversationManager:
@@ -37,7 +38,7 @@ class ConversationManager:
                     history.append(named_res)
 
                     if verbose:
-                        print(named_res)
+                        print(textwrap.fill(named_res, 70))
                 else:
                     if verbose:
                         print(f"<{actor.get_name()} said nothing>")

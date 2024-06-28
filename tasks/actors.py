@@ -81,6 +81,9 @@ class DumbLlmActor(AbstractLlmActor):
 
     # make prompt as small as humanly possible
     def _actor_prompt(self, history: str) -> str:
-        prompt = f"{self.context} {self.instructions} \nThe conversation so far: {history}"
+        prompt = f"""
+        You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}. The conversation so far is '{history}'
+        """ 
+        print(len(prompt))
         return prompt
     

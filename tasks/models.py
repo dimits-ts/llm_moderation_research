@@ -1,4 +1,5 @@
 import abc
+from typing import Any
 import llama_cpp
 
 
@@ -10,12 +11,12 @@ class GeneratingAgent(abc.ABC):
     """
 
     @abc.abstractmethod
-    def prompt(self, prompt: str) -> str:
+    def prompt(self, prompt: Any) -> str:
         """
         Prompt the LLM and get its response.
 
         :param prompt: The prompt to the LLM.
-        :type prompt: str
+        :type prompt: Any
         :return: The LLM's response.
         :rtype: str
         """
@@ -28,11 +29,8 @@ class LlamaModel(GeneratingAgent):
     def _get_response_from_output(json_output) -> str:
         """
         Extracts the model's response from the raw output as a string.
-        Assumes that output is of the form "Q: <prompt> A: <answer>"
         """
-        prompt_and_answer = json_output["choices"][0]["text"]
-        _, _, answer = prompt_and_answer.partition("A:")
-        return answer
+        return json_output["choices"][0]["message"]["content"]
     
 
     def __init__(self, model: llama_cpp.Llama, max_out_tokens: int, seed: int):
@@ -40,15 +38,14 @@ class LlamaModel(GeneratingAgent):
         self.max_out_tokens = max_out_tokens
         self.seed = seed
 
-    def prompt(self, prompt: str) -> str:
-        output = self.model.create_completion(
-                        prompt=f"Q: {prompt} A:",
+    def prompt(self, json_prompt: list[llama_cpp.ChatCompletionRequestMessage]) -> str:
+        output = self.model.create_chat_completion(
+                        messages=json_prompt,
                         max_tokens=self.max_out_tokens,
-                        stop=["Q:", "\n"], # Stop generating just before the model would generate a new question
-                        echo=True,
-                        seed=self.seed)
+                        seed=self.seed,
+                        stop=["###", "\n\n"])
         # debug
-        #print(output["choices"][0]["text"])
+        #print(output["choices"][0]["content"])
         
         response = self._get_response_from_output(output)
 

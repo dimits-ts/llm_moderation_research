@@ -26,8 +26,8 @@ class ConversationManager:
         for _ in range(self.conv_len):
             for actor in self.actors:
                 conv_counter += 1
-                history_str = " ".join(history)
-                res = actor.speak(history_str)
+
+                res = actor.speak(list(history))
 
                 if len(res.strip()) != 0: 
                     total_history.append((conv_id, conv_counter, actor.get_name(), res))

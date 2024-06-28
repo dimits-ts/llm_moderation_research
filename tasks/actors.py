@@ -10,11 +10,11 @@ class Actor(abc.ABC):
         return ""
 
     @abc.abstractmethod
-    def speak(self, history: str) -> str:
+    def speak(self, history: list[str]) -> str:
         return ""
 
 
-class AbstractLlmActor(Actor, abc.ABC):
+class LlmActor(Actor):
 
     def __init__(self, 
                  model: tasks.models.LlamaModel, 
@@ -30,60 +30,30 @@ class AbstractLlmActor(Actor, abc.ABC):
         self.context = context
         self.instructions = instructions
 
-    @abc.abstractmethod
-    def _actor_prompt(self, history: str) -> str:
-        return ""
-        
     
+    def _system_prompt(self) -> dict:
+        prompt = f"""
+        You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}.'
+        """ 
+        return {"role": "system", "content": prompt}
+    
+    def _message_prompt(self, message: str) -> dict:
+        return {"role": "user", "content": message}
+
     @typing.final
-    def speak(self, history: str) -> str:
-        actor_prompt = self._actor_prompt(history)
-        response = self.model.prompt(actor_prompt)
+    def speak(self, history: list[str]) -> str:
+        system_prompt = self._system_prompt()
+        messages = []
+        for message in history:
+            message_prompt = self._message_prompt(message)
+            messages.append((system_prompt, message_prompt))
+        
+        response = self.model.prompt(messages)
+
         return response
-    
+
     @typing.final
     def get_name(self) -> str:
         return self.name
-    
 
-class SmartLlmActor(AbstractLlmActor):
-    def __init__(self, 
-                 model: tasks.models.LlamaModel, 
-                 name: str,
-                 role: str, 
-                 attributes: list[str], 
-                 context: str,
-                 instructions: str) -> None:
-        super().__init__(model, name, role, attributes, context, instructions)
-
-    
-    def _actor_prompt(self, history: str) -> str:
-        prompt = f"""
-        Your name is {self.name}, and are a {self.role}.
-        The following statements describe you and your behavior: {", ".join(self.attributes)}
-        The scenario you are participating in: {self.context} 
-        What you need to do: {self.instructions}
-        The conversation so far:\n {history}
-        """
-
-        return prompt
-    
-
-class DumbLlmActor(AbstractLlmActor):
-    def __init__(self, 
-                 model: tasks.models.LlamaModel, 
-                 name: str,
-                 role: str, 
-                 attributes: list[str], 
-                 context: str,
-                 instructions: str) -> None:
-        super().__init__(model, name, role, attributes, context, instructions)
-
-    # make prompt as small as humanly possible
-    def _actor_prompt(self, history: str) -> str:
-        prompt = f"""
-        You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}. The conversation so far is '{history}'
-        """ 
-        print(len(prompt))
-        return prompt
     

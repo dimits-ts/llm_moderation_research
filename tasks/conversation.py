@@ -15,7 +15,7 @@ class ConversationManager:
 
     def begin_conversation(self, verbose: bool=True) -> pd.DataFrame:
         # unique id for each conversation, generated for persisence purposes
-        conv_id = time.time()
+        conv_id = str(time.time())
 
         total_history = []
         # counter to determine the ordering of the responses in the dataframe
@@ -34,15 +34,16 @@ class ConversationManager:
                     
                     # append name of actor to his response
                     # "user x posted" important for the model to not confuse it with the prompt
-                    named_res = f"User {actor.get_name()} posted:\n{res}"
+                    wrapped_res = textwrap.fill(res, 70)
+                    named_res = f"User {actor.get_name()} posted:\n{wrapped_res}"
                     history.append(named_res)
 
                     if verbose:
-                        print(textwrap.fill(named_res, 70))
+                        print(named_res)
                 else:
                     if verbose:
                         print(f"<{actor.get_name()} said nothing>")
 
         return pd.DataFrame(total_history, 
-                            columns=["conv_id", "response_order", "actor_name", "contents"])
+                            columns=["conv_id", "response_order", "actor_name", "content"])
 

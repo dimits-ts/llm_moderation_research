@@ -1,6 +1,9 @@
 import collections
 import textwrap
 import time
+import datetime
+import json
+from typing import Any
 
 import tasks.actors
 
@@ -80,3 +83,24 @@ class Conversation:
         if verbose:
             print(formatted_res)
         self.ctx_history.append(formatted_res)
+    
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "id": self.id,
+            "timestamp": datetime.datetime.now(),
+            "users": [user.get_name() for user in self.users],
+            "user_types": [type(user).__name__ for user in self.users],
+            "moderator": self.moderator.get_name(),
+            "moderator_type": type(self.moderator).__name__,
+            "user_prompts": [user.describe() for user in self.users],
+            "moderator_prompt": [self.moderator.describe()],
+            "ctx_length": len(self.ctx_history),
+            "logs": self.conv_logs
+        }
+
+    def to_json_file(self, output_path: str):
+        with open(output_path, "w", encoding="utf8") as fout:
+            json.dump(self.to_dict(), fout)
+
+    def __str__(self) -> str:
+        return json.dumps(self.to_dict())

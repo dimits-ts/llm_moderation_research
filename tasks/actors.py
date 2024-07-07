@@ -1,7 +1,7 @@
-import llama_cpp
-import tasks.models
 import abc
 import typing
+
+import tasks.models
 
 
 class Actor(abc.ABC):
@@ -14,14 +14,18 @@ class Actor(abc.ABC):
     def speak(self, history: list[str]) -> str:
         return ""
 
+    @abc.abstractmethod
+    def describe(self):
+        return ""
+
 
 class LlmActor(Actor):
 
-    def __init__(self, 
-                 model: tasks.models.LlamaModel, 
+    def __init__(self,
+                 model: tasks.models.LlamaModel,
                  name: str,
-                 role: str, 
-                 attributes: list[str], 
+                 role: str,
+                 attributes: list[str],
                  context: str,
                  instructions: str) -> None:
         self.model = model
@@ -31,16 +35,19 @@ class LlmActor(Actor):
         self.context = context
         self.instructions = instructions
 
-    
     def _system_prompt(self) -> dict:
-        prompt = f"You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}." 
+        prompt = f"You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}."
         return {"role": "system", "content": prompt}
-    
+
     def _message_prompt(self, history: list[str]) -> dict:
         return {
-                "role": "user",
-                "content": "\n".join(history) + f"\n{self.get_name()}:"
-              }
+            "role": "user",
+            "content": "\n".join(history) + f"\n{self.get_name()}:"
+        }
+
+    def describe(self):
+        return f"Model: {type(self.model).__name__}. Prompt: {self._system_prompt()["content"]}"
+
 
     @typing.final
     def speak(self, history: list[str]) -> str:
@@ -52,5 +59,3 @@ class LlmActor(Actor):
     @typing.final
     def get_name(self) -> str:
         return self.name
-
-    

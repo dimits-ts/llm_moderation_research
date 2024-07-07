@@ -6,6 +6,7 @@ import json
 from typing import Any
 
 import tasks.actors
+import tasks.util
 
 
 class Conversation:
@@ -99,6 +100,8 @@ class Conversation:
         }
 
     def to_json_file(self, output_path: str):
+        tasks.util.ensure_parent_directories_exist(output_path)
+
         with open(output_path, "w", encoding="utf8") as fout:
             json.dump(self.to_dict(), fout)
 

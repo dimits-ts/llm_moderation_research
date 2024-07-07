@@ -53,7 +53,7 @@ class LlmActor(Actor):
     def speak(self, history: list[str]) -> str:
         system_prompt = self._system_prompt()
         message_prompt = self._message_prompt(history)
-        response = self.model.prompt([system_prompt, message_prompt])
+        response = self.model.prompt([system_prompt, message_prompt], stop_list=["User"])
         return response
 
     @typing.final

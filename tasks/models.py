@@ -38,14 +38,12 @@ class LlamaModel(GeneratingAgent):
         self.max_out_tokens = max_out_tokens
         self.seed = seed
 
-    def prompt(self, json_prompt: list[llama_cpp.ChatCompletionRequestMessage]) -> str:
+    def prompt(self, json_prompt: list[llama_cpp.ChatCompletionRequestMessage], stop_list: list[str]) -> str:
         output = self.model.create_chat_completion(
                         messages=json_prompt,
                         max_tokens=self.max_out_tokens,
                         seed=self.seed,
-                        stop=["###", "\n\n"])
-        # debug
-        #print(output["choices"][0]["content"])
+                        stop=["###", "\n\n"].extend(stop_list)) # prevent model from generating the next actor's response
         
         response = self._get_response_from_output(output)
 

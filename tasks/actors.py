@@ -4,22 +4,53 @@ import typing
 import tasks.models
 
 
-class Actor(abc.ABC):
+class IActor(abc.ABC):
+    """
+    An interface denoting an actor within a conversation.
+    Designed to be as general as possible, in order to support LLM, human and
+    IR/random selection models.
+    """
 
     @abc.abstractmethod
     def get_name(self) -> str:
+        """
+        Get the actor's assigned name within the conversation.
+
+        :return: The name of the actor.
+        :rtype: str
+        """
         return ""
 
     @abc.abstractmethod
     def speak(self, history: list[str]) -> str:
+        """
+        Prompt the actor to speak, given a history of previous messages
+        in the conversation.
+
+        :param history: A list of previous messages.
+        :type history: list[str]
+        :return: The actor's new message
+        :rtype: str
+        """
         return ""
 
     @abc.abstractmethod
-    def describe(self):
+    def describe(self) -> str:
+        """
+        Get a description of the actor's internals.
+
+        :return: A brief description of the actor
+        :rtype: str
+        """
         return ""
 
 
-class LlmActor(Actor):
+class LlmActor(IActor):
+    """
+    An actor which responds according to an underlying LLM instance.
+    The LLM instance can be of any type, provided it satisfies the 
+    :class:`tasks.models.IGeneratingAgent` interface.
+    """
 
     def __init__(self,
                  model: tasks.models.LlamaModel,
@@ -28,6 +59,24 @@ class LlmActor(Actor):
                  attributes: list[str],
                  context: str,
                  instructions: str) -> None:
+        """
+        Create a new actor based on an LLM instance.
+
+        :param model: A model or wrapper encapsulating a promptable LLM instance.
+        :type model: tasks.models.LlamaModel
+        :param name: The name given to the in-conversation actor.
+        :type name: str
+        :param role: The role of the actor within the conversation 
+        (e.g. "chat user", "chat moderator").
+        :type role: str
+        :param attributes: A list of attributes which characterize the actor
+         (e.g. "middle-class", "LGBTQ", "well-mannered").
+        :type attributes: list[str]
+        :param context: The context of the conversation, including topic and participants.
+        :type context: str
+        :param instructions: Special instructions for the actor.
+        :type instructions: str
+        """
         self.model = model
         self.name = name
         self.role = role

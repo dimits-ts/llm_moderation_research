@@ -17,8 +17,8 @@ class Conversation:
 
     def __init__(
         self,
-        users: list[tasks.actors.Actor],
-        moderator: tasks.actors.Actor | None = None,
+        users: list[tasks.actors.IActor],
+        moderator: tasks.actors.IActor | None = None,
         history_context_len: int = 5,
         conv_len: int = 5,
     ) -> None:
@@ -61,7 +61,7 @@ class Conversation:
                 if self.moderator is not None:
                     self._actor_turn(self.moderator, verbose)
 
-    def _actor_turn(self, actor: tasks.actors.Actor, verbose: bool) -> None:
+    def _actor_turn(self, actor: tasks.actors.IActor, verbose: bool) -> None:
         """
         Prompt the actor to speak and record his response accordingly.
 
@@ -85,10 +85,10 @@ class Conversation:
         self.ctx_history.append(formatted_res)
         self.conv_logs.append(formatted_res)
     
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self, timestamp_format: str="%y-%m-%d-%H-%M") -> dict[str, Any]:
         return {
             "id": self.id,
-            "timestamp": datetime.datetime.now(),
+            "timestamp": datetime.datetime.now().strftime(timestamp_format),
             "users": [user.get_name() for user in self.users],
             "user_types": [type(user).__name__ for user in self.users],
             "moderator": self.moderator.get_name(),

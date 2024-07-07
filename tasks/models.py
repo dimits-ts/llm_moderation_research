@@ -3,7 +3,7 @@ from typing import Any
 import llama_cpp
 
 
-class GeneratingAgent(abc.ABC):
+class IGeneratingAgent(abc.ABC):
     """
     Abstract class encapsulating any agent that can generate text,
     (be it a human, an LLM, a retrieval system ...) to be used in the 
@@ -23,7 +23,7 @@ class GeneratingAgent(abc.ABC):
         return ""
 
 
-class LlamaModel(GeneratingAgent):
+class LlamaModel(IGeneratingAgent):
 
     @staticmethod
     def _get_response_from_output(json_output) -> str:

@@ -1,4 +1,5 @@
 import os
+import datetime
 
 
 def ensure_parent_directories_exist(output_path: str) -> None:
@@ -14,7 +15,19 @@ def ensure_parent_directories_exist(output_path: str) -> None:
         os.makedirs(directory, exist_ok=True)
 
 
-def generate_datetime_filename(output_dir: str=None, format: str="%y-%m-%d-%H-%M") -> str:
+def generate_datetime_filename(
+    output_dir: str = None, format: str = "%y-%m-%d-%H-%M"
+) -> str:
+    """
+    Generate a filename based on the current date and time.
+
+    :param output_dir: The path to the generated file, defaults to None
+    :type output_dir: str, optional
+    :param format: strftime format, defaults to "%y-%m-%d-%H-%M"
+    :type format: str, optional
+    :return: the full path for the generated file
+    :rtype: str
+    """
     datetime_name = datetime.datetime.now().strftime(format)
 
     if output_dir is None:

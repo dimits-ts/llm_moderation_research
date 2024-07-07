@@ -43,7 +43,7 @@ class LlamaModel(GeneratingAgent):
                         messages=json_prompt,
                         max_tokens=self.max_out_tokens,
                         seed=self.seed,
-                        stop=["###", "\n\n"].extend(stop_list)) # prevent model from generating the next actor's response
+                        stop=["###", "\n\n"] + stop_list) # prevent model from generating the next actor's response
         
         response = self._get_response_from_output(output)
 

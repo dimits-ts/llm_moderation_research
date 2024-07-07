@@ -70,8 +70,7 @@ class Conversation:
         :type verbose: bool
         """
         res = actor.speak(list(self.ctx_history))
-        self.conv_logs.append((self.id, actor.get_name(), res))
-
+        
         if len(res.strip()) != 0:
             # append name of actor to his response
             # "user x posted" important for the model to not confuse it with the prompt
@@ -83,6 +82,7 @@ class Conversation:
         if verbose:
             print(formatted_res)
         self.ctx_history.append(formatted_res)
+        self.conv_logs.append(formatted_res)
     
     def to_dict(self) -> dict[str, Any]:
         return {

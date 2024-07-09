@@ -83,8 +83,9 @@ class Conversation:
 
         if verbose:
             print(formatted_res)
+
         self.ctx_history.append(formatted_res)
-        self.conv_logs.append(formatted_res)
+        self.conv_logs.append((actor.get_name(), res))
     
     def to_dict(self, timestamp_format: str="%y-%m-%d-%H-%M") -> dict[str, Any]:
         return {

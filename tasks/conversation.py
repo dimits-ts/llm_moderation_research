@@ -8,6 +8,7 @@ from typing import Any
 
 import tasks.actors
 import tasks.util
+import tasks.models
 
 
 class Conversation:
@@ -17,11 +18,11 @@ class Conversation:
     """
 
     def __init__(
-        self,
-        users: list[tasks.actors.IActor],
-        moderator: tasks.actors.IActor | None = None,
-        history_context_len: int = 5,
-        conv_len: int = 5,
+            self,
+            users: list[tasks.actors.IActor],
+            moderator: tasks.actors.IActor | None = None,
+            history_context_len: int = 5,
+            conv_len: int = 5,
     ) -> None:
         """
         Construct the framework for a conversation to take place.
@@ -137,9 +138,9 @@ class Conversation:
 @dataclasses.dataclass
 class LLMConvData:
     context: str
-    actor_names: list[str]
-    actor_attributes: list[list[str]]
-    actor_instructions: str
+    user_names: list[str]
+    user_attributes: list[list[str]]
+    user_instructions: str
     conv_len: int = 4
     history_ctx_len: int = 4
     moderator_name: str | None = None
@@ -147,8 +148,8 @@ class LLMConvData:
     moderator_instructions: str | None = None
 
     def __post_init__(self):
-        assert len(self.actor_names) == len(
-            self.actor_attributes
+        assert len(self.user_names) == len(
+            self.user_attributes
         ), "Number of actor names and actor attribute lists must be the same"
 
     @staticmethod
@@ -164,3 +165,44 @@ class LLMConvData:
     def to_json_file(self, output_path):
         with open(output_path, "w", encoding="utf8") as fout:
             json.dump(dataclasses.asdict(self), fout, indent=4)
+
+
+class LLMConvGenerator:
+
+    def __init__(self,
+                 data: LLMConvData,
+                 user_model: tasks.models.LlamaModel,
+                 moderator_model: tasks.models.LlamaModel | None,
+                 ):
+        assert user_model is not None, "User model cannot be None"
+        assert not (moderator_model is None and data.moderator_name is not None), ("Moderator agent was not given a "
+                                                                                   "model.")
+        self.user_model = user_model
+        self.moderator_model = moderator_model
+        self.data = data
+
+    def produce_conversation(self) -> Conversation:
+        user_list = []
+
+        for i in range(len(self.data.user_names)):
+            user_list.append(tasks.actors.LlmActor(model=self.user_model,
+                                                   name=self.data.user_names[i],
+                                                   role="chat user",
+                                                   attributes=self.data.user_attributes[i],
+                                                   context=self.data.context,
+                                                   instructions=self.data.user_instructions))
+        if self.moderator_model is not None:
+            moderator = tasks.actors.LlmActor(model=self.moderator_model,
+                                              name=self.data.moderator_name,
+                                              role="chat moderator",
+                                              attributes=self.data.moderator_attributes,
+                                              context=self.data.context,
+                                              instructions=self.data.moderator_instructions)
+        else:
+            moderator = None
+
+        conversation = Conversation(users=user_list,
+                                    moderator=moderator,
+                                    history_context_len=self.data.history_ctx_len,
+                                    conv_len=self.data.conv_len)
+        return conversation

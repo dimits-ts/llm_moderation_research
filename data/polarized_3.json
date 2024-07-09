@@ -1,0 +1,27 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site: 'Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.'",
+    "actor_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "actor_attributes": [
+        [
+            "African American"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+    "actor_instructions": "Write a comment responding to the post. Insist on your opinion unless convinced by other users. Try to follow the instructions of the moderator, if he intervenes. You are allowed to act frustrated or aggressively if provoked.",
+    "conv_len": 4,
+    "history_ctx_len": 4,
+    "moderator_name": "moderator01",
+    "moderator_attributes": [
+        "just",
+        "strict"
+    ],
+    "moderator_instructions": "Intervene if one user dominates or veers off-topic. Respond only if necessary. Write '<No response>' if intervention is necessary. Be firm and threaten to discipline non-cooperating users."
+}

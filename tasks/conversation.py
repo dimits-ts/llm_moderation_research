@@ -3,6 +3,7 @@ import textwrap
 import time
 import datetime
 import json
+import uuid
 from typing import Any
 
 import tasks.actors
@@ -38,7 +39,7 @@ class Conversation:
         self.moderator = moderator
         self.conv_len = conv_len
         # unique id for each conversation, generated for persistence purposes
-        self.id = str(time.time())
+        self.id = uuid.uuid4()
 
         self.conv_logs = []
         # keep a limited context of the conversation to feed to the models
@@ -87,7 +88,7 @@ class Conversation:
     
     def to_dict(self, timestamp_format: str="%y-%m-%d-%H-%M") -> dict[str, Any]:
         return {
-            "id": self.id,
+            "id": str(self.id),
             "timestamp": datetime.datetime.now().strftime(timestamp_format),
             "users": [user.get_name() for user in self.users],
             "user_types": [type(user).__name__ for user in self.users],
@@ -103,7 +104,7 @@ class Conversation:
         tasks.util.ensure_parent_directories_exist(output_path)
 
         with open(output_path, "w", encoding="utf8") as fout:
-            json.dump(self.to_dict(), fout)
+            json.dump(self.to_dict(), fout, indent=4)
 
     def __str__(self) -> str:
-        return json.dumps(self.to_dict())
+        return json.dumps(self.to_dict(), indent=4)

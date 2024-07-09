@@ -54,7 +54,9 @@ class Conversation:
         :raises RuntimeError: if the object has already been used to generate a conversation
         """
         if len(self.conv_logs) != 0:
-            raise RuntimeError("This conversation has already been concluded, create a new Conversation object.")
+            raise RuntimeError(
+                "This conversation has already been concluded, create a new Conversation object."
+            )
 
         for _ in range(self.conv_len):
             for user in self.users:
@@ -72,7 +74,7 @@ class Conversation:
         :type verbose: bool
         """
         res = actor.speak(list(self.ctx_history))
-        
+
         if len(res.strip()) != 0:
             # append name of actor to his response
             # "user x posted" important for the model to not confuse it with the prompt
@@ -86,22 +88,43 @@ class Conversation:
 
         self.ctx_history.append(formatted_res)
         self.conv_logs.append((actor.get_name(), res))
-    
-    def to_dict(self, timestamp_format: str="%y-%m-%d-%H-%M") -> dict[str, Any]:
+
+    def to_dict(self, timestamp_format: str = "%y-%m-%d-%H-%M") -> dict[str, Any]:
+        """
+        Get a dictionary view of the data and metadata contained in the conversation.
+
+        :param timestamp_format: the format for the conversation's creation time, defaults to "%y-%m-%d-%H-%M"
+        :type timestamp_format: str, optional
+        :return: a dict representing the conversation
+        :rtype: dict[str, Any]
+        """
         return {
             "id": str(self.id),
             "timestamp": datetime.datetime.now().strftime(timestamp_format),
             "users": [user.get_name() for user in self.users],
             "user_types": [type(user).__name__ for user in self.users],
-            "moderator": self.moderator.get_name(),
-            "moderator_type": type(self.moderator).__name__,
+            "moderator": (
+                self.moderator.get_name() if self.moderator is not None else "None"
+            ),
+            "moderator_type": (
+                type(self.moderator).__name__ if self.moderator is not None else None
+            ),
             "user_prompts": [user.describe() for user in self.users],
-            "moderator_prompt": [self.moderator.describe()],
+            "moderator_prompt": (
+                self.moderator.describe() if self.moderator is not None else None
+            ),
             "ctx_length": len(self.ctx_history),
-            "logs": self.conv_logs
+            "logs": self.conv_logs,
         }
 
     def to_json_file(self, output_path: str):
+        """
+        Export the data and metadata of the conversation as a json file.
+        Convinience function equivalent to json.dump(self.to_dict(), output_path)
+
+        :param output_path: the path for the exported file
+        :type output_path: str
+        """
         tasks.util.ensure_parent_directories_exist(output_path)
 
         with open(output_path, "w", encoding="utf8") as fout:

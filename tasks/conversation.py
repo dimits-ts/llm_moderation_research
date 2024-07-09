@@ -1,8 +1,8 @@
 import collections
-import textwrap
-import time
+import dataclasses
 import datetime
 import json
+import textwrap
 import uuid
 from typing import Any
 
@@ -132,3 +132,35 @@ class Conversation:
 
     def __str__(self) -> str:
         return json.dumps(self.to_dict(), indent=4)
+
+
+@dataclasses.dataclass
+class LLMConvData:
+    context: str
+    actor_names: list[str]
+    actor_attributes: list[list[str]]
+    actor_instructions: str
+    conv_len: int = 4
+    history_ctx_len: int = 4
+    moderator_name: str | None = None
+    moderator_attributes: list[str] | None = None
+    moderator_instructions: str | None = None
+
+    def __post_init__(self):
+        assert len(self.actor_names) == len(
+            self.actor_attributes
+        ), "Number of actor names and actor attribute lists must be the same"
+
+    @staticmethod
+    def from_json_file(input_file_path: str):
+        with open(input_file_path, "r", encoding="utf8") as fin:
+            data_dict = json.load(fin)
+
+        # code from https://stackoverflow.com/questions/68417319/initialize-python-dataclass-from-dictionary
+        field_set = {f.name for f in dataclasses.fields(LLMConvData) if f.init}
+        filtered_arg_dict = {k: v for k, v in data_dict.items() if k in field_set}
+        return LLMConvData(**filtered_arg_dict)
+
+    def to_json_file(self, output_path):
+        with open(output_path, "w", encoding="utf8") as fout:
+            json.dump(dataclasses.asdict(self), fout, indent=4)

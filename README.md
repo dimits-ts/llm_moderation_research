@@ -8,13 +8,33 @@ The project focuses on the creation, evaluation and exploitation of synthetic di
 
 The project is structured as follows:
 
-- tasks: a task-specific library developed for this project 
-- output: the output data from the experiments 
-- experiments.ipynb: the main notebook, utilizing the task-specific library to run and display experiments
+- `data`: input prompts in JSON format (see `tasks.conversations.LlmConvData`)
+- `scripts`: automation scripts for batch processing of experiments
+- `tasks`: a task-specific library developed for this project 
+- `output`: the output data from the experiments 
+
+- `create_synthetic.py`: a convenient script automatically loading a conversation from serialized data, executing the synthetic dialogue using a local LLM, and serializing the output
+- `tutorial.ipynb`: a notebook containing notes on the experiments, implementation and design details, and example code for our framework
 
 ## Use
 
-In order to use and/or contribute to the repository, simply clone it locally and run the main notebook. Currently, there is no installation necessary, nor requirements for external data sources.
+There are many ways with which to use the synthetic conversation framework:
+1. (Preferred) Run `create_synthetic.py`, see usage below
+1. (Preferred) Run `execute_all.sh` in order to batch calls to `create_synthetic.py`, see usage below
+1. Run `tutorial.ipynb` with modified parameters
+1. Create a new python script leveraging the framework library found in the `tasks` modules
+
+### Running the python script
+```
+Usage: create_synthetic.py [-h] --input_file INPUT_FILE --output_dir OUTPUT_DIR --model_path MODEL_PATH
+                           [--max_tokens MAX_TOKENS] [--ctx_width_tokens CTX_WIDTH_TOKENS]
+                           [--random_seed RANDOM_SEED] [--inference_threads INFERENCE_THREADS]
+                           [--gpu_layers GPU_LAYERS]
+```
+### Running the automated batch script
+```
+Usage: scripts/execute_all.sh --python_script_path <python script path> --input_dir <input_directory> --output_dir <output_directory> --model_path <model_file_path>
+```
 
 ## Documentation
 

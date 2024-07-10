@@ -1,6 +1,3 @@
-# temporarily dont push output to upstream
-output/ 
-
 .idea/
 
 # Byte-compiled / optimized / DLL files

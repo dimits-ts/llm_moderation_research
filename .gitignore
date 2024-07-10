@@ -1,3 +1,9 @@
+# don't include convienience local-only script
+execute_all_personalized.sh
+
+# don't include output from script invokations
+logs/
+
 .idea/
 
 # Byte-compiled / optimized / DLL files

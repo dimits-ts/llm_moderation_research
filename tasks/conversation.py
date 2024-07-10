@@ -29,11 +29,13 @@ class Conversation:
 
         :param users: A list of discussion participants
         :type users: list[tasks.actors.Actor]
-        :param moderator: An actor tasked with moderation if not None, can speak at any point in the conversation , defaults to None
+        :param moderator: An actor tasked with moderation if not None, can speak at any point in the conversation,
+         defaults to None
         :type moderator: tasks.actors.Actor | None, optional
         :param history_context_len: How many prior messages are included to the LLMs prompt as context, defaults to 5
         :type history_context_len: int, optional
-        :param conv_len: The total length of the conversation (how many times each actor will be prompted), defaults to 5
+        :param conv_len: The total length of the conversation (how many times each actor will be prompted),
+         defaults to 5
         :type conv_len: int, optional
         """
         self.users = users

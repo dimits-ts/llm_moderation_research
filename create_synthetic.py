@@ -7,10 +7,10 @@ import tasks.util
 
 OUTPUT_DIR = "output"
 
-MAX_TOKENS = 1024
+MAX_TOKENS = 512
 # see this for a discussion on ctx width for llama models
 # https://github.com/ggerganov/llama.cpp/issues/194
-CTX_WIDTH_TOKENS = 512
+CTX_WIDTH_TOKENS = 1024
 MODEL_PATH = "/home/dimits/bin/llm_models/llama-2-13b-chat.Q5_K_M.gguf"
 RANDOM_SEED = 42
 INFERENCE_THREADS = 4
@@ -44,7 +44,9 @@ def main():
 
     print("Beginning conversation...")
     conv.begin_conversation(verbose=True)
-    conv.to_json_file(tasks.util.generate_datetime_filename(output_dir=OUTPUT_DIR, file_ending=".json"))
+    output_path = tasks.util.generate_datetime_filename(output_dir=OUTPUT_DIR, file_ending=".json")
+    conv.to_json_file(output_path)
+    print("Conversation saved to ", output_path)
 
 
 if __name__ == "__main__":

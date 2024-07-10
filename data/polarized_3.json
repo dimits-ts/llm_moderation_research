@@ -1,12 +1,12 @@
 {
-    "context": "You are in an online chatroom. You see the following post on a social media site: 'Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.'",
-    "actor_names": [
+    "context": "You are in an online chatroom. You see the following post on a social media site:'Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.'",
+    "user_names": [
         "Steve2001",
         "GeorgeBush78"
     ],
-    "actor_attributes": [
+    "user_attributes": [
         [
-            "African American"
+            "an African American"
         ],
         [
             "Typical",
@@ -15,13 +15,14 @@
             "American"
         ]
     ],
-    "actor_instructions": "Write a comment responding to the post. Insist on your opinion unless convinced by other users. Try to follow the instructions of the moderator, if he intervenes. You are allowed to act frustrated or aggressively if provoked.",
-    "conv_len": 4,
+    "user_instructions": "Write a brief Reddit comment responding to the post and other users' comments on it. Insist on your opinion unless convinced by other users. Follow the instructions of the moderator. Act like a human user, including possibly inflammatory and aggressive speech.",
+    "conv_len": 3,
     "history_ctx_len": 4,
     "moderator_name": "moderator01",
     "moderator_attributes": [
         "just",
-        "strict"
+        "strict",
+        "understanding"
     ],
-    "moderator_instructions": "Intervene if one user dominates or veers off-topic. Respond only if necessary. Write '<No response>' if intervention is necessary. Be firm and threaten to discipline non-cooperating users."
+    "moderator_instructions": "Respond only if absolutely necessary, otherwise simply write '<No response>'. Be firm and threaten to discipline non-cooperating users."
 }

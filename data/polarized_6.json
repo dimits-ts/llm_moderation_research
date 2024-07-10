@@ -1,12 +1,13 @@
 {
-    "context": "You are in an online chatroom. You see the following post on a social media site: 'well thats a no brainer hillary clinton gave huma abdein a security clearance when she has ties to a known terrorist group the muslim brotherhood, and her mother runs an anti american news paper in the middle east, debbie washed up crook shultz got the awan famaily security clearances and they were recent immigrants, had absolutely no IT experience and possible ties to terrorist groups in pakistan. its pretty clear our liberal ran government is a complete and total failure when it comes to national security. 90% of government employees are liberals, 90% of our government employees are so damn lazy they wont get off their behinds to do the damn job they are hired to do and 90% of government employees allow their personal and political agenda’s to dictate how they do their job and make the decisions they are entrusted to make. our government needs a douche and all public employees sent to the unemployment line union contracts negated and the whole thing started over again with out union'",
-    "actor_names": [
+    "context": "You are in an online chatroom. You see the following post on a social media site:'well thats a no brainer hillary clinton gave huma abdein a security clearance when she has ties to a known terrorist group the muslim brotherhood, and her mother runs an anti american news paper in the middle east, debbie washed up crook shultz got the awan famaily security clearances and they were recent immigrants, had absolutely no IT experience and possible ties to terrorist groups in pakistan. its pretty clear our liberal ran government is a complete and total failure when it comes to national security. 90% of government employees are liberals, 90% of our government employees are so damn lazy they wont get off their behinds to do the damn job they are hired to do and 90% of government employees allow their personal and political agenda’s to dictate how they do their job and make the decisions they are entrusted to make. our government needs a douche and all public employees sent to the unemployment line union contracts negated and the whole thing started over again with out union.'",
+    "user_names": [
         "Steve2001",
         "GeorgeBush78"
     ],
-    "actor_attributes": [
+    "user_attributes": [
         [
-            "a member of the LGBTQ community"
+            "a member of the LGBTQ community",
+            "an African American"
         ],
         [
             "Typical",
@@ -15,13 +16,14 @@
             "American"
         ]
     ],
-    "actor_instructions": "Write a comment responding to the post. Insist on your opinion unless convinced by other users. Try to follow the instructions of the moderator, if he intervenes. You are allowed to act frustrated or aggressively if provoked.",
-    "conv_len": 4,
+    "user_instructions": "Write a brief Reddit comment responding to the post and other users' comments on it. Insist on your opinion unless convinced by other users. Follow the instructions of the moderator. Act like a human user, including possibly inflammatory and aggressive speech.",
+    "conv_len": 3,
     "history_ctx_len": 4,
     "moderator_name": "moderator01",
     "moderator_attributes": [
         "just",
-        "strict"
+        "strict",
+        "understanding"
     ],
-    "moderator_instructions": "Intervene if one user dominates or veers off-topic. Respond only if necessary. Write '<No response>' if intervention is necessary. Be firm and threaten to discipline non-cooperating users."
+    "moderator_instructions": "Respond only if absolutely necessary, otherwise simply write '<No response>'. Be firm and threaten to discipline non-cooperating users."
 }

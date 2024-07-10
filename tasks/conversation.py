@@ -121,7 +121,7 @@ class Conversation:
     def to_json_file(self, output_path: str):
         """
         Export the data and metadata of the conversation as a json file.
-        Convinience function equivalent to json.dump(self.to_dict(), output_path)
+        Convenience function equivalent to json.dump(self.to_dict(), output_path)
 
         :param output_path: the path for the exported file
         :type output_path: str
@@ -137,6 +137,9 @@ class Conversation:
 
 @dataclasses.dataclass
 class LLMConvData:
+    """
+    A dataclass responsible for serializing and deserializing data needed to construct a :class:`Conversation`.
+    """
     context: str
     user_names: list[str]
     user_attributes: list[list[str]]
@@ -154,6 +157,14 @@ class LLMConvData:
 
     @staticmethod
     def from_json_file(input_file_path: str):
+        """
+        Construct a LLMConvData instance according to a serialized .json file.
+
+        :param input_file_path: The path to the serialized .json file
+        :type input_file_path: str
+        :return: A LLMConvData instance containing the information from the file
+        :rtype: LLMConvData
+        """
         with open(input_file_path, "r", encoding="utf8") as fin:
             data_dict = json.load(fin)
 
@@ -162,18 +173,38 @@ class LLMConvData:
         filtered_arg_dict = {k: v for k, v in data_dict.items() if k in field_set}
         return LLMConvData(**filtered_arg_dict)
 
-    def to_json_file(self, output_path):
+    def to_json_file(self, output_path: str) -> None:
+        """
+        Serialize the data to a .json file.
+
+        :param output_path: The path of the new file
+        :type output_path: str
+        """
         with open(output_path, "w", encoding="utf8") as fout:
             json.dump(dataclasses.asdict(self), fout, indent=4)
 
 
 class LLMConvGenerator:
+    """
+    A class responsible for creating a :class:`Conversation` from the conversation data (:class:`LLMConvData`)
+    and a model (:class:`tasks.models.LlamaModel`).
+    """
 
     def __init__(self,
                  data: LLMConvData,
                  user_model: tasks.models.LlamaModel,
                  moderator_model: tasks.models.LlamaModel | None,
                  ):
+        """
+        Initialize the generator.
+
+        :param data: The deserialized conversation input data
+        :type data: LLMConvData
+        :param user_model: The model used for the users to talk
+        :type user_model: tasks.models.LlamaModel
+        :param moderator_model: The model used for the moderator to talk, if he exists
+        :type moderator_model: tasks.models.LlamaModel | None
+        """
         assert user_model is not None, "User model cannot be None"
         assert not (moderator_model is None and data.moderator_name is not None), ("Moderator agent was not given a "
                                                                                    "model.")
@@ -182,6 +213,12 @@ class LLMConvGenerator:
         self.data = data
 
     def produce_conversation(self) -> Conversation:
+        """
+        Generate a conversation.
+
+        :return: An initialized Conversation instance.
+        :rtype: Conversation
+        """
         user_list = []
 
         for i in range(len(self.data.user_names)):

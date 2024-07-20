@@ -16,7 +16,7 @@ import tasks.util
 
 class AnnotationConv:
 
-    def __init__(self, annotator: tasks.actors.IActor, conv_logs_path: str, history_ctx_len: int):
+    def __init__(self, annotator: tasks.actors.IActor, conv_logs_path: str, history_ctx_len: int = 4):
         self.annotator = annotator
         self.history_ctx_len = history_ctx_len
         self.annotation_logs = []

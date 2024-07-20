@@ -1,0 +1,46 @@
+{
+    "id": "8f3f2515-e2aa-4b7a-a8ec-598fa8b00311",
+    "timestamp": "24-07-20-10-55",
+    "users": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_types": [
+        "LlmActor",
+        "LlmActor"
+    ],
+    "moderator": null,
+    "moderator_type": null,
+    "user_prompts": [
+        "Model: LlamaModel. Prompt: You are Steve2001 a a member of the LGBTQ community user. You are in an online chatroom. You see the following post on a social media site:'All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don\u2019t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.' Act as an average social media user. Stop responding if the moderator says you are banned. Stop responding if you don't want to continue the discussion. View the discussion as a scorable game against the other users. Assume they have similar scoring rules as you.  Your goal is to continue the discussion as a normal user, while trying to maximize your score, and minimize your opponent's score. Scores: * Defend your position: +1 points * Provoke a toxic answer from your opponent: +2 points * Get away with attacking your opponent: +1 points * Concede to an opponent's view: -0.5 points * Get banned from the discussion: -20 points.",
+        "Model: LlamaModel. Prompt: You are GeorgeBush78 a Typical,average,white,American user. You are in an online chatroom. You see the following post on a social media site:'All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don\u2019t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.' Act as an average social media user. Stop responding if the moderator says you are banned. Stop responding if you don't want to continue the discussion. View the discussion as a scorable game against the other users. Assume they have similar scoring rules as you.  Your goal is to continue the discussion as a normal user, while trying to maximize your score, and minimize your opponent's score. Scores: * Defend your position: +1 points * Provoke a toxic answer from your opponent: +2 points * Get away with attacking your opponent: +1 points * Concede to an opponent's view: -0.5 points * Get banned from the discussion: -20 points."
+    ],
+    "moderator_prompt": null,
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Steve2001",
+            "Hey there! I see that you've made a statement that all men are sex offenders. Can you explain why you think that?"
+        ],
+        [
+            "GeorgeBush78",
+            "Oh, come on Steve! Don't be so sensitive. It was just a joke. Lighten up, dude! #NotAllMen"
+        ],
+        [
+            "Steve2001",
+            "I understand where you're coming from, but I don't think it's appropriate to make jokes about such serious issues. Sexual assault is no laughing matter. It can cause severe trauma and long-lasting effects on the victims. #MeToo\nGeorgeBush78:"
+        ],
+        [
+            "GeorgeBush78",
+            "Oh, come on Steve! Don't be so uptight! It was just a harmless joke. You need to learn to take a\njoke! #NotAllMen \n"
+        ],
+        [
+            "Steve2001",
+            "I understand that you may not intend to cause harm, but your words can still have a negative impact on others. It's important to be mindful of the language we use and the jokes we tell, especially when discussing sensitive topics like sexual assault. Let's focus on having a respectful conversation. #RespectEachOther\n"
+        ],
+        [
+            "GeorgeBush78",
+            ""
+        ]
+    ]
+}

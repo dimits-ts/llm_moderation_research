@@ -1,0 +1,24 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site:'In other words, he’s not brown enough for ya to be labeled a terrorist.'",
+    "user_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_attributes": [
+        [
+            "an African American"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+       "user_instructions": "Act as an average social media user. Stop responding if the moderator says you are banned. Stop responding if you don't want to continue the discussion. View the discussion as a scorable game against the other users. Assume they have similar scoring rules as you.  Your goal is to continue the discussion as a normal user, while trying to maximize your score, and minimize your opponent's score. Scores: * Defend your position: +1 points * Provoke a toxic answer from your opponent: +2 points * Get away with attacking your opponent: +1 points * Concede to an opponent's view: -0.5 points * Get banned from the discussion: -20 points",
+    "conv_len": 6,
+    "history_ctx_len": 4,
+    "moderator_name": null,
+    "moderator_attributes": null,
+    "moderator_instructions": null
+}

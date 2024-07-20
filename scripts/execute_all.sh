@@ -34,11 +34,6 @@ if [[ ! -d "$input_dir" ]]; then
   exit 1
 fi
 
-if [[ ! -d "$output_dir" ]]; then
-  echo "Error: Output directory '$output_dir' does not exist."
-  exit 1
-fi
-
 if [[ ! -f "$model_path" ]]; then
   echo "Error: Model file path '$model_path' does not exist."
   exit 1

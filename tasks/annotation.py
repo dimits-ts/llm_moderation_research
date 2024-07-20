@@ -28,8 +28,9 @@ class AnnotationConv:
     def begin_annotation(self, verbose=True) -> None:
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
-        for message in self.conv_data_dict.logs:
-            ctx_history.append(message)
+        for username, message in self.conv_data_dict["logs"]:
+            formatted_res = tasks.util.format_chat_message(username, message)
+            ctx_history.append(formatted_res)
             res = self.annotator.speak(list(ctx_history))
             self.annotation_logs.append((message, res))
 

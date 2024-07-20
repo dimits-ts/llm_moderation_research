@@ -9,7 +9,7 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description="Annotate conversation via Llama conversation model.")
-    parser.add_argument('--prompt_input_file', required=True, help="Judge prompt file path.")
+    parser.add_argument('--prompt_input_path', required=True, help="Judge prompt file path.")
     parser.add_argument('--conv_path', required=True, help="Serialized conversation file path.")
     parser.add_argument('--output_dir', required=True, help="Output directory path.")
     parser.add_argument('--model_path', required=True, help="Model file path.")
@@ -22,7 +22,7 @@ def main():
 
     args = parser.parse_args()
 
-    prompt_input_path = args.prompt_input_file
+    prompt_input_path = args.prompt_input_path
     conv_path = args.conv_path
     output_dir = args.output_dir
     max_tokens = args.max_tokens

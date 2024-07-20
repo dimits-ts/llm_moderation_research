@@ -2,6 +2,7 @@ import dataclasses
 import json
 import collections
 import datetime
+import textwrap
 from typing import Any
 
 import tasks.actors
@@ -24,13 +25,17 @@ class AnnotationConv:
         with open(conv_logs_path, "r", encoding="utf8") as fin:
             self.conv_data_dict = json.load(fin)
 
-    def start_annotation_conversation(self) -> None:
+    def begin_annotation(self, verbose=True) -> None:
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
         for message in self.conv_data_dict.logs:
             ctx_history.append(message)
             res = self.annotator.speak(list(ctx_history))
             self.annotation_logs.append((message, res))
+
+            if verbose:
+                print(textwrap.fill(message))
+                print(res)
 
     def to_dict(self, timestamp_format: str = "%y-%m-%d-%H-%M") -> dict[str, Any]:
         """
@@ -121,7 +126,7 @@ class LLMAnnotationGenerator:
         self.llm = llm
         self.conv_logs_path = conv_logs_path
 
-    def begin_conversation(self) -> AnnotationConv:
+    def produce_conversation(self) -> AnnotationConv:
         """
         Generate the synthetic annotations.
 

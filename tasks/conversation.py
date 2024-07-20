@@ -64,6 +64,12 @@ class Conversation:
         for _ in range(self.conv_len):
             for user in self.users:
                 self._actor_turn(user, verbose)
+
+                # TODO: refactor for more than 2 users
+                # if one of the two users stop speaking
+                if len(self.conv_logs[-1][1].strip()) == 0:
+                    return
+
                 if self.moderator is not None:
                     self._actor_turn(self.moderator, verbose)
 

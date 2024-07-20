@@ -1,5 +1,6 @@
 import os
 import datetime
+import textwrap
 
 
 def ensure_parent_directories_exist(output_path: str) -> None:
@@ -36,3 +37,15 @@ def generate_datetime_filename(
         return datetime_name
     else:
         return os.path.join(output_dir, datetime_name)
+
+
+def format_chat_message(username: str, message: str) -> str:
+    if len(message.strip()) != 0:
+        # append name of actor to his response
+        # "user x posted" important for the model to not confuse it with the prompt
+        wrapped_res = textwrap.fill(message, 70)
+        formatted_res = f"User {username} posted:\n{wrapped_res}"
+    else:
+        formatted_res = f"<{username} said nothing>"
+
+    return formatted_res

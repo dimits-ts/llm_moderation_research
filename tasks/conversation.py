@@ -2,13 +2,12 @@ import collections
 import dataclasses
 import datetime
 import json
-import textwrap
 import uuid
 from typing import Any
 
 import tasks.actors
-import tasks.util
 import tasks.models
+import tasks.util
 
 
 class Conversation:
@@ -83,14 +82,7 @@ class Conversation:
         :type verbose: bool
         """
         res = actor.speak(list(self.ctx_history))
-
-        if len(res.strip()) != 0:
-            # append name of actor to his response
-            # "user x posted" important for the model to not confuse it with the prompt
-            wrapped_res = textwrap.fill(res, 70)
-            formatted_res = f"User {actor.get_name()} posted:\n{wrapped_res}"
-        else:
-            formatted_res = f"<{actor.get_name()} said nothing>"
+        formatted_res = tasks.util.format_chat_message(actor.get_name(), res)
 
         if verbose:
             print(formatted_res)

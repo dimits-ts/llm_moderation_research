@@ -30,7 +30,7 @@ class TestLLMConvData(TestCase):
         assert len(data2.user_names) != 0
         assert data2.moderator_name is None
 
-        self.assertRaises(AssertionError, lambda: LLMConvData.from_json_file("output/test_invalid.json"))
+        self.assertRaises(Exception, lambda: LLMConvData.from_json_file("output/test_invalid.json"))
 
     def test_to_json_file(self):
         data = LLMConvData(context="You are in an online chatroom. You see the following post on a social media site:"

@@ -113,7 +113,7 @@ class Conversation:
             "users": [user.get_name() for user in self.users],
             "user_types": [type(user).__name__ for user in self.users],
             "moderator": (
-                self.moderator.get_name() if self.moderator is not None else "None"
+                self.moderator.get_name() if self.moderator is not None else None
             ),
             "moderator_type": (
                 type(self.moderator).__name__ if self.moderator is not None else None
@@ -236,7 +236,7 @@ class LLMConvGenerator:
                                                    attributes=self.data.user_attributes[i],
                                                    context=self.data.context,
                                                    instructions=self.data.user_instructions))
-        if self.moderator_model is not None:
+        if self.data.moderator_name is not None:
             moderator = tasks.actors.LlmActor(model=self.moderator_model,
                                               name=self.data.moderator_name,
                                               role="chat moderator",

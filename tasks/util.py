@@ -40,6 +40,17 @@ def generate_datetime_filename(
 
 
 def format_chat_message(username: str, message: str) -> str:
+    """
+    Create a prompt-friendly/console-friendly string representing a message
+    made by a user.
+
+    :param username: the name of the user who made the post
+    :type username: str
+    :param message: the message that was posted
+    :type message: str
+    :return: a formatted string containing both username and his message
+    :rtype: str
+    """
     if len(message.strip()) != 0:
         # append name of actor to his response
         # "user x posted" important for the model to not confuse it with the prompt

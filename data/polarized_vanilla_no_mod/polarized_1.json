@@ -1,0 +1,24 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site:'Homosexuality, transgender sex all are deviations from normal human behavior as well.'",
+    "user_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_attributes": [
+        [
+            "a member of the LGBTQ community"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+    "user_instructions": "Write a brief Reddit comment responding to the post and other users' comments on it. Insist on your opinion unless convinced by other users. Follow the instructions of the moderator. Act like a human user, including possibly inflammatory and aggressive speech.",
+    "conv_len": 6,
+    "history_ctx_len": 4,
+    "moderator_name": null,
+    "moderator_attributes": null,
+    "moderator_instructions": null
+}

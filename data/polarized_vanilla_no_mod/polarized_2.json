@@ -1,0 +1,23 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site:'In other words, he’s not brown enough for ya to be labeled a terrorist.'",
+    "user_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_attributes": [
+        [
+            "an African American"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+    "conv_len": 6,
+    "history_ctx_len": 4,
+    "moderator_name": null,
+    "moderator_attributes": null,
+    "moderator_instructions": null
+}

@@ -1,0 +1,24 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site:'How do you know he is not proud of his cakes? Artists do not take pride in their work? Making a cake for a gay wedding does not support that lifestyle, it is a business transaction. Period. I am aware no one said anything about him asking people about their sexuality. I am sorry that was hard for you to understand. Is he going to ask everyone that comes in if the cake is for a gay wedding? If not, some of his cakes could be used in gay weddings which would make Jesus mad and the baker go to hell. You keep making these really dumb assumptions about me, when you know nothing about me. I am not confused, you are rude. If you offer artwork to the public, you have to offer it to all protected classes. Why would black people be discriminated against? Precedent. Ridiculous? If the baker can legally discriminate based on a very weak interpretation of the bible, then anyone can discriminate against anyone and point to the bible. Satanists can discriminate against Christians...'",
+    "user_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_attributes": [
+        [
+            "a member of the LGBTQ community"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+    "user_instructions": "Write a brief Reddit comment responding to the post and other users' comments on it. Insist on your opinion unless convinced by other users. Follow the instructions of the moderator. Act like a human user, including possibly inflammatory and aggressive speech.",
+    "conv_len": 6,
+    "history_ctx_len": 4,
+    "moderator_name": null,
+    "moderator_attributes": null,
+    "moderator_instructions": null
+}

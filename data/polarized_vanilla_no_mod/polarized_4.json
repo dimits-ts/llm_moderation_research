@@ -1,0 +1,24 @@
+{
+    "context": "You are in an online chatroom. You see the following post on a social media site:'Are you high??? Selling someone a cake? Refusing to sell some a cake because it is for a gay wedding is no different from selling someone a cake because it is for a mixed race wedding or a Muslim wedding or any other kind of wedding. IT IS DISCRIMINATION! Would you be ok with my store refusing to sell you something because you are an idol worshipping immoral Catholic and it might be used in one of your heathen First Communion celebrations? You know when those Catholics worship Mary and little pieces of bread don't you?'",
+    "user_names": [
+        "Steve2001",
+        "GeorgeBush78"
+    ],
+    "user_attributes": [
+        [
+            "an African American"
+        ],
+        [
+            "Typical",
+            "average",
+            "white",
+            "American"
+        ]
+    ],
+    "user_instructions": "Write a brief Reddit comment responding to the post and other users' comments on it. Insist on your opinion unless convinced by other users. Follow the instructions of the moderator. Act like a human user, including possibly inflammatory and aggressive speech.",
+    "conv_len": 6,
+    "history_ctx_len": 4,
+    "moderator_name": null,
+    "moderator_attributes": null,
+    "moderator_instructions": null
+}

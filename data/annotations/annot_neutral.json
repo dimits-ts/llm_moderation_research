@@ -2,6 +2,6 @@
     "attributes": [
         "expert", "neutral"
     ],
-    "instructions": "\nYou will be given a series of comments made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output is of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Annotate the following conversation:",
+    "instructions": "\nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:",
     "history_ctx_len": 4
 }

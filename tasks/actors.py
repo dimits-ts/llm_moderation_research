@@ -85,7 +85,7 @@ class LlmActor(IActor):
         self.instructions = instructions
 
     def _system_prompt(self) -> dict:
-        prompt = f"You are {self.name} a {",".join(self.attributes)} user. {self.context} {self.instructions}."
+        prompt = f"You are {self.name} a {", ".join(self.attributes)} {self.role}. {self.context} {self.instructions}."
         return {"role": "system", "content": prompt}
 
     def _message_prompt(self, history: list[str]) -> dict:
@@ -96,7 +96,6 @@ class LlmActor(IActor):
 
     def describe(self):
         return f"Model: {type(self.model).__name__}. Prompt: {self._system_prompt()["content"]}"
-
 
     @typing.final
     def speak(self, history: list[str]) -> str:

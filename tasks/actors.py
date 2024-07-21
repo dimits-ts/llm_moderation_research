@@ -107,3 +107,11 @@ class LlmActor(IActor):
     @typing.final
     def get_name(self) -> str:
         return self.name
+
+
+class LLMAnnotator(LlmActor):
+    def _message_prompt(self, history: list[str]) -> dict:
+        return {
+            "role": "user",
+            "content": "Conversation so far:\n\n" + "\n".join(history) + "\nOutput:"
+        }

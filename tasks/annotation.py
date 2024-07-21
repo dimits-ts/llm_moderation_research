@@ -25,12 +25,11 @@ class AnnotationConv:
         with open(conv_logs_path, "r", encoding="utf8") as fin:
             self.conv_data_dict = json.load(fin)
 
-    def begin_annotation(self, verbose=True, output_prompt: str = "") -> None:
+    def begin_annotation(self, verbose=True) -> None:
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
         for username, message in self.conv_data_dict["logs"]:
             formatted_message = tasks.util.format_chat_message(username, message)
-            formatted_message += output_prompt
             ctx_history.append(formatted_message)
             annotation = self.annotator.speak(list(ctx_history))
             self.annotation_logs.append((message, annotation))
@@ -51,7 +50,7 @@ class AnnotationConv:
         return {
             "conv_id": str(self.conv_data_dict["id"]),
             "timestamp": datetime.datetime.now().strftime(timestamp_format),
-            "annotator_type": type(self.annotator).__name__ ,
+            "annotator_type": type(self.annotator).__name__,
             "annotator_prompt": self.annotator.describe(),
             "ctx_length": self.history_ctx_len,
             "logs": self.annotation_logs,
@@ -135,12 +134,12 @@ class LLMAnnotationGenerator:
         :return: An initialized AnnotationConv instance.
         :rtype: AnnotationConv
         """
-        annotator = tasks.actors.LlmActor(model=self.llm,
-                                          name="",
-                                          role="expert annotator",
-                                          attributes=self.data.attributes,
-                                          context="",
-                                          instructions=self.data.instructions)
+        annotator = tasks.actors.LLMAnnotator(model=self.llm,
+                                              name="",
+                                              role="expert annotator",
+                                              attributes=self.data.attributes,
+                                              context="",
+                                              instructions=self.data.instructions)
 
         conversation = AnnotationConv(annotator=annotator,
                                       conv_logs_path=self.conv_logs_path,

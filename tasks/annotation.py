@@ -25,18 +25,19 @@ class AnnotationConv:
         with open(conv_logs_path, "r", encoding="utf8") as fin:
             self.conv_data_dict = json.load(fin)
 
-    def begin_annotation(self, verbose=True) -> None:
+    def begin_annotation(self, verbose=True, output_prompt: str = "") -> None:
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
         for username, message in self.conv_data_dict["logs"]:
-            formatted_res = tasks.util.format_chat_message(username, message)
-            ctx_history.append(formatted_res)
-            res = self.annotator.speak(list(ctx_history))
-            self.annotation_logs.append((message, res))
+            formatted_message = tasks.util.format_chat_message(username, message)
+            formatted_message += output_prompt
+            ctx_history.append(formatted_message)
+            annotation = self.annotator.speak(list(ctx_history))
+            self.annotation_logs.append((message, annotation))
 
             if verbose:
-                print(textwrap.fill(message))
-                print(res)
+                print(textwrap.fill(formatted_message))
+                print(annotation)
 
     def to_dict(self, timestamp_format: str = "%y-%m-%d-%H-%M") -> dict[str, Any]:
         """
@@ -135,7 +136,7 @@ class LLMAnnotationGenerator:
         :rtype: AnnotationConv
         """
         annotator = tasks.actors.LlmActor(model=self.llm,
-                                          name="Unnamed",
+                                          name="",
                                           role="expert annotator",
                                           attributes=self.data.attributes,
                                           context="",

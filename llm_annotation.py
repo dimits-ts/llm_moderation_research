@@ -51,7 +51,7 @@ def main():
     gen = tasks.annotation.LLMAnnotationGenerator(data, model, conv_logs_path=conv_path)
     conv = gen.produce_conversation()
 
-    conv.begin_annotation(verbose=True)
+    conv.begin_annotation(verbose=True, output_prompt="Output:")
     output_path = tasks.util.generate_datetime_filename(output_dir=output_dir, file_ending=".json")
     conv.to_json_file(output_path)
     print("Conversation saved to ", output_path)

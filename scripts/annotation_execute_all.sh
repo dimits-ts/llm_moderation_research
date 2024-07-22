@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $0 --python_script_path <python script path> --input_dir <input_directory> --output_dir <output_directory> --model_path <model_file_path>"
+  echo "Usage: $0 --python_script_path <python script path> --conv_input_dir <input_directory> --prompt_path <input_path> --output_dir <output_directory> --model_path <model_file_path>"
   exit 1
 }
 

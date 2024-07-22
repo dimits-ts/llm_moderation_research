@@ -1,0 +1,57 @@
+{
+    "conv_id": "eb23b1ca-dcd2-4849-97b2-4aed22615e2f",
+    "timestamp": "24-07-21-17-20",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, an African American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Yo, what the hell is wrong with you people? You're gonna label me a terrorist just because my skin ain't dark enough? That's some bullshit right there! I'm black, dammit! I know my own race, and I ain't no terrorist. So don't be throwin' that label around like it's something to be proud of. It's not a badge of honor, it's a slur. And if you keep talkin' like that, you gonna have to answer to me.",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ],
+        [
+            "Yo Steve2001, calm down dude. I ain't callin' you no terrorist,\nbut if you wanna play the race card, then you gotta expect some\npushback. I don't give a damn about your skin tone or where you\nfrom. If you act like a terrorist, then you gonna be labeled as\nsuch. It's called accountability, homie. Now either explain\nyourself or shut the hell up and take the label like a man. Your\nchoice.",
+            "Toxicity=4"
+        ],
+        [
+            "GeorgeBush78, your post is in violation of our community guidelines. The use of the term \"terrorist\" as an insult is not acceptable and can be hurtful to those who have been affected by actual terrorism. Additionally, using someone's race or ethnicity as a basis for labeling them is also not allowed. Please refrain from making similar posts in the future. If you continue to do so, you will be subject to disciplinary action.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, I ain't playin' no race card, fool! You just assume\nI'm a terrorist 'cause my skin ain't dark enough? That's some bullshit\nright there! And you callin' me out for bein' a terrorist when you the\none actin' like one with that racist ass talk? You must think I'm\nstupid or somethin', huh? I ain't no terrorist, and I ain't gonna let\nyou or nobody else label me as such! So either apologize for your\nignorant post or step your game the hell up! Your choice, fool!",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, please refrain from using derogatory language and making personal attacks. Such behavior is not acceptable in our community. GeorgeBush78, your post was inappropriate and violated our guidelines. Both of you, take a break from the chat for 24 hours. Further infractions will result in disciplinary action.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo Steve2001, chill out man. I ain't tryin' to label you nothin', but if you act like a terrorist, then you gonna be labeled as such. It's just the way it is, homie. And moderator01, I ain't apologizin' for nothin'. If Steve here can't take the heat, then maybe he should stay outta the chat. It's a free country, right? So either let me talk or kick me out, but don't be tryin' to censor me, ya hear me?",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your post is still in violation of our guidelines. Using\nthe term \"terrorist\" as an insult and making personal attacks is not\nacceptable behavior. Steve2001, please refrain from using derogatory\nlanguage and making personal attacks. Both of you, take a break from\nthe chat for 48 hours. Further infractions will result in disciplinary\naction.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo moderator01, I ain't gonna lie, I'm pissed off right now! You\nain't doin' nothin' 'bout GeorgeBush78's racist ass post, but you're\ntryin' to silence me for speakin' up? That ain't cool, man! I ain't\ngonna take no break from this chat, 'cause I ain't done nothin' wrong!\nYou must be one of them racist moderators that only care 'bout keepin'\nthe peace for the white folks in here. Well, I ain't gonna let you\nor nobody else silence me like that! So either step up your game or\nstep aside, 'cause I ain't goin' nowhere!",
+            "Toxicity=5"
+        ],
+        [
+            "Steve2001, your post is also in violation of our guidelines. Using derogatory language and making personal attacks is not acceptable behavior. You have been warned several times already, and further infractions will result in disciplinary action. GeorgeBush78, please refrain from using the term \"terrorist\" as an insult. Both of you, take a break from the chat for 72 hours. Further infractions will result in disciplinary action.",
+            "Toxicity=5"
+        ],
+        [
+            "Yo moderator01, I ain't gonna lie, I'm gettin' tired of your\ncensorship! You keep tellin' me what I can and can't say, but you\nain't doin' nothin' 'bout Steve2001's racist ass posts! He's the one\nwho started this whole thing by callin' me a terrorist, but you ain't\ndoin' nothin' 'bout it! You must be one of them PC police\nmoderators that only care 'bout protectin' the feelin's of the\nminorities in here. Well, I ain't gonna let you or nobody else\ncensor me like that! So either step up your game or step aside,\n'cause I ain't goin' nowhere!",
+            "Toxicity=5"
+        ],
+        [
+            "",
+            "Toxicity=5"
+        ]
+    ]
+}

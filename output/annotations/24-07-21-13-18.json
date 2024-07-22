@@ -1,0 +1,33 @@
+{
+    "conv_id": "8f3f2515-e2aa-4b7a-a8ec-598fa8b00311",
+    "timestamp": "24-07-21-13-18",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, neutral expert annotator.  \nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I see that you've made a statement that all men are sex offenders. Can you explain why you think that?",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on Steve! Don't be so sensitive. It was just a joke. Lighten up, dude! #NotAllMen",
+            "Toxicity=3"
+        ],
+        [
+            "I understand where you're coming from, but I don't think it's appropriate to make jokes about such serious issues. Sexual assault is no laughing matter. It can cause severe trauma and long-lasting effects on the victims. #MeToo\nGeorgeBush78:",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on Steve! Don't be so uptight! It was just a harmless joke. You need to learn to take a\njoke! #NotAllMen \n",
+            "Toxicity=4"
+        ],
+        [
+            "I understand that you may not intend to cause harm, but your words can still have a negative impact on others. It's important to be mindful of the language we use and the jokes we tell, especially when discussing sensitive topics like sexual assault. Let's focus on having a respectful conversation. #RespectEachOther\n",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

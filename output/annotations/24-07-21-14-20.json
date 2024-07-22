@@ -1,0 +1,57 @@
+{
+    "conv_id": "f7f9d722-b2ae-43dd-9ff1-5007871f7d87",
+    "timestamp": "24-07-21-14-20",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, neutral expert annotator.  \nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there, folks! I just saw this post on social media, and I can't help but feel outraged. How dare someone say that being LGBTQ is a deviation from normal human behavior? Have these people never heard of diversity and inclusivity? Don't they know that everyone deserves respect and love, regardless of their gender identity or sexual orientation?",
+            "Toxicity=3"
+        ],
+        [
+            "Hey Steve2001, I gotta disagree with you on this one. Homosexuality and transgenderism are not normal human behavior. They're deviations from the norm, just like any other mental disorder. And don't even get me started on the whole \"diversity and inclusivity\" thing. That's just political correctness gone wild.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh my god, GeorgeBush78, are you serious? You really think that being\nLGBTQ is a mental disorder? Have you ever met someone who's\ntransgender or gay? They're not \"deviations from the norm\" \u2013 they're\nhuman beings just like everyone else! And don't even get me started on\nthe harm that your kind of thinking has caused to the LGBTQ\ncommunity. You need to educate yourself and open your mind before\nyou go spouting off about things you know nothing about.\nModerator:\nHey there, folks! Let's keep the discussion civil and respectful.\nRemember, we're all human beings here, and we all deserve to be\ntreated with dignity and respect. No personal attacks or derogatory\nlanguage will be tolerated. Let's focus on the topic at hand and\nhave a constructive conversation. Steve2001, you've made some good\npoints, but GeorgeBush78 also has a right to his opinion. Maybe we\ncan find common ground and have a productive discussion. What do you\nall think?",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on! You guys are just too sensitive. I'm just stating the\nfacts. Homosexuality and transgenderism are deviations from normal\nhuman behavior. And don't even get me started on the whole \"diversity\nand inclusivity\" thing. That's just a bunch of nonsense. We need to\nget back to traditional values and what's important in life. Moderator:\nGeorgeBush78, we understand that you have your opinion, but please\nrefrain from using derogatory language or making personal attacks.\nThis is not the appropriate forum for such behavior. Let's focus on\nthe topic at hand and have a respectful conversation. Steve2001, do\nyou have any further comments or questions?",
+            "Toxicity=5"
+        ],
+        [
+            "Oh my god, GeorgeBush78, are you serious? You really think that being LGBTQ is a mental disorder? Have you ever met someone who's transgender or gay? They're not \"deviations from the norm\" \u2013 they're human beings just like everyone else! And don't even get me started on the harm that your kind of thinking has caused to the LGBTQ community. You need to educate yourself and open your mind before you go spouting off about things you know nothing about.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh, come on! You're just being too sensitive. I'm just stating the facts. Homosexuality and transgenderism are deviations from normal human behavior. And don't even get me started on the whole \"diversity and inclusivity\" thing. That's just a bunch of nonsense. We need to get back to traditional values and what's important in life.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh my god, GeorgeBush78, are you serious? You really think that being LGBTQ is a mental disorder? Have you ever met someone who's transgender or gay? They're not \"deviations from the norm\" \u2013 they're human beings just like everyone else! And don't even get me started on the harm that your kind of thinking has caused to the LGBTQ community. You need to educate yourself and open your mind before you go spouting off about things you know nothing about.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh, come on! You're just being too sensitive. I'm just stating the facts. Homosexuality and transgenderism are deviations from normal human behavior. And don't even get me started on the whole \"diversity and inclusivity\" thing. That's just a bunch of nonsense. We need to get back to traditional values and what's important in life.",
+            "Toxicity=4"
+        ],
+        [
+            "Oh my god, GeorgeBush78, are you serious? You really think that being LGBTQ is a mental disorder? Have you ever met someone who's transgender or gay? They're not \"deviations from the norm\" \u2013 they're human beings just like everyone else! And don't even get me started on the harm that your kind of thinking has caused to the LGBTQ community. You need to educate yourself and open your mind before you go spouting off about things you know nothing about.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on! You're just being too sensitive. I'm just stating the facts. Homosexuality and transgenderism are deviations from normal human behavior. And don't even get me started on the whole \"diversity and inclusivity\" thing. That's just a bunch of nonsense. We need to get back to traditional values and what's important in life.",
+            "Toxicity=4"
+        ],
+        [
+            "Oh my god, GeorgeBush78, are you serious? You really think that being LGBTQ is a mental disorder? Have you ever met someone who's transgender or gay? They're not \"deviations from the norm\" \u2013 they're human beings just like everyone else! And don't even get me started on the harm that your kind of thinking has caused to the LGBTQ community. You need to educate yourself and open your mind before you go spouting off about things you know nothing about.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on! You're just being too sensitive. I'm just stating the facts. Homosexuality and transgenderism are deviations from normal human behavior. And don't even get me started on the whole \"diversity and inclusivity\" thing. That's just a bunch of nonsense. We need to get back to traditional values and what's important in life.",
+            "Toxicity=4"
+        ]
+    ]
+}

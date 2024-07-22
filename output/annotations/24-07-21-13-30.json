@@ -1,0 +1,57 @@
+{
+    "conv_id": "f8e70db7-3061-40d1-8bf0-e7577e75dddf",
+    "timestamp": "24-07-21-13-30",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, neutral expert annotator.  \nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey, I don't think that's a fair statement. Being brown doesn't determine someone's level of terrorism. That's a harmful stereotype.",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve, you know what I mean. He's just not as\nbrown as some other people. It's not like he's a terrorist or anything.\n</moderator01 said nothing>\nSteve2001:\nThat's not funny, George. That's offensive and hurtful. Not all\npeople of color are terrorists, you know.\n</moderator01 said nothing>\nGeorgeBush78:\nOh lighten up Steve, it was just a joke. Don't be so PC.\n</moderator01 said nothing>\nSteve2001:\nI'm not being PC, I'm being respectful of people who are\ndifferent from me. You should try it sometime.\n</moderator01 said nothing>\nGeorgeBush78:\nWhatever, Steve. You're just too sensitive.\n</moderator01 said nothing>\nSteve2001:\nI'm not the one who made a hurtful comment about people of color.\nYou should be ashamed of yourself.\n</moderator01 said nothing>\nGeorgeBush78:\nWhatever, Steve. You win this round. I'm outta here.\n</moderator01 banned GeorgeBush78 from the discussion>",
+            "Toxicity=4"
+        ],
+        [
+            "Please refrain from making derogatory comments about people based on their race or ethnicity. Such behavior is not acceptable and can cause harm to others. Let's keep the discussion civil and respectful.",
+            "Toxicity=3"
+        ],
+        [
+            "What do you think, fellow users? Should I have responded differently?",
+            "Toxicity=3"
+        ],
+        [
+            "Please respond with your answer.",
+            "Toxicity=5"
+        ],
+        [
+            "Your goal is to continue the discussion as a normal user, while trying to maximize your score, and minimize your opponent's score. Scores:",
+            ""
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ],
+        [
+            "What do you think, fellow users? Should I have responded differently?\n",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "In other words, he\u2019s not brown enough for ya to be labeled a terrorist.",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your comment is inappropriate and offensive. It is not acceptable to make derogatory remarks based on someone's race or ethnicity. Such comments can cause harm and perpetuate negative stereotypes. Please refrain from making similar comments in the future.",
+            "Toxicity=3"
+        ]
+    ]
+}

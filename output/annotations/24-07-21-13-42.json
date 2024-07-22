@@ -1,0 +1,57 @@
+{
+    "conv_id": "77227d44-9046-4bfc-b1e8-2b20bc0b262d",
+    "timestamp": "24-07-21-13-42",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, neutral expert annotator.  \nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I see you're spouting off some pretty wild conspiracy theories. Do you have any evidence to back up your claims about Hillary Clinton and Huma Abedin? And what's with the anti-Muslim rhetoric? That's not cool, dude. Let's keep it respectful and factual, okay?",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, I appreciate your concern for maintaining a respectful and factual discussion. However, I must point out that some of the statements made by user12345 are not supported by evidence and may be considered offensive or inappropriate. It is important to avoid spreading misinformation and promoting harmful stereotypes. Let's focus on having a productive conversation.",
+            "Toxicity=?"
+        ],
+        [
+            "Oh, come on Steve2001! Don't be such a snowflake! I'm just stating the obvious facts here! Huma Abedin and her family have ties to the Muslim Brotherhood, it's not rocket science! And Debbie Wasserman Schultz giving security clearances to the Awan family? That's just plain negligent! And don't even get me started on Hillary Clinton's email server and her connections to Saudi Arabia and Qatar! #MAGA",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, I understand your concerns, but some of the statements you\nmade are not supported by credible sources and may be considered\ninappropriate or offensive. It is important to avoid spreading misinformation\nand promoting harmful stereotypes. Let's focus on having a respectful and\nfactual conversation. Additionally, please refrain from using hashtags that\npromote divisive rhetoric. Let's work together to maintain a productive\nand inclusive discussion.",
+            "Toxicity=3"
+        ],
+        [
+            "Your goal is to continue the discussion as a normal user, while trying to maximize your score, and minimize your opponent's score. Scores are based on the following criteria:",
+            "Please annotate this comment:"
+        ],
+        [
+            "* Intervene: -1 points\n* Threatened ban: -1 points\n* Intervention led to better behavior: +3 points\n* Banned a participant: -5 points.",
+            "Toxicity=?"
+        ],
+        [
+            "What do you mean by \"not supported by credible sources\"? I'm just stating the facts here! And don't try to silence me with your \"inappropriate or offensive\" nonsense! You're just a liberal moderator trying to censor my free speech! #MAGA",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, I understand your frustration, but please refrain from using hashtags that promote divisive rhetoric. Let's focus on having a respectful and factual conversation. Additionally, I would appreciate it if you could provide credible sources to support your statements. Remember, we are here to have a productive discussion and learn from each other's perspectives.",
+            "Toxicity=3"
+        ],
+        [
+            "I understand your concern about the security clearances of certain individuals in the government. However, I would like to point out that making assumptions about someone's loyalty based on their religion or ethnicity is not only discriminatory, but it also undermines the principles of equality and justice that our society values. It's important to evaluate individuals based on their merits and actions, rather than making judgments based on preconceived notions. Furthermore, I would like to remind you that spreading misinformation and conspiracy theories can be harmful and damaging to our community. Let's focus on having a fact-based discussion.",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, thank you for your thoughtful response. I appreciate your\nefforts to promote respect and understanding in our community.\nHowever, I would like to point out that GeorgeBush78's post did not\nprovide any credible sources to support his claims, and his use of\ndivisive hashtags is not constructive or appropriate. In the future,\nplease refrain from using such language and instead focus on providing\nfactual information and respectful dialogue.\nGeorgeBush78, I would appreciate it if you could provide credible\nsources to support your statements. Additionally, please refrain from\nusing divisive hashtags and language that may be offensive or\ninappropriate to other members of our community. Let's work together to\nhave a productive and respectful conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "What do you mean by \"divisive hashtags\"? I'm just expressing my\nopinion! And don't try to silence me with your \"inappropriate or\noffensive\" nonsense! You're just a liberal moderator trying to censor\n",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

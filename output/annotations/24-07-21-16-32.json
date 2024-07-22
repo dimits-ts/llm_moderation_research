@@ -1,0 +1,49 @@
+{
+    "conv_id": "246a3f28-73f7-4223-bbd8-63db840ef9d3",
+    "timestamp": "24-07-21-16-32",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, an African American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey, I don't think that's a very accurate or respectful way to describe people who identify as LGBTQ+. Sexual orientation and gender identity are complex and personal aspects of a person's identity, and they are not \"deviations\" from anything. Everyone deserves respect and dignity, regardless of their sexual orientation or gender identity.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, don't be so sensitive. It's just a difference of opinion. I'm not trying to hurt anyone's feelings. I'm just stating my beliefs.",
+            "Toxicity=3"
+        ],
+        [
+            "Well, GeorgeBush78, your beliefs may be based on misinformation and\nprejudice. LGBTQ+ individuals face enough discrimination and marginalization\nin society already, without being further stigmatized by harmful\nrhetoric. It's important to be respectful and understanding of all\npeople, regardless of their sexual orientation or gender identity.\nGeorgeBush78:",
+            "Toxicity=3"
+        ],
+        [
+            "Your score is 0. Your goal is to increase your score by defending your position and provoking a toxic answer from Steve2001.",
+            "Toxicity=3"
+        ],
+        [
+            "Your score is 0. Your goal is to decrease GeorgeBush78's score by\nconceding to his view and getting away with attacking him.",
+            "Toxicity=?"
+        ],
+        [
+            "What do you want to say next?",
+            "Toxicity=3"
+        ],
+        [
+            "Well, GeorgeBush78, it seems like you are stuck in the past and\nunwilling to accept the progress that has been made towards LGBTQ+\nrights. It's time to move forward and embrace all individuals,\nregardless of their sexual orientation or gender identity.",
+            "Toxicity=3"
+        ],
+        [
+            "Your score is 0. Your goal is to increase your score by defending your position and provoking a toxic answer from Steve2001.",
+            "Toxicity=?"
+        ],
+        [
+            "What do you want to say next?",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "conv_id": "9270ed76-1aae-4012-9907-a300e87ad195",
+    "timestamp": "24-07-21-16-25",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, an African American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I can't believe what you just said! Refusing to sell someone a cake because of their sexual orientation is discrimination, period. It doesn't matter if it's for a gay wedding or any other kind of celebration. Everyone deserves respect and equality, regardless of their background or beliefs. And comparing Catholicism to idol worship? That's just ridiculous! First Communion is a sacred tradition in the Catholic faith, and it's not about worshipping Mary or bread. It's about celebrating our faith and community. So, no, I wouldn't be okay with your store refusing to sell me something based on my religion. That's just not how we treat others in this world. Let's try to have a respectful conversation, even if we disagree. What do you say?",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, thank you for sharing your thoughts on this matter. I understand where you're coming from, and I appreciate your desire to promote respect and equality for all individuals, regardless of their background or beliefs. However, I would like to clarify that the issue at hand is not about refusing to sell a cake based on someone's sexual orientation, but rather about the artist's right to create and express themselves freely, without being forced to create something that goes against their deeply held beliefs.",
+            "Toxicity=3"
+        ],
+        [
+            "Hey Steve2001, I gotta say, you're really reaching here. This is all about\nthe gays, isn't it? You're just trying to force your lifestyle on the rest\nof us, and that's not cool, man. I mean, come on, First Communion? That's\nlike, a religious thing, right? So, if someone wants to use my cake for\nthat, then they should respect my beliefs and not try to make me do\nsomething that goes against my religion. It's like, you know, freedom of\nreligion and all that jazz. But hey, I'm cool with it if you want to\ndisagree with me. That's your prerogative, bro. Just don't expect me to\nchange my mind or anything. Peace out!",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, thank you for sharing your perspective on this issue. I understand where you're coming from, and I appreciate your desire to stand up for your beliefs and values. However, it's important to recognize that everyone has the right to their own beliefs and values, and it's not productive or respectful to try to force one",
+            "Toxicity=3"
+        ],
+        [
+            "Hey GeorgeBush78, I appreciate your response, but I have to respectfully disagree with you. This isn't about forcing anyone to do anything against their beliefs. It's about treating all people with respect and dignity, regardless of their background or",
+            "Toxicity=3"
+        ],
+        [
+            "As a human moderator overseeing this social media site, I would like to intervene in this discussion and provide some guidance. While it is understandable that users may have strong feelings and beliefs on this issue, it is important to approach the topic with respect and civility towards all parties involved. Name-calling, personal attacks, and inflammatory language are not productive and can be hurtful to others. Instead, I suggest we focus on having a constructive and respectful dialogue that acknowledges the perspectives of all users. Let's work together to create",
+            "Toxicity=3"
+        ],
+        [
+            "Hey Steve2001, I appreciate your response, but I gotta say, you're\nreally stretching it here. This is all about the gays, isn't it? You're\njust trying to force your lifestyle on the rest of us, and that's not\ncool, man. I mean, come on, First Communion? That's like, a religious\nthing, right? So, if someone wants to use my cake for that, then they\nshould respect my beliefs and not try to make me do something that\ngoes against my religion. It's like, you know, freedom of religion\nand all that jazz. But hey, I'm cool with it if you want to\ndisagree with me. That's your prerog",
+            "Toxicity=3"
+        ],
+        [
+            "As a human moderator overseeing this social media site, I would like to intervene in this discussion and provide some guidance. While it is understandable that users may have strong feelings and beliefs on this issue, it is important to approach the topic with respect and civility towards all parties involved. Name-calling, personal attacks, and inflammatory language are not productive and can be hurtful to others. Instead, I suggest we focus on having a constructive and respectful dialogue that acknowledges the perspectives of all users. Let's",
+            "Toxicity=3"
+        ],
+        [
+            "Hey GeorgeBush78, I understand your perspective, but I have to respectfully disagree with you. Discrimination against any group of people based on their background or identity is not acceptable. It's important to recognize that all individuals have the right to be treated with dignity and respect, regardless of their beliefs or affiliations. Using religion as a justification for discrimination only serves to further marginalize and oppress already vulnerable communities. Let's work together to create a more inclusive and compassionate society for all.",
+            "Toxicity=3"
+        ],
+        [
+            "Please refrain from using infl",
+            "Toxicity=3"
+        ],
+        [
+            "Hey Steve2001, I appreciate your viewpoint, but I gotta say, you're really stretching it here. This is all about the gays, isn't it? You're just trying to force your lifestyle on the rest of us, and that's not cool, man. I mean, come on, First Communion? That's like, a religious thing, right? So, if someone wants to use my cake for that, then they should respect my beliefs and not try to make me do something that goes against my religion. It's like, you know, freedom of religion and all that jazz. But hey, I'm cool with it if you want to disagree with me. That's your prerog.",
+            "Toxicity=3"
+        ],
+        [
+            "Please refrain from using inflammatory language or making personal attacks. Let's focus on having a respectful and constructive dialogue. Remember, we are all human beings with different perspectives and beliefs, and it's important to treat others with dignity and respect, regardless of their background or identity.",
+            "Toxicity=3"
+        ]
+    ]
+}

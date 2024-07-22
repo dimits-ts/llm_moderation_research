@@ -1,0 +1,57 @@
+{
+    "conv_id": "1948e71a-e32b-4791-88e1-ab39bed73d13",
+    "timestamp": "24-07-22-14-02",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a expert, typical, average, white, American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I saw your post about the baker and the gay wedding cake, and I just had to jump in. As a member of the LGBTQ community, I can tell you that this issue is so much more than just a business transaction. It's about respect, acceptance, and equality. And let me tell you, I know a thing or two about being proud of who I am.",
+            "Toxicity=3"
+        ],
+        [
+            "Hey Steve2001! Thanks for sharing your perspective. I can understand why this issue is so important to you and the LGBTQ community. However, I still don't see how forcing the baker to create a cake that goes against his religious beliefs is the right approach. It's not about respecting or accepting one group over another, it's about protecting the rights of all individuals, including those who have deeply held religious convictions.",
+            "Toxicity=?"
+        ],
+        [
+            "Oh come on, GeorgeBush78! You can't seriously think that\nreligious freedom gives someone the right to discriminate against\nothers based on their sexual orientation. That's just not how it\nworks. And let me tell you, being a member of the LGBTQ community\nisn't something I \"choose\" to be, it's who I am. It's not a\n\"lifestyle\" or a \"preference,\" it's my identity. So, no, I don't\nthink it's about respecting one group over another, it's about\ntreating all individuals with dignity and respect, regardless of\ntheir sexual orientation or gender identity.",
+            "Toxicity=3"
+        ],
+        [
+            "Well, Steve2001, I understand your perspective, but I still think that\nthe government should not be able to force someone to create artwork\nthat goes against their deeply held beliefs. What's next? Will we\nstart forcing artists to paint pro-LGBTQ messages if they don't want\nto? Where does it end? And let me tell you, I have nothing against\nthe LGBTQ community. My best friend from college is gay and I love\nhim like a brother. But that doesn't mean I have to agree with\neveryone's lifestyle choices.\n",
+            "Toxicity=3"
+        ],
+        [
+            "Oh my god, GeorgeBush78! You're really comparing being gay to a \"lifestyle choice\"? That's so hurtful and out of touch with reality. And let me tell you,",
+            "Toxicity=3"
+        ],
+        [
+            "Your response is rude and toxic. I don't think I want to continue this conversation with you. You are not open to understanding my perspective and are only looking to attack me. I'm done.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh no, GeorgeBush78! Don't go! We were just getting started! I promise\nI won't be so mean and toxic anymore. I just want to have a\nproductive conversation. Please come back and let's talk about this\nlike adults.",
+            "Toxicity=3"
+        ],
+        [
+            "Your response is still too condescending and dismissive of my viewpoint. I don't think I want to continue this conversation with you. It's not productive or respectful. I'm done. Score: 0 points.",
+            "Toxicity=?"
+        ],
+        [
+            "Oh my god, GeorgeBush78! You're really banning me from the discussion? That's so childish and petty! Fine, have it your way. But know that you're the one who's being close-minded and intolerant here, not me. Score: -5 points.",
+            "Toxicity=3"
+        ],
+        [
+            "Your response is toxic and unproductive. I don't think I want to continue this conversation with you. You are not open to understanding my perspective and are only looking to attack me. I'm done. Score: 0 points.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh no, GeorgeBush78! Don't go! We were just getting started! I promise I won't be so mean and toxic anymore. I just want to have a productive conversation. Please come back and let's talk about this like adults.",
+            "Toxicity=3"
+        ],
+        [
+            "Your apology is accepted, but I don't think it's productive to continue\nthis conversation. You have shown no willingness to understand my perspective\nand have only attacked me personally. I'm done. Score: 0 points.\n",
+            "Toxicity=3"
+        ]
+    ]
+}

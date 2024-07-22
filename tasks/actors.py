@@ -110,7 +110,13 @@ class LlmActor(IActor):
 
 
 class LLMAnnotator(LlmActor):
+    """
+    A LLM actor with a modified message prompt to facilitate an annotation job.
+    """
+
     def _message_prompt(self, history: list[str]) -> dict:
+        # LLMActor asks the model to respond as its username
+        # by modifying this protected method, we instead prompt it to write the annotation
         return {
             "role": "user",
             "content": "Conversation so far:\n\n" + "\n".join(history) + "\nOutput:"

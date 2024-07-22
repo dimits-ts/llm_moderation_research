@@ -16,6 +16,9 @@ import tasks.util
 # without impacting conversations.py at all
 
 class AnnotationConv:
+    """
+    An annotation job modelled as a conversation between the messages of a finished dialogue, and the LLM Annotator.
+    """
 
     def __init__(self, annotator: tasks.actors.IActor, conv_logs_path: str, history_ctx_len: int = 4):
         self.annotator = annotator
@@ -26,6 +29,12 @@ class AnnotationConv:
             self.conv_data_dict = json.load(fin)
 
     def begin_annotation(self, verbose=True) -> None:
+        """
+        Begin the conversation-modelled annotation job.
+
+        :param verbose: whether to print the results of the annotation to the console, defaults to True
+        :type verbose: bool, optional
+        """
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
         for username, message in self.conv_data_dict["logs"]:

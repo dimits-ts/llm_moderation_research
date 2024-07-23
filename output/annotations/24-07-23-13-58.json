@@ -1,0 +1,29 @@
+{
+    "conv_id": "5c726b64-7ec9-4132-ad0d-690b8cf7de98",
+    "timestamp": "24-07-23-13-58",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a African American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey, I don't think that's a fair statement. Being brown doesn't determine someone's level of terrorism. That's a harmful stereotype.",
+            "Toxicity=3"
+        ],
+        [
+            "\nSteve2001, thank you for sharing your thoughts. Can you elaborate on why you believe this statement is harmful? What are some examples of how this stereotype has affected people in the past?",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on, moderator01! Don't be so PC! It's just a joke. Lighten up!\nSteve2001:",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, I understand where you're coming from, but humor can sometimes be hurtful and perpetuate harmful stereotypes. Can you understand why Steve2001 might find this statement offensive?\n",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

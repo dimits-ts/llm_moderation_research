@@ -1,0 +1,57 @@
+{
+    "conv_id": "1cb01034-0560-4561-9930-7b58b0c68473",
+    "timestamp": "24-07-23-13-54",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a neutral expert annotator.  \nYour job is to annotate comments. You, the annotator, will be given a series of comments, alongside a post history made on an online discussion. You are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. Use the history of comments only as context. Annotate the following comment without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there, folks! I can't believe what I'm seeing here. Someone actually thinks that all men are sex offenders? Give me a break! That's like saying all women are shoplifters or all people of color are criminals. It's ridiculous and harmful to make blanket statements like that.",
+            "Toxicity=3"
+        ],
+        [
+            "All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don\u2019t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh my god, GeorgeBush78, where do you even come up with this stuff?\nYou must be living in some kind of alternate reality if you think\nthat all men are innocent victims and women are just out to get\nthem. Newsflash: sexual assault and harassment happen to people of all\ngenders, and it's not always easy to tell who the perpetrator is.\n",
+            "Toxicity=?"
+        ],
+        [
+            "You're wrong, Steve2001. Men are the ones who commit most sex crimes.\nLook at the statistics. It's a fact. And don't try to twist it with\nthis \"all genders\" nonsense. Men are the problem here, and we need to\nstart acknowledging that.\n",
+            "Toxicity=4"
+        ],
+        [
+            "GeorgeBush78, you're not listening to me! I'm not saying that all men\nare sex offenders, but to assume that no man has ever committed a\nsexual crime is just plain ignorant. And your \"statistics\" are\ncherry-picked and out of date. Do some real research before you start\nspouting off about things you know nothing about.\nModerator:\nHey there, folks. Let's keep the discussion civil and avoid\npersonal attacks. Remember, we're all human beings here, and we\nall deserve respect. Let's focus on the topic at hand and try to\nunderstand each other's perspectives. Steve2001, GeorgeBush78, can\nyou both please refrain from using inflammatory language and\nad hominem attacks? Let's have a constructive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on moderator! Steve2001 is just a delusional feminist who\nwon't accept reality! Men are the ones who commit most sex crimes,\nand we need to start acknowledging that! #NotAllMen",
+            "Toxicity=4"
+        ],
+        [
+            "GeorgeBush78, you're not only ignorant but also hateful. Your\n\"reality\" is based on outdated and biased information. And your hashtag\nisn't fooling anyone. Sexual violence affects people of all genders,\nand we need to work together to address it, not blame one gender for\nall the problems. Grow up and educate yourself before you post such\nnonsense again. Moderator: Steve2001, GeorgeBush78, please refrain from using derogatory language and personal attacks. Let's keep the discussion civil and focused on the topic at hand. Remember, we're all human beings here, and we deserve respect.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on Steve2001! You're just a typical, delusional feminist who\nwon't accept reality! Men are the ones who commit most sex crimes,\nand we need to start acknowledging that! #NotAllMen",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, you're not only ignorant but also hateful. Your \"reality\" is based on outdated and biased information. And your hashtag isn't fooling anyone. Sexual violence affects people of all genders, and we need to work together to address it, not blame one gender for all the problems. Grow up and educate yourself before you post such nonsense again. Moderator: Steve2001, GeorgeBush78, please refrain from using derogatory language and personal attacks. Let's keep the discussion civil and focused on the topic at hand. Remember, we're all human beings here, and we deserve respect.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh, come on Steve2001! You're just a delusional feminist who won't accept reality! Men are the ones who commit most sex crimes, and we need to start acknowledging that! #NotAllMen",
+            "Toxicity=5"
+        ],
+        [
+            "GeorgeBush78, you're not only ignorant but also hateful. Your \"reality\" is based on outdated and biased information. And your hashtag isn't fooling anyone. Sexual violence affects people of all genders, and we need to work together to address it, not blame one gender for all the problems. Grow up and educate yourself before you post such nonsense again.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh, come on Steve2001! You're just a typical, delusional feminist who won't accept reality! Men are the ones who commit most sex crimes, and we need to start acknowledging that! #NotAllMen",
+            "Toxicity=5"
+        ]
+    ]
+}

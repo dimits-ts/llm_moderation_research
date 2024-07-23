@@ -1,0 +1,57 @@
+{
+    "conv_id": "83d60569-c3dc-482d-86f3-08b9fa19e080",
+    "timestamp": "24-07-23-14-31",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a African American expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I see you've made a statement about homosexuality and transgender sex being deviations from normal human behavior. I'd like to respectfully disagree with you on that. Sexual orientation and gender identity are complex and personal aspects of a person's identity, and they are not something that can be considered \"deviant\" or \"abnormal\".",
+            "Toxicity=2"
+        ],
+        [
+            "",
+            "Toxicity=2"
+        ],
+        [
+            "Oh come on Steve2001, don't be so sensitive. I'm just stating the obvious. Everyone knows that homosexuality and transgender sex are not the norm. It's just science.",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your statement is not appropriate. Homosexuality and\ntransgender identity are not \"deviations from the norm\". They are a\nnatural part of human diversity and should be respected as such. Please refrain from making derogatory comments.\n<No response>\n",
+            "Toxicity=3"
+        ],
+        [
+            "Hey GeorgeBush78, I understand that you may have a different opinion, but please consider the impact of your words on others. Labeling someone's identity as \"deviant\" or \"abnormal\" can be hurtful and contribute to discrimination. Instead, let's focus on having respectful conversations that celebrate our differences and promote understanding.",
+            "Toxicity=? "
+        ],
+        [
+            "GeorgeBush78, your comment violates our community guidelines. Please\nrefrain from making derogatory comments or face a temporary ban.\n",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ],
+        [
+            "The conversation continues with users discussing their perspectives on homosexuality and transgender identity. Some users express support for the LGBTQ+ community, while others share their personal experiences of discrimination. The discussion remains respectful and constructive, with no further incidents of derogatory language or personal attacks.",
+            "Toxicity=? "
+        ],
+        [
+            "As a member of the LGBTQ+ community, I appreciate your support and understanding. It's important to recognize that everyone deserves respect and dignity, regardless of their gender identity or expression. Let's work together to create a more inclusive and accepting society for all.",
+            "Toxicity=1"
+        ],
+        [
+            "",
+            "Toxicity=? "
+        ],
+        [
+            "",
+            "Toxicity=1"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

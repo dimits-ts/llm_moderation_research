@@ -36,7 +36,7 @@ if [[ ! -d "$conv_input_dir" ]]; then
 fi
 
 if [[ ! -f "$prompt_path" ]]; then
-  echo "Error: Annotation prompt input directory '$prompt_path' does not exist."
+  echo "Error: Annotation prompt input path '$prompt_path' does not exist."
   exit 1
 fi
 

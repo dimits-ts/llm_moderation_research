@@ -1,6 +1,3 @@
-# don't include convienience local-only script
-*_personalized.sh
-
 # don't include output from script invokations
 logs/
 # don't include LLM weights

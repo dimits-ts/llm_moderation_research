@@ -222,14 +222,14 @@ class LLMConvGenerator:
         user_list = []
 
         for i in range(len(self.data.user_names)):
-            user_list.append(tasks.actors.LlmActor(model=self.user_model,
+            user_list.append(tasks.actors.LLMUser(model=self.user_model,
                                                    name=self.data.user_names[i],
                                                    role="chat user",
                                                    attributes=self.data.user_attributes[i],
                                                    context=self.data.context,
                                                    instructions=self.data.user_instructions))
         if self.data.moderator_name is not None:
-            moderator = tasks.actors.LlmActor(model=self.moderator_model,
+            moderator = tasks.actors.LLMUser(model=self.moderator_model,
                                               name=self.data.moderator_name,
                                               role="chat moderator",
                                               attributes=self.data.moderator_attributes,

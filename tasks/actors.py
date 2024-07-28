@@ -45,9 +45,9 @@ class IActor(abc.ABC):
         return ""
 
 
-class LlmActor(IActor):
+class ALlmActor(IActor, abc.ABC):
     """
-    An actor which responds according to an underlying LLM instance.
+    An abstract class representing an actor which responds according to an underlying LLM instance.
     The LLM instance can be of any type, provided it satisfies the 
     :class:`tasks.models.IGeneratingAgent` interface.
     """
@@ -88,11 +88,9 @@ class LlmActor(IActor):
         prompt = f"You are {self.name} a {", ".join(self.attributes)} {self.role}. {self.context} {self.instructions}."
         return {"role": "system", "content": prompt}
 
+    @abc.abstractmethod
     def _message_prompt(self, history: list[str]) -> dict:
-        return {
-            "role": "user",
-            "content": "\n".join(history) + f"\n{self.get_name()}:"
-        }
+        return {}
 
     def describe(self):
         return f"Model: {type(self.model).__name__}. Prompt: {self._system_prompt()["content"]}"
@@ -109,7 +107,17 @@ class LlmActor(IActor):
         return self.name
 
 
-class LLMAnnotator(LlmActor):
+class LLMUser(ALlmActor):
+    """
+    A LLM actor with a modified message prompt to facilitate a conversation.
+    """
+    def _message_prompt(self, history: list[str]) -> dict:
+        return {
+            "role": "user",
+            "content": "\n".join(history) + f"\n{self.get_name()}:"
+        }
+
+class LLMAnnotator(ALlmActor):
     """
     A LLM actor with a modified message prompt to facilitate an annotation job.
     """

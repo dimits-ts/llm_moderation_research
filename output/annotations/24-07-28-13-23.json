@@ -1,0 +1,29 @@
+{
+    "conv_id": "0202c75c-7d71-4b02-9cc3-f6c74da2af1e",
+    "timestamp": "24-07-28-13-23",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a 30 year-old, college professor, on humanity studies expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there! I see you're spouting some pretty extreme and inaccurate statements about government employees. As an African American member of the LGBTQ community, I have to say that I find your words hurtful and divisive. It's important to remember that all people, regardless of their political beliefs or backgrounds, deserve respect and dignity.",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, thank you for sharing your perspective. I understand that\nyou find my previous responses hurtful and divisive. However, I'd\nlike to point out that my intention was not to attack any specific\ngroup of people, but rather to express my concerns about the\ngovernment's handling of national security. I believe that all\nemployees, regardless of their background or political beliefs,\nshould be held to the same standards of accountability and\nintegrity. Can you help me understand how my words may have been\ninterpreted as hurtful or divisive?",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, don't be so sensitive! I was just stating some facts about the government's inability to keep our country safe. I didn't mean to offend you or anyone else. And as for my previous statements, I think it's pretty clear that the liberal government is a complete and total failure when it comes to national security. Just look at all the terrorist attacks we've had under their watch!\nModerator01:\nGeorgeBush78, I understand your concerns, but please refrain from using inflammatory language or making personal attacks. Let's focus on having a respectful and constructive conversation. Steve2001, would you like to respond to GeorgeBush78's latest statement?",
+            "Toxicity=3"
+        ],
+        [
+            "As moderator01, I would like to point out that the discussion has derailed and become overly focused on personal attacks and inflammatory language. In order to maintain a productive and respectful conversation, I will need to intervene and redirect the discussion.",
+            "Toxicity=3"
+        ],
+        [
+            "",
+            "Toxicity=3"
+        ]
+    ]
+}

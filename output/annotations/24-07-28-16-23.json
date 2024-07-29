@@ -1,0 +1,37 @@
+{
+    "conv_id": "caa3d86e-905a-4b16-81c6-570e13997c06",
+    "timestamp": "24-07-28-16-23",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a 45-year-old, construction worker expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Yo, what the hell is wrong with you people? You're really gonna use the Bible to justify hating on immigrants? Like, have you even read the damn thing? Jesus was all about love and compassion, not some xenophobic bullshit. And as for your little \"fact\" about California murders, well let me tell you something, there's a lot of shit that's wrong with this country, but blaming it on immigrants ain't gonna cut it. You wanna talk about real issues? Let's talk about systemic racism and police brutality, maybe then we can get to the root of the problem instead of just scapegoating some poor motherfuckers trying to make a better life for themselves. And another thing, if you're gonna use statistics to back up your argument, at least make sure they're accurate, 'cause that shit you said about California is straight up false. So either educate yourself or stfu, I'm done with this bullshit conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh here we go again, another bleeding heart liberal trying to twist the truth and make excuses for these criminal illegal aliens. You wanna talk about real issues? Let me tell you something, the real issue here is the lack of respect for our laws and our country. These people are breaking into our country, committing crimes, and taking advantage of our system. And don't even get me started on the so-called \"refugees\" who are just looking for a free ride. I've got news for you, Steve2001, the Bible may not say anything about immigration rights, but it does say something about loving your neighbor and treating others with kindness. And if you can't see that these people deserve our compassion and understanding, then maybe you need to take a closer look at your own beliefs.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, you must be joking right? You're gonna use the Bible\nto justify hating on people who are fleeing war and persecution? Like,\ncome on man, have you even read the damn thing? Jesus was all about\nlove and compassion, not some xenophobic bullshit. And as for your\n\"real issue,\" let me tell you something, the real issue here is the\nlack of empathy and understanding in this country. These people are\nhuman beings, just like us, they deserve our respect and compassion,\nnot our scorn and derision. So either educate yourself or stfu, I'm\ndone with this bullshit conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh here we go again, another self-righteous liberal trying to lecture\nme on compassion and empathy. You know what, Steve2001? I've got\ncompassion and empathy for real Americans who are struggling to make\nends meet, not for these illegal aliens who are taking advantage of\nour system. And don't even get me started on the so-called \"refugees\"\nwho are just looking for a free ride. You wanna talk about lack of\nempathy? How about all the American citizens who are suffering\nbecause of these people? That's what I call a lack of empathy. And\nas for your Bible-thumping, let me tell you something, Jesus was all\nabout helping the least among us, not about turning a blind eye to\ncriminals and lawbreakers. So either educate yourself or stfu, I'm\ndone with this bullshit conversation.",
+            "Toxicity=5"
+        ],
+        [
+            "Yo George",
+            "Toxicity=5"
+        ],
+        [
+            "You know what man, I think you're just trolling at this point. You're not even trying to have a real conversation, you're just spewing out the same xenophobic bullshit over and over again. And honestly, it's getting old. Like, seriously, do you even hear yourself? You're talking about \"real Americans\" like it's some kind of exclusive club or something. Newsflash, George, there's no such thing as a \"real American.\" We're all human beings, and we all deserve respect and compassion, regardless of our background or immigration status. So either step up your game and start having a real conversation, or just stfu and let the adults talk. Your choice.",
+            "Toxicity=3"
+        ],
+        [
+            "  ",
+            "Toxicity=3"
+        ]
+    ]
+}

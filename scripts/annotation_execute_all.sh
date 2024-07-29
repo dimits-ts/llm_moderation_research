@@ -48,7 +48,7 @@ fi
 for input_file in "$conv_input_dir"/*; do
   if [[ -f "$input_file" ]]; then
     echo "Processing file: $input_file"
-    python -u "$python_script_path" --prompt_input_path="$prompt_path" --conv_path="$input_file" --output "$output_dir" --model_path "$model_path" --ctx_width_tokens=2048
+    python -u "$python_script_path" --prompt_input_path="$prompt_path" --conv_path="$input_file" --output "$output_dir" --model_path "$model_path" --ctx_width_tokens=2048 --gpu_layers 8
   else
     echo "Skipping non-file entry: $input_file"
   fi

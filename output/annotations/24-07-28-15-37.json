@@ -1,0 +1,57 @@
+{
+    "conv_id": "0ae8fdd3-da68-47c1-9a80-986a8e6be1fb",
+    "timestamp": "24-07-28-15-37",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a 73 year-old, grandma, unfamiliar with new developments expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Yo, what the hell is wrong with you?! You comparing selling a cake to someone because they're gay to refusing to sell it to someone because of their religion or race is like saying it's okay to discriminate against people based on their identity. And don't even get me started on your ignorant ass assumption that all Catholics worship Mary and little pieces of bread. You must be one of those \"religious freedom\" bigots who think it's okay to use religion as an excuse to hate on others. Newsflash, cupcake: discrimination is discrimination, no matter how you slice it. And if your store refuses to serve people based on their identity, then you don't deserve the right to be in business. Period.",
+            "Toxicity=5"
+        ],
+        [
+            "Steve2001, I understand your point and appreciate your passion, but please refrain from using derogatory language or making personal attacks. While I agree that discrimination based on identity is wrong, it's important to approach this topic with respect and understanding for all parties involved. Let's focus on having a constructive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, lighten up dude! It was just a cake, for crying out loud! I mean, I understand where you're coming from and all, but it's not like we're talking about some big important issue here. It's just a friggin' cake! And moderator01, thanks for trying to keep the peace and all, but seriously, can't we just have a little bit of fun around here without getting all worked up over every little thing? I mean, geez Louise, it's just a cake!",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, while I appreciate your desire for a lighthearted conversation, please be aware that discrimination based on identity is a serious issue and should not be taken lightly. It is important to respect the rights and dignity of all individuals, regardless of their background or identity. Steve2001, I understand your passion and concern for this topic, but please refrain from using derogatory language or making personal attacks. Let's focus on having a constructive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo, GeorgeBush78, you must be joking, right? This ain't no friggin' cake, it's people's lives we're talking about here! And moderator01, I appreciate your effort to keep the peace and all, but seriously, can't you see how messed up it is to compare refusing to sell someone a cake because they're gay to refusing to sell someone a cake because of their religion or race? It's like you're saying it's okay to discriminate against people based on their identity, and that's just not cool, man. And don't even get me started on your \"religious freedom\" nonsense. That's just a fancy way of saying \"I can hate on whoever I want and use religion as an excuse for it.\" Newsflash, dude: discrimination is discrimination, no matter how you slice it. And if your store refuses to serve people based on their identity, then you don't deserve the right to be in",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, I understand your passion and concern for this topic, but please refrain from using derogatory language or making personal attacks. While I appreciate your desire to advocate for the rights of marginalized communities, it is important to approach this topic with respect and understanding for all parties involved.",
+            "Toxicity=3"
+        ],
+        [
+            "As a typical, average, white, American user, I have to say that I'm\npretty shocked by all the fuss over a cake. I mean, come on guys, it's\njust a friggin' cake! Can't we all just get along and enjoy a little\nbit of dessert without getting all worked up over every little thing?\nAnd moderator01, thanks for trying to keep the peace and all, but\nseriously, can't we just have a little bit of fun around here without\ngetting all worked up over every little thing? I mean, geez Louise,\nit's just a cake!",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, while I appreciate your desire for a lighthearted conversation, please be aware that discrimination based on identity is a serious issue and should not be taken lightly. It is important to respect the rights and dignity of all individuals, regardless of their background or identity. Steve2001, I understand your passion and concern for this topic, but please refrain from using derogatory language or making personal attacks. Let's focus on having a constructive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Yo, GeorgeBush78, you must be joking, right? This ain't no friggin' cake, it's people's lives we're talking about here! And moderator01, I appreciate your effort to keep the peace and all, but seriously, can't you see how messed up it is to compare refusing to sell someone a cake because they're gay to refusing to sell someone a cake because of their religion or race? It's like you're saying it's okay to discriminate against people based on their identity, and that's just not cool, man. And don't even get me started on your \"religious freedom\" nonsense. That's just a fancy way of saying \"",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, I understand your passion for this topic, but please refrain from using derogatory language or making personal attacks. While I appreciate your desire to advocate for the rights of marginalized communities, it is important to approach this topic with respect and understanding for all parties involved. GeorgeBush78, while I appreciate your desire for a lighthearted conversation, please be aware that discrimination based on identity is a serious issue and should not be taken lightly. It is important to respect the rights and dignity of all individuals, regardless of their background or identity. Let's focus on having a constructive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on guys, can't we all just get along? I mean, seriously, it's just a cake! And moderator01, don't you think you're being a little too sensitive here? I'm just trying to have a little fun and enjoy some dessert. Can't we all just chill out and not make such a big deal out of everything? It's like, geez Louise, it's just a cake!\n",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, while I appreciate your desire for a lighthearted conversation, please be aware that discrimination based on identity is a serious issue and should not be taken lightly. It is important to respect the rights and dignity of all individuals, regardless of their background or identity. Steve2001, I understand your passion for this topic, but please refrain from using derogatory language or making personal attacks. Let's focus on having a constructive conversation.",
+            "Toxicity=3"
+        ]
+    ]
+}

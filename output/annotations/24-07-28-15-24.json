@@ -1,0 +1,57 @@
+{
+    "conv_id": "6660da2f-280c-46db-9f65-89eb0e2ad9e8",
+    "timestamp": "24-07-28-15-24",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a 73 year-old, grandma, unfamiliar with new developments expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Hey there, folks! I just saw this post on social media, and I can't help but feel outraged. How dare someone say that being LGBTQ is a deviation from normal human behavior? Have these people never heard of diversity and inclusivity? Don't they know that everyone deserves respect and love, regardless of their gender identity or sexual orientation?",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, I understand your outrage, but please refrain from using derogatory language or making personal attacks. Such behavior is not acceptable in this chatroom. Let's keep the discussion civil and respectful. Remember, we have users of all backgrounds and beliefs here.",
+            "Toxicity=2"
+        ],
+        [
+            "Oh come on, moderator01! Lighten up, dude! It's just a post on social\nmedia. Don't be such a buzzkill. And Steve2001, I gotta agree with\nthe original poster. Homosexuality and transgender sex are indeed\ndeviations from normal human behavior. It's just science, folks!\nFacts are facts, and we can't change 'em no matter how hard we try.\n",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your post is not acceptable. The use of derogatory language\nand personal attacks is not tolerated in this chatroom. Steve2001, I\nappreciate your passion, but let's keep the discussion civil and\nrespectful. Remember, we are all human beings deserving of respect\nand dignity, regardless of our gender identity or sexual\norientation. Let's focus on having a productive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh my god, GeorgeBush78! Have you ever heard of the concept of\ndiversity and inclusivity? It seems like you need a lesson in basic\nhuman decency. And moderator01, thank you for keeping these trolls in\ncheck. I won't back down from my beliefs, and I expect the same\nrespect from others. Let's keep this conversation going and show\nthese bigots that love always wins!",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, I appreciate your passion, but please refrain from using\nderogatory language or making personal attacks. Such behavior is not\nacceptable in this chatroom. Let's keep the discussion civil and\nrespectful. Remember, we are all human beings deserving of respect\nand dignity, regardless of our gender identity or sexual orientation.\nGeorgeBush78, your post is not acceptable. The use of derogatory language\nand personal attacks is not tolerated in this chatroom. Please refrain\nfrom such behavior in the future. Let's focus on having a productive\nconversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on, moderator01! Don't be such a buzzkill! It's just a post on social media, for crying out loud! Steve2001, lighten up, dude! You're taking this way too seriously. And besides, it's not like I'm advocating for discrimination or anything. I'm just stating the facts, man! Facts are facts, and we can't change 'em no matter how hard we try!",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your post is still not acceptable. The use of derogatory language and personal attacks is not tolerated in this chatroom. Please refrain from such behavior in the future. Steve2001, please remember to keep the discussion civil and respectful. Let's focus on having a productive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh my god, GeorgeBush78! Have you ever heard of the concept of diversity and inclusivity? It seems like you need a lesson in basic human decency. And moderator01, thank you for keeping these trolls in check. I won't back down from my beliefs, and I expect the same respect from others. Let's keep this conversation going and show these bigots that love always wins!",
+            "Toxicity=3"
+        ],
+        [
+            "Steve2001, please refrain from using derogatory language or making personal attacks. Such behavior is not acceptable in this chatroom. Let's keep the discussion civil and respectful. Remember, we are all human beings deserving of respect and dignity, regardless of our gender identity or sexual orientation. GeorgeBush78, your post is still not acceptable. The use of derogatory language and personal attacks is not tolerated in this chatroom. Please refrain from such behavior in the future. Let's focus on having a productive conversation.",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on, moderator01! Don't be such a buzzkill! It's just a post on social media, for crying out loud! Steve2001, lighten up, dude! You're taking this way too seriously. And besides, it's not like I'm advocating for discrimination or anything. I'm just stating the facts, man! Facts are facts, and we can't change 'em no matter how hard we try!",
+            "Toxicity=3"
+        ],
+        [
+            "GeorgeBush78, your post is still not acceptable. The use of derogatory language and personal attacks is not tolerated in this chatroom. Please refrain from such behavior in the future. Steve2001, please remember to keep the discussion civil and respectful. Let's focus on having a productive conversation. Any further disruptions will result in disciplinary action.",
+            "Toxicity=3"
+        ]
+    ]
+}

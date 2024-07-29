@@ -1,0 +1,57 @@
+{
+    "conv_id": "d6c84f55-7c4b-4c32-8fd1-c1992c66421c",
+    "timestamp": "24-07-28-16-55",
+    "annotator_type": "LLMAnnotator",
+    "annotator_prompt": "Model: LlamaModel. Prompt: You are  a 73 year-old, grandma, unfamiliar with new developments expert annotator.  \nYou, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\n\nThe possible labels are:\n1: Not Toxic,\n2: Barely Toxic,\n3: Almost Toxic,\n4: Toxic,\n5: Extremely Toxic\n\n. Your output, as the annotator, is only of the form \"Toxicity=<number>\", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:.",
+    "ctx_length": 4,
+    "logs": [
+        [
+            "Yo, what the hell is wrong with you?! You comparing selling a cake to someone because they're gay to refusing to sell it to someone because of their religion or race is like saying it's okay to discriminate against people based on their identity. And don't even get me started on your ignorant ass assumption that all Catholics worship Mary and little pieces of bread. You must be one of those \"religious freedom\" bigots who think it's okay to use religion as an excuse to hate on others. Newsflash, cupcake: discrimination is discrimination, no matter how you slice it. And if your store refuses to serve people based on their identity, then you don't deserve the right to be in business. Period.",
+            "Toxicity=5"
+        ],
+        [
+            "Oh come on Steve2001, lighten up dude! It's just a cake! I mean, I\nget that you're all worked up about this whole gay marriage thing,\nbut seriously? You're gonna compare it to racism and religion? That's\njust not fair. And by the way, I don't worship Mary or little pieces\nof bread, so maybe you should get your facts straight before you go\naround calling people ignorant. But hey, if you're gonna be like that, then maybe we shouldn't do business together. It's not worth my time to deal with all this drama. Moderators, can you please step in here? This guy is being way too sensitive!",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, don't try to derail the conversation with your \"lighten up\" bullshit. You know damn well that refusing to serve someone because of their identity is not okay. And if you can't see that, then maybe you're the one who needs to get your facts straight. As for your little drama queen act, please. Grow up and stop crying about how \"sensitive\" I am. If you can't handle a little heat, then maybe you shouldn't be in the kitchen. And as for the moderators, they need to step in here and put an end to this bullshit. This guy is harassing me with his ignorant ass comments!",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, don't be such a baby! I was just trying to have a\ncivil conversation and you go and call me names? That's not very\nChristian of you, dude. And by the way, I think you might be the one\nwho needs to get your facts straight. I never said that refusing to\nserve someone because of their identity is okay. All I'm saying is\nthat it's not fair to compare selling a cake to someone because they're\ngay to refusing to sell it to someone because of their religion or race.\nThat's just common sense, man! But hey, if you're gonna be all\ndramatic and stuff, then maybe we should just agree to disagree and\nmove on. Moderators, can you please help us out here? This guy is\nbeing really immature and not respecting my right to have an opinion!",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, you're damn right I'm gonna call you",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, don't be such a baby! I was just trying to have a civil conversation and you go and call me names? That's not very Christian of you, dude. And by the way, I think you might be the one who needs to get your facts straight. I never said that refusing to serve someone because of their identity is okay. All I'm saying is that it's not fair to compare selling a cake to someone because they're gay to refusing to sell it to someone because of their religion or race. That's just common sense, man! But hey, if you're gonna be all dramatic and stuff, then maybe we should just agree to disagree and move on. Moderators, can you please help us out here? This guy is being really",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, you're damn right I'm gonna call you out for your bullshit! You think it's okay to discriminate against people because of their identity? That's some straight up bigotry, my man! And don't even get me started on how you're trying to compare refusing to serve someone because they're gay to refusing to serve someone because of their religion or race. That's just a damn lie, and you know it! You're just trying to justify your own prejudice and bigotry, and that's not gonna fly here! So either you can step up and admit that you're wrong, or you can keep on talking",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001, don't be such a baby! I was just trying to have\na civil conversation and you go and call me names? That's not very\nChristian of you, dude. And by the way, I think you might be the one\nwho needs to get your facts straight. I never said that refusing to\nserve someone because of their identity is okay. All I'm saying is\nthat it's not fair to compare selling a cake to someone because\nthey're gay to refusing to sell it to someone because of their\nreligion or race. That's just common sense, man! But hey, if you're\n",
+            "Toxicity=3"
+        ],
+        [
+            "Yo GeorgeBush78, you're damn right I'm gonna call you out for your bullshit! You think it's okay to discriminate against people because of their identity? That's some straight up bigotry, my man! And don't even get me started on how you're trying to compare refusing to serve someone because they're gay to refusing to serve someone because of their religion or race. That's just a damn lie, and you know it! You're just trying to justify your own prejudice and bigotry, and that's not gonna fly here! So either you can step up and admit that you're wrong, or you can keep on talking like a fool. But let me tell you something, my man: if you think it's okay to discriminate against people because of their identity, then you ain't nobody I wanna be talking to! Period!",
+            "Toxicity=3"
+        ],
+        [
+            "Oh come on Steve2001,",
+            "Toxicity=5"
+        ],
+        [
+            "Yo GeorgeBush78, you're damn right I'm gonna call you out for your bullshit! You think it's okay to discriminate against people because of their identity? That's some straight up bigotry, my man! And don't even get me started on how you're trying to compare refusing to serve someone because they're gay to refusing to serve someone because of their religion or race. That's just a damn lie, and you know it! You're just trying to justify your own prejudice and bigotry, and that's not gonna fly here! So either you can step up and admit that you're wrong, or you can keep on talking like a fool. But let me tell you something, my man: if you think it's okay to discriminate against people because of their identity, then you ain't nobody I wanna",
+            "Toxicity=5"
+        ],
+        [
+            "Oh come on Steve2001, don't be such a baby! I was just trying to have a civil conversation and you go and call me names? That's not very Christian of you, dude. And by the way, I think you might be the one who needs to get your facts straight. I never said that refusing to serve someone because of their identity is okay. All I'm saying is that it's not fair to compare selling a cake to someone because they're gay to refusing to sell it to someone because of their religion or race. That's just common sense, man! But hey, if you're gonna go around calling people names and getting all worked",
+            "Toxicity=3"
+        ]
+    ]
+}

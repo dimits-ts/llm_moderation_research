@@ -2,6 +2,8 @@
 logs/
 # don't include LLM weights
 models/
+# dont include lock files
+*.~lock.*
 
 .idea/
 

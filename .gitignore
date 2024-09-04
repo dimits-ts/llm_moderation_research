@@ -7,6 +7,9 @@ models/
 
 .idea/
 
+# drawio
+*.bkp
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

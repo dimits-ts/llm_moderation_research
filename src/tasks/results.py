@@ -3,10 +3,32 @@ import lib.util
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.axes
 import seaborn as sns
 
 
-def toxicity_barplot(df: pd.DataFrame, ax):
+def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
+    """
+    Create a bar plot displaying the mean toxicity scores for different conversation variants, 
+    grouped by annotator prompts.
+
+    This function generates a horizontal bar plot where the x-axis represents toxicity 
+    scores, and the y-axis represents different conversation variants. The bars are 
+    colored by annotator demographic. An additional vertical red line is plotted at a 
+    toxicity score of 3 to mark a threshold.
+
+    :param df: The input DataFrame containing the toxicity scores, conversation variants, and annotator prompts.
+    :type df: pd.DataFrame
+    :param ax: The matplotlib axes object where the bar plot will be drawn.
+    :type ax: matplotlib.axes.Axes
+    :return: None
+
+    :example:
+        >>> fig, example_ax = plt.subplots()
+        >>> toxicity_barplot(df, example_ax)
+        >>> plt.show()
+    """
+
     sns.barplot(
         data=df,
         y="conv_variant",
@@ -31,13 +53,33 @@ def pvalue_heatmap(
     filename: str | None = None,
     output_dir: str = "."
 ) -> None:
-    """Generate a heatmap with p-values and corresponding asterisks
+    """
+    Generate a heatmap visualizing correlation (or other) values along with p-value significance.
 
-    :param value_df: DataFrame with correlation or other values
-    :param pvalue_df: DataFrame with p-values corresponding to value_df
-    :param show_labels: Boolean indicating whether to show labels on the heatmap
-    :param correlation_title: Title for the heatmap
-    :param filename: Optional filename to save the plot
+    This function produces a heatmap where the lower triangle of the matrix contains
+    correlation values from `value_df`. These values are annotated with asterisks based
+    on the significance levels of corresponding p-values from `pvalue_df`.
+    The heatmap can be saved to a file if a filename is specified.
+
+    :param value_df: DataFrame containing the correlation or other values to be visualized.
+    :type value_df: pd.DataFrame
+    :param pvalue_df: DataFrame containing p-values corresponding to the values in `value_df`.
+    :type pvalue_df: pd.DataFrame
+    :param show_labels: Whether to display axis labels on the heatmap, defaults to False.
+    :type show_labels: bool, optional
+    :param correlation_title: Title for the heatmap, defaults to an empty string.
+    :type correlation_title: str, optional
+    :param xlabel_text: Label for the x-axis of the heatmap, defaults to an empty string.
+    :type xlabel_text: str, optional
+    :param filename: Optional filename to save the heatmap image, defaults to None.
+    :type filename: str | None, optional
+    :param output_dir: Directory where the heatmap image will be saved if a filename is provided, defaults to
+    the current directory.
+    :type output_dir: str, optional
+    :return: None
+
+    :example:
+        >>> pvalue_heatmap(value_df, pvalue_df, show_labels=True, correlation_title="Correlation Heatmap")
     """
     # Format the value_df with asterisks based on pvalue_df
     formatted_values = _format_with_asterisks(value_df, pvalue_df)

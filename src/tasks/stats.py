@@ -8,6 +8,24 @@ from itertools import combinations
 
 
 def posthoc_dunn(df: pd.DataFrame, val_col: str, group_col: str) -> pd.DataFrame:
+    """
+   Perform Dunn's post-hoc test with Bonferroni correction for multiple comparisons.
+   :param df: The input DataFrame containing the data.
+   :type df: pd.DataFrame
+   :param val_col: The column name containing the values to be compared between groups.
+   :type val_col: str
+   :param group_col: The column name containing the group labels.
+   :type group_col: str
+   :return: A DataFrame containing pairwise p-values after Bonferroni correction.
+   :rtype: pd.DataFrame
+
+   :example:
+       >>> example_df = pd.DataFrame({
+       ...     'value': [1.2, 2.3, 2.5, 3.1],
+       ...     'group': ['A', 'B', 'A', 'B']
+       ... })
+       >>> posthoc_dunn(example_df, val_col='value', group_col='group')
+   """
     posthoc = scikit_posthocs.posthoc_dunn(
         df, val_col=val_col, group_col=group_col, p_adjust="bonferroni"
     )
@@ -21,6 +39,25 @@ def posthoc_dunn(df: pd.DataFrame, val_col: str, group_col: str) -> pd.DataFrame
 
 # produced by ChatGPT
 def pairwise_diffs(df: pd.DataFrame, groupby_cols: list[str], value_col: str) -> pd.DataFrame:
+    """
+    Calculate pairwise differences in mean values between groups.
+
+    :param df: The input DataFrame containing the data.
+    :type df: pd.DataFrame
+    :param groupby_cols: The columns to group by in order to calculate mean values.
+    :type groupby_cols: list[str]
+    :param value_col: The column name containing the values for which pairwise differences will be calculated.
+    :type value_col: str
+    :return: A DataFrame containing pairwise mean differences between groups.
+    :rtype: pd.DataFrame
+
+    :example:
+        >>> example_df = pd.DataFrame({
+        ...     'group': ['A', 'B', 'A', 'B'],
+        ...     'value': [1.2, 2.3, 2.5, 3.1]
+        ... })
+        >>> pairwise_diffs(example_df, groupby_cols=['group'], value_col='value')
+    """
     # calculate the mean toxicity for each combination of annotator_prompt and conv_variant
     mean_values = df.groupby(groupby_cols)[value_col].mean().unstack()
 
@@ -57,7 +94,6 @@ def calculate_unimodality(df, opinions_col, dimension_col):
     Returns:
     dict: A dictionary with the dimension value as the key and the unimodality result as the value.
     """
-
     unimodality_results = {}
 
     # Partition the opinions based on the dimension

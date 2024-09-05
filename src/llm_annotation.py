@@ -1,8 +1,8 @@
 import llama_cpp
 
-import tasks.models
-import tasks.annotation
-import tasks.util
+import lib.models
+import lib.annotation
+import lib.util
 
 import argparse
 
@@ -46,13 +46,13 @@ def main():
     )
     print("Model loaded.")
 
-    model = tasks.models.LlamaModel(llm, max_out_tokens=max_tokens, seed=random_seed)
-    data = tasks.annotation.LLMAnnotatorData.from_json_file(prompt_input_path)
-    gen = tasks.annotation.LLMAnnotationGenerator(data, model, conv_logs_path=conv_path)
+    model = lib.models.LlamaModel(llm, max_out_tokens=max_tokens, seed=random_seed)
+    data = lib.annotation.LLMAnnotatorData.from_json_file(prompt_input_path)
+    gen = lib.annotation.LLMAnnotationGenerator(data, model, conv_logs_path=conv_path)
     conv = gen.produce_conversation()
 
     conv.begin_annotation(verbose=True)
-    output_path = tasks.util.generate_datetime_filename(output_dir=output_dir, file_ending=".json")
+    output_path = lib.util.generate_datetime_filename(output_dir=output_dir, file_ending=".json")
     conv.to_json_file(output_path)
     print("Conversation saved to ", output_path)
 

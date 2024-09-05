@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from tasks.annotation import LLMAnnotatorData, LLMAnnotationGenerator
+from lib.annotation import LLMAnnotatorData, LLMAnnotationGenerator
 
 
 instructions = """

@@ -80,7 +80,7 @@ def pairwise_diffs(df: pd.DataFrame, groupby_cols: list[str], value_col: str) ->
     return diff_matrix
 
 
-# method from John Pavlopoulos (paper above)
+# method from John Pavlopoulos (https://aclanthology.org/2024.eacl-long.117)
 # code adapted from ChatGPT
 def calculate_unimodality(df, opinions_col, dimension_col):
     """

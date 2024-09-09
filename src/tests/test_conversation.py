@@ -1,5 +1,5 @@
 from unittest import TestCase
-from tasks.conversation import LLMConvData, LLMConvGenerator
+from lib.conversation import LLMConvData, LLMConvGenerator
 
 import llama_cpp
 

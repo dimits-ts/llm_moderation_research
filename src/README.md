@@ -26,7 +26,7 @@ There are many ways with which to use the synthetic conversation framework:
 1. (Preferred) Run `create_synthetic.py`, see usage below
 1. (Preferred) Run `conversation_execute_all.sh` in order to batch calls to `create_synthetic.py`, see usage below
 1. Run `notebooks/tutorial.ipynb` with modified parameters
-1. Create a new python script leveraging the framework library found in the `tasks` modules
+1. Create a new python script leveraging the framework library found in the `lib` module
 
 #### Running the python script
 ```
@@ -47,7 +47,7 @@ Similarly, in order to run LLM annotation on the conversations:
 1. (Preferred) Run `llm_annotation.py`, see usage below
 1. (Preferred) Run `annotation_execute_all.sh` in order to batch calls to `llm_annotation.py`, see usage below
 1. Run `notebooks/tutorial.ipynb` with modified parameters
-1. Create a new python script leveraging the framework library found in the `tasks` modules
+1. Create a new python script leveraging the framework library found in the `lib` module
 
 #### Running the python script
 ```
@@ -67,7 +67,8 @@ The project is structured as follows:
 - `data`: input prompts in JSON format (see `tasks.conversations.LlmConvData`)
 - `models`: directory for local LLM instances
 - `scripts`: automation scripts for batch processing of experiments
-- `tasks`: a task-specific library developed for this project 
+- `lib`: the LLM conversation library we developed
+- `tasks`: a task-specific library largely used in post-experiment preprocessing and analysis
 - `output`: the output data from the experiments 
 - `notebooks`: notebooks relating to research notes, implementation notes and data analysis 
 

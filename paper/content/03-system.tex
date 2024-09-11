@@ -1,45 +1,46 @@
-% !TEX root = ../thesis-example.tex
+% !TEX root = ../main.tex
 %
 \chapter{System Design and Implementation}
 \label{sec:system}
 
-%\cleanchapterquote{Innovation distinguishes between a leader and a follower.}{Steve Jobs}{(CEO Apple Inc.)}
+A very important part of this thesis is the Synthetic Discussion Framework (SDF), a lightweight, specialized python library which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework, why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the general design and concept (Section \ref{sec:system:design}), and finally the actual implementation (Section \ref{sec:system:implementation}) of the new framework.
 
-\Blindtext[1][1]
-\cite{WEB:GNU:GPL:2010}
+\section{Requirements}
+\label{sec:system:requirements}
+
+The requirements for the SDF were not obtained by standard Requirement Solicitation procedures. Instead, they were iteratively solicited during weekly meetings. Thus, no formal document detailing them exists. 
+
+However, the interested stakeholders in the context of the wider research effort, ultimately decided on a combination of the below requirements. We denote the SDF as "the system" for this section.
+
+Functional requirements:
+\begin{enumerate}
+	\item The system must support multiple LLM types, with potentially different libraries handling them.
+	\item The system must support a conversation with at least two LLM users.
+	\item The system must support socio-demographic backgrounds (SDBs) to be given to LLM users.
+	\item The system must support the existence and absence of a third LLM user, posing as a moderator.
+	\item The moderator must be able to intervene at any point in the conversation.
+	\item The moderator must be able to "ban" users, preventing them from further commenting.
+	\item The output of the system must be serializable and easily parsable.
+\end{enumerate}
+
+Non functional requirements:
+\begin{enumerate}
+	\item The system must be able to be ran locally, with scarce computational resources.
+	\item The system must be accessed through a simple and flexible API.
+	\item The system must be able to automatically produce a large amount of synthetic discussions in a timeframe of hours.
+\end{enumerate}
+
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail at all three non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases making, their API convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
+
+Thus the solution of building our own framework is the only practical way of satisfying all the requirements above.
+
+
 
 \section{Design}
-\label{sec:system:sec0}
+\label{sec:system:design}
 
-\Blindtext[1][1]
 
-\begin{itemize}[noitemsep]
-\item Item 1
-\item Item 2
-\item Item 3
-\item Item 4
-\end{itemize}
-
-\Blindtext[1][1]
 
 \section{Implementation}
-\label{sec:system:sec1}
+\label{sec:system:implementation}
 
-\Blindtext[1][1]
-
-\begin{algorithm}
-\caption{Test}\label{alg:test}
-\begin{algorithmic}[1]
-\Procedure{GET}{$a,b$}\Comment{The g.c.d. of a and b}
-\State $r\gets a\bmod b$
-\While{$r\not=0$}\Comment{We have the answer if r is 0}
-\State $a\gets b$
-\State $b\gets r$
-\State $r\gets a\bmod b$
-\EndWhile\label{euclidendwhile}
-\State \textbf{return} $b$\Comment{The gcd is b}
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-\Blindtext[1][1]

@@ -23,6 +23,7 @@ Functional requirements:
 	\item The moderator must be able to intervene at any point in the conversation.
 	\item The moderator must be able to "ban" users, preventing them from further commenting.
 	\item The output of the system must be serializable and easily parsable.
+	\item The system must support automated annotation.
 \end{enumerate}
 
 Non functional requirements:
@@ -30,6 +31,8 @@ Non functional requirements:
 	\item The system must be able to be ran locally, with scarce computational resources.
 	\item The system must be accessed through a simple and flexible API.
 	\item The system must be able to automatically produce a large amount of synthetic discussions in a timeframe of hours.
+	\item The system must support large-scale data annotation.
+	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
 Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail at all three non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases making, their API convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
@@ -45,18 +48,9 @@ The SDF is comprised of two main functions; Synthetic Dialogue Creation and Auto
 
 
 \subsection{Synthetic Dialogue Creation}
+\label{ssec:creation}
 
 The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation}.
-
-The two Users and the Moderator are all controlled by the same LLM instance; we only change the system prompt when each takes its turn to speak. The prompts are comprised of five parts:
-
-\begin{itemize}
-	\item \textbf{Name}, the name of the actor, used for other actors to refer ro him in-conversation.
-	\item \textbf{Role}, the role of the actor within the conversation (user, moderator).
-	\item \textbf{Attributes}, a list of attributes, primarily used for giving the actor an SDB.
-	\item \textbf{Context}, information known to all users.
-	\item \textbf{Instructions}, potentially unique to each actor. 
-\end{itemize}
 
 \begin{figure}
 	\centering
@@ -64,6 +58,40 @@ The two Users and the Moderator are all controlled by the same LLM instance; we 
 	\caption{The conversation loop on which the SDF operates. Can be generalized for N users and 0 or 1 moderators.}
 	\label{fig::conversation}
 \end{figure}
+
+The two Users and the Moderator are all controlled by the same LLM instance; we only change the system prompt when each takes its turn to speak. The prompts are comprised of five parts:
+
+\begin{itemize}
+	\item \textbf{Name}, the name of the actor, used for other actors to refer ro him in-conversation.
+	\item \textbf{Role}, the role of the actor within the conversation (user, moderator).
+	\item \textbf{Attributes}, a list of actor attributes, primarily used for giving the actor an SDB.
+	\item \textbf{Context}, information known to all users.
+	\item \textbf{Instructions}, potentially unique to each actor. 
+\end{itemize}
+
+
+\subsection{Automated Dialogue Annotation}
+
+As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be ML-based instead of DL-based \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. To bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
+
+Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional ML and even DL models, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
+
+\begin{itemize}
+	\item Attempt to find a prompt which produces results closer to what would be expected of a human annotator.
+	\item Lean into the subjectiveness of LLM decision-making and use many LLM annotators, each with a different SDB, then use inter-annotator analysis techniques.
+\end{itemize}
+
+In this thesis, we use the second option.
+
+We re-use the conversation paradigm of Section \ref{ssec:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator, that is for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=8cm]{annotation_graph_light.png}
+	\caption{The annotation loop on which the SDF operates. Note the purposeful similarity to Figure \ref{fig::conversation}.}
+	\label{fig::annotation}
+\end{figure}
+
 
 
 \section{Implementation}

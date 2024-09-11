@@ -48,7 +48,7 @@ The SDF is comprised of two main functions; Synthetic Dialogue Creation and Auto
 
 
 \subsection{Synthetic Dialogue Creation}
-\label{ssec:creation}
+\label{ssec:system:creation}
 
 The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation}.
 
@@ -71,6 +71,7 @@ The two Users and the Moderator are all controlled by the same LLM instance; we 
 
 
 \subsection{Automated Dialogue Annotation}
+\label{ssec:system:annotation}
 
 As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be ML-based instead of DL-based \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. To bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
 
@@ -83,7 +84,7 @@ Using LLMs as annotators imposes both a challenge and an opportunity, since anno
 
 In this thesis, we use the second option.
 
-We re-use the conversation paradigm of Section \ref{ssec:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator, that is for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation}.
+We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator, that is for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation}.
 
 \begin{figure}
 	\centering
@@ -96,4 +97,59 @@ We re-use the conversation paradigm of Section \ref{ssec:creation} to facilitate
 
 \section{Implementation}
 \label{sec:system:implementation}
+
+\subsection{Synthetic Discussion Library}
+\label{ssec:system:library}
+
+The SDF is at its core based on the Synthetic Discussion Library (SDL) around which the rest of the framework operates. The library is written in Python, contains 4 distinct modules, and is based on Object Oriented Programming (OOP) principles.
+
+Each of these modules contains classes and supporting code for a specific function. In brief:
+
+\begin{itemize}
+	\item \textbf{models.py} holds Adapter classes \cite{gamma1995design} which enable the framework to uniformly access almost any LLM instance regardless of type (as long as a suitable subclass is created).
+	
+	\item \textbf{actors.py} which holds Wrapper classes \cite{gamma1995design}, containing Model Adapter classes from \textbf{models.py} and provide them with prompt templates.
+	
+	\item \textbf{conversation.py} uses Actor classes in order to execute and serialize the conversation.
+\end{itemize}
+
+The library additionally provides the \textbf{annotator.py} and \textbf{util.py} modules which are self explanatory.
+
+
+\subsection{Framework entry-points}
+\label{ssec:system:entrypoints}
+
+The framework provides a variety of APIs to access the SDL from the more standardized (which necessitate no programming) to the more flexible (direct access to the library's public API). These are:
+
+\begin{itemize}
+	\item Automated python scripts which, when given a JSON configuration file, begin a batch production of automated discussions.
+	
+	\item Jupyter notebooks with explanatory high-level documentation, which are used for on-boarding users to the framework and quick experimentation.
+	
+	\item The exported SDL itself.
+\end{itemize}
+
+
+\subsection{High-level view of the system}
+\label{ssec:system:overview}
+
+A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\textcolor{green}{green shapes}) can be provided by either JSON files or programmatically, depending on the entry-point (\textcolor{blue}{blue shapes}) used. 
+
+The procedure described in the figure, enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests e.t.c.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
+
+Each processing step (\textcolor{violet}{pink shapes}) additionally creates entries on our generated dataset, be it the conversation logs with rich meta-data (\textcolor{violet}{"Generate Conversation"}), multi-annotator, multi-dimensional annotations (\textcolor{violet}{"Generate Annotation"}) or controversial comments (\textcolor{violet}{"Data Analysis"}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=12cm]{system_light.png}
+	\caption{An abstract view of the SDF. \textcolor{green}{Green shapes} represent various configurations, \textcolor{blue}{blue shapes} entry points (see Section \ref{ssec:system:entrypoints}), \textcolor{violet}{pink ones} processes delegated to the SDL, and \textbf{white} ones exported data.}
+	\label{fig::system}
+\end{figure}
+
+
+
+\subsection{Technical Details}
+\label{ssec:system:details}
+
+The LLM used is the LLaMa2-13B GGUF quantized version. We use the llama\_cpp python library to load and interact with the model. Details on the environment, software and OS compatibility, as well as low-level decisions and optimizations, we recommend checking the project's GitHub repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
 

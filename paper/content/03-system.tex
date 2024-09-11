@@ -8,6 +8,8 @@ A very important part of this thesis is the Synthetic Discussion Framework (SDF)
 \section{Requirements}
 \label{sec:system:requirements}
 
+%TODO: add LLM annotators
+
 The requirements for the SDF were not obtained by standard Requirement Solicitation procedures. Instead, they were iteratively solicited during weekly meetings. Thus, no formal document detailing them exists. 
 
 However, the interested stakeholders in the context of the wider research effort, ultimately decided on a combination of the below requirements. We denote the SDF as "the system" for this section.
@@ -39,6 +41,29 @@ Thus the solution of building our own framework is the only practical way of sat
 \section{Design}
 \label{sec:system:design}
 
+The SDF is comprised of two main functions; Synthetic Dialogue Creation and Automatic Dialogue Annotation. In this section, we will explain how these two functions work conceptually and what their goals are.
+
+
+\subsection{Synthetic Dialogue Creation}
+
+The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation}.
+
+The two Users and the Moderator are all controlled by the same LLM instance; we only change the system prompt when each takes its turn to speak. The prompts are comprised of five parts:
+
+\begin{itemize}
+	\item \textbf{Name}, the name of the actor, used for other actors to refer ro him in-conversation.
+	\item \textbf{Role}, the role of the actor within the conversation (user, moderator).
+	\item \textbf{Attributes}, a list of attributes, primarily used for giving the actor an SDB.
+	\item \textbf{Context}, information known to all users.
+	\item \textbf{Instructions}, potentially unique to each actor. 
+\end{itemize}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=8cm]{conversation_graph_light.png}
+	\caption{The conversation loop on which the SDF operates. Can be generalized for N users and 0 or 1 moderators.}
+	\label{fig::conversation}
+\end{figure}
 
 
 \section{Implementation}

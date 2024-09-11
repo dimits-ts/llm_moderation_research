@@ -5,9 +5,9 @@ import datetime
 import textwrap
 from typing import Any
 
-import tasks.actors
-import tasks.models
-import tasks.util
+import lib.actors
+import lib.models
+import lib.util
 
 
 # "...but if you look at conversations.py, this whole file violates DRY"
@@ -20,7 +20,7 @@ class AnnotationConv:
     An annotation job modelled as a conversation between the messages of a finished dialogue, and the LLM Annotator.
     """
 
-    def __init__(self, annotator: tasks.actors.IActor, conv_logs_path: str, history_ctx_len: int = 4):
+    def __init__(self, annotator: lib.actors.IActor, conv_logs_path: str, history_ctx_len: int = 4):
         self.annotator = annotator
         self.history_ctx_len = history_ctx_len
         self.annotation_logs = []
@@ -38,7 +38,7 @@ class AnnotationConv:
         ctx_history = collections.deque(maxlen=self.history_ctx_len)
 
         for username, message in self.conv_data_dict["logs"]:
-            formatted_message = tasks.util.format_chat_message(username, message)
+            formatted_message = lib.util.format_chat_message(username, message)
             ctx_history.append(formatted_message)
             annotation = self.annotator.speak(list(ctx_history))
             self.annotation_logs.append((message, annotation))
@@ -73,7 +73,7 @@ class AnnotationConv:
         :param output_path: the path for the exported file
         :type output_path: str
         """
-        tasks.util.ensure_parent_directories_exist(output_path)
+        lib.util.ensure_parent_directories_exist(output_path)
 
         with open(output_path, "w", encoding="utf8") as fout:
             json.dump(self.to_dict(), fout, indent=4)
@@ -124,12 +124,12 @@ class LLMAnnotatorData:
 class LLMAnnotationGenerator:
     """
     A class responsible for creating a :class:`AnnotationConv` from the conversation data
-    (:class:`LLMAnnotatorData`) and a model (:class:`tasks.models.LlamaModel`).
+    (:class:`LLMAnnotatorData`) and a model (:class:`lib.models.LlamaModel`).
     """
 
     def __init__(self,
                  data: LLMAnnotatorData,
-                 llm: tasks.models.LlamaModel,
+                 llm: lib.models.LlamaModel,
                  conv_logs_path: str
                  ):
         self.data = data
@@ -143,12 +143,12 @@ class LLMAnnotationGenerator:
         :return: An initialized AnnotationConv instance.
         :rtype: AnnotationConv
         """
-        annotator = tasks.actors.LLMAnnotator(model=self.llm,
-                                              name="",
-                                              role="expert annotator",
-                                              attributes=self.data.attributes,
-                                              context="",
-                                              instructions=self.data.instructions)
+        annotator = lib.actors.LLMAnnotator(model=self.llm,
+                                            name="",
+                                            role="expert annotator",
+                                            attributes=self.data.attributes,
+                                            context="",
+                                            instructions=self.data.instructions)
 
         conversation = AnnotationConv(annotator=annotator,
                                       conv_logs_path=self.conv_logs_path,

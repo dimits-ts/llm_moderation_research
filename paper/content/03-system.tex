@@ -41,8 +41,8 @@ Thus the solution of building our own framework is the only practical way of sat
 
 
 
-\section{Design}
-\label{sec:system:design}
+\section{System Design}
+\label{sec:system:design-system}
 
 The SDF is comprised of two main functions; Synthetic Dialogue Creation and Automatic Dialogue Annotation. In this section, we will explain how these two functions work conceptually and what their goals are.
 
@@ -92,6 +92,45 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 	\caption{The annotation loop on which the SDF operates. Note the purposeful similarity of the function to Figure \ref{fig::conversation}.}
 	\label{fig::annotation}
 \end{figure}
+
+
+\section{Prompt Design}
+\label{sec:system:design-prompt}
+
+Our user instruction prompts in general were designed with the following criteria in mind:
+
+\begin{itemize}
+	\item Many people are unwilling to change opinions during online discussions.
+	
+	\item Personal attacks are common \cite{dekock2022disagree}.
+	
+	\item Anonymity makes people more likely assume other participants are not arguing in good faith, especially in toxic environments \cite{Avalle2024PersistentIP}.
+	
+	\item People are not told what to believe when entering a discussion, but form opinions based on (besides many other factors) their SDB.  %TODO citation needed?
+	
+\end{itemize}
+
+Thus, user prompts are designed to promote toxicity, controversy and confrontation.
+
+On the other hand, our moderator prompts were largely based on the eCornell moderator manual \cite{Cornell_eRulemaking2017} which, among others, emphasizes the following guidelines:
+
+\begin{itemize}
+	\item The moderator must remain neutral and impartial. 
+	
+	\item Responses should be briefly reflected upon before being posted.
+	
+	\item Questions posed by the moderator must be purposeful, as if they have one chance to interact with the user. They can rephrase a user's point if they do not understand it.
+	
+	\item Language should be short and simple.
+\end{itemize}
+
+In our experiments we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above (Section \ref{ssec:system:vanilla-prompt}). The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals (Section \ref{ssec:system:game-prompt}.
+
+\subsection{Vanilla prompts}
+\label{ssec:system:vanilla-prompt}
+
+\subsection{"Moderation Game" prompts}
+\label{ssec:system:game-prompt}
 
 
 

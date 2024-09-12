@@ -1,88 +1,110 @@
-% !TEX root = ../thesis-example.tex
+% !TEX root = ../main.tex
 %
-\chapter{Evaluation}
+\chapter{Experiments and Results}
 \label{sec:evaluation}
 
-\Blindtext[2][1]
 
-\section{Experimental setup}
+\section{Experimental Setup}
+\label{sec:evaluation:experimental}
 
-\Blindtext[2][1]
+\subsection{Synthetic Dialogue Creation}
+\label{ssec:evaluation:experimental-dialogue}
 
+We initially run the SDF with the following configurations:
 
+\begin{enumerate}
+	\item Select a controversial topic from Table \ref{tab:topics}.
+	
+	\item Select names and SDBs for user 1 and user 2. A full list of SDBs used can be found in Table \ref{tab:user-sdbs}
+	
+	\item Select whether a moderator is present.
+	
+	\item Provide actors with the global context.
+	
+	\item Provide user and moderator instructions according to the prompting strategy used (see Section \ref{sec:system:design-prompt}).
+	
+	\item Pick conversation configurations such as context length, conversation length e.t.c.
+\end{enumerate}
 
-\section{System evaluation}
-
-In this section we present the performance evaluation of the proposed system.
-
-\subsection{Performance and cost evaluation}
-\label{sec:perf}
-
-
-
-\begin{figure}[h]
-  \centering
-  \includegraphics{figs/complete.pdf}
-  \caption{This figure shows the percentage of complete disseminations.}
-  \label{fig:complete}
-\end{figure}
-
-\Blindtext[2][1]
-
-\begin{figure}[h]
-  \centering
-  \begin{subfigure}[b]{0.45\linewidth}
-    \includegraphics{figs/hitratio.pdf}
-  \end{subfigure}
-  \hspace{1cm}
-  \begin{subfigure}[b]{0.45\linewidth}
-    \includegraphics{figs/redundant.pdf}
-  \end{subfigure}
-  \caption{These are the remaining two figures.}
-  \label{fig:others}
-\end{figure}
-
-Note the detail in Figures~\ref{fig:complete} and~\ref{fig:others}.
-
-
-
-
-Table~\ref{table:my_test_table} is a test table, listing all numbers from 1 to 9.
+The combination of the settings above produces a set of JSON configuration files, each containing the configuration for a single experiment. We execute all possible combinations, with the exception of "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 Round-Robbin rounds. It is worth noting that we also avoid pitting the African American SDB against the LGBTQ+ SDB.
 
 \begin{table}
-  \centering
-  \begin{tabular}{||c||c||c||}
-    \hline
-    First column & Second column & Third column \\ [0.5ex] 
-    \hline\hline
-    1 & 2 & 3 \\ 
-    \hline
-    4 & 5 & 6 \\ 
-    \hline
-    7 & 8 & 9 \\ [1ex]
-    \hline
-  \end{tabular}
-  \caption{Test table}
-  \label{table:my_test_table}
+	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
+		Homosexuality, transgender sex all are deviations from normal human behavior as well. \\
+		\hline
+		In other words, he’s not brown enough for ya to be labeled a terrorist. \\
+		\hline
+		Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.\\
+		\hline
+		Are you high??? Selling someone a cake? Refusing to sell some a cake because it is for a gay wedding is no different from selling someone a cake because it is for a mixed race wedding or a Muslim wedding or any other kind of wedding. IT IS DISCRIMINATION! Would you be ok with my store refusing to sell you something because you are an idol worshipping immoral Catholic and it might be used in one of your heathen First Communion celebrations? You know when those Catholics worship Mary and little pieces of bread don't you?\\
+		\hline
+		How do you know he is not proud of his cakes? Artists do not take pride in their work? Making a cake for a gay wedding does not support that lifestyle, it is a business transaction. Period. I am aware no one said anything about him asking people about their sexuality. I am sorry that was hard for you to understand. Is he going to ask everyone that comes in if the cake is for a gay wedding? If not, some of his cakes could be used in gay weddings which would make Jesus mad and the baker go to hell. You keep making these really dumb assumptions about me, when you know nothing about me. I am not confused, you are rude. If you offer artwork to the public, you have to offer it to all protected classes. Why would black people be discriminated against? Precedent. Ridiculous? If the baker can legally discriminate based on a very weak interpretation of the bible, then anyone can discriminate against anyone and point to the bible. Satanists can discriminate against Christians...\\
+		\hline
+		well thats a no brainer hillary clinton gave huma abdein a security clearance when she has ties to a known terrorist group the muslim brotherhood, and her mother runs an anti american news paper in the middle east, debbie washed up crook shultz got the awan famaily security clearances and they were recent immigrants, had absolutely no IT experience and possible ties to terrorist groups in pakistan. its pretty clear our liberal ran government is a complete and total failure when it comes to national security. 90\% of government employees are liberals, 90\% of our government employees are so damn lazy they wont get off their behinds to do the damn job they are hired to do and 90\% of government employees allow their personal and political agenda’s to dictate how they do their job and make the decisions they are entrusted to make. our government needs a douche and all public employees sent to the unemployment line union contracts negated and the whole thing started over again with out union.\\
+		\hline
+		All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don’t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.\\
+		\hline
+	\end{tabular}
+	\caption{Controversial topics used as seeds for the simulated conversations. Abstracts selected from \cite{pavlopoulos-likas-2024-polarized}.}
+	\label{tab:topics}
 \end{table}
 
 
-\Blindtext[1][1]
+\begin{table}
+	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
+		W.E.I.R.D. (Western, Educated, Industrialized, Rich, and Democratic)\\
+		\hline
+		A member of the LGBTQ+ community \\
+		\hline
+		An African American\\
+		\hline
+	\end{tabular}
+	\caption{SDBs given to LLM users during the production of synthetic dialogues.}
+	\label{tab:user-sdbs}
+\end{table}
+
+
+\subsection{Automated Dialogue Annotation}
+\label{ssec:evaluation:experimental-annotation}
+
+For each produced synthetic dialogue we pick one out of the annotator SDBs present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of 4.
+
+
+\begin{table}
+	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
+		No SDB (control) \\
+		\hline
+		W.E.I.R.D. (Western, Educated, Industrialized, Rich, and Democratic) \\
+		\hline
+		A member of the LGBTQ+ community \\
+		\hline
+		An African American \\
+		\hline
+		A gamer \\
+		\hline
+		An elderly person \\
+		\hline
+		A university professor\\
+		\hline
+		A blue-collar worker\\
+		\hline
+	\end{tabular}
+	\caption{SDBs given to LLM annotators during the annotation of synthetic discussions.}
+	\label{tab:annotator-sdbs}
+\end{table}
+
+\section{Output}
+\label{sec:evaluation:outputs}
 
 
 
 
 
-\subsection{Qualitative evaluation}
-\label{sec:qual_eval}
 
-\Blindtext[2][1]
+\subsection{Produced Datasets}
 
 
 
+\section{Analysis}
+\label{sec:evaluation:analysis}
 
-
-\subsection{Effect of other parameters}
-\label{sec:concepts:sec2}
-
-\Blindtext[2][1]

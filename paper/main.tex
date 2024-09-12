@@ -101,7 +101,17 @@
 \usepackage{acronym}
 \usepackage{libertine}
 
+% **************************************************
+% Custom commands
+% **************************************************
+
 \newcommand{\code}[1]{\texttt{#1}}
+
+% automatic row numbers
+\usepackage{array,etoolbox}
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
 
 
 % **************************************************

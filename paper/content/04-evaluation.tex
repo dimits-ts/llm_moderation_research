@@ -93,15 +93,21 @@ For each produced synthetic dialogue we pick one out of the annotator SDBs prese
 	\label{tab:annotator-sdbs}
 \end{table}
 
-\section{Output}
-\label{sec:evaluation:outputs}
 
+\section{Produced Datasets}
+\label{sec:evaluation:datasets}
 
+We produce three synthetic datasets:
 
+\begin{itemize}
+	\item The \textbf{Synthetic Dialogues Dataset}, containing the logs of the conversations, as well as rich metadata such as the prompts used and the conversation-specific configurations.
+	
+	\item The \textbf{Automated Annotation Dataset}, containing the annotations for each comment in each synthetic conversation. Contains metadata similar to the Synthetic Dialogues Dataset such as annotator prompt and context length.
+	
+	\item The \textbf{Controversial Comments Dataset}, containing the comments in which the annotators disagreed upon. Includes comment and conversation IDs for matching with the other datasets, the nDFU \cite{pavlopoulos-likas-2024-polarized} score of each comments, and the individual annotations for each annotator SDB.
+\end{itemize}
 
-
-
-\subsection{Produced Datasets}
+%TODO: Add table with dataset statistics
 
 
 

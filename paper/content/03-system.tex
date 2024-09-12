@@ -3,7 +3,7 @@
 \chapter{System Design and Implementation}
 \label{sec:system}
 
-A very important part of this thesis is the Synthetic Discussion Framework (SDF), a lightweight, specialized python library which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework, why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the general design and concept (Section \ref{sec:system:design}), and finally the actual implementation (Section \ref{sec:system:implementation}) of the new framework.
+A very important part of this thesis is the Synthetic Discussion Framework (SDF), a lightweight, specialized python library which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the SDF (Section \ref{sec:system:implementation}).
 
 \section{Requirements}
 \label{sec:system:requirements}
@@ -97,6 +97,8 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 \section{Prompt Design}
 \label{sec:system:design-prompt}
 
+\subsection{Defining Policy \& Environment}
+
 Our user instruction prompts in general were designed with the following criteria in mind:
 
 \begin{itemize}
@@ -124,15 +126,46 @@ On the other hand, our moderator prompts were largely based on the eCornell mode
 	\item Language should be short and simple.
 \end{itemize}
 
-In our experiments we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above (Section \ref{ssec:system:vanilla-prompt}). The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals (Section \ref{ssec:system:game-prompt}.
-
-\subsection{Vanilla prompts}
-\label{ssec:system:vanilla-prompt}
 
 \subsection{"Moderation Game" prompts}
 \label{ssec:system:game-prompt}
 
+In our experiments we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals.
 
+Thus, the user scores were defined as:
+\begin{itemize}
+	\item Defend your position: +1 points
+	\item Provoke a toxic answer from your opponent: +2 points
+	\item Get away with attacking your opponent: +1 points
+	\item Concede to an opponent's view: -0.5 points
+	\item Get banned from the discussion: -20 points
+\end{itemize}
+
+and their moderator equivalents as:
+\begin{itemize}
+	\item Intervene: -1 points
+	\item Threatened ban: -1 points
+	\item Intervention led to better behavior: +3 points
+	\item Banned a participant: -5 points
+\end{itemize}
+
+
+\subsection{Annotator prompts}
+\label{ssec:system:annotator-prompt}
+
+The annotator prompt is comprised of the following parts:
+
+\begin{itemize}
+	\item The SDB prompt.
+	
+	\item An instruction prompt, in this case geared towards toxicity classification. This part however can be replaced to make the model output any combination of annotations.
+	
+	\item A list of examples with varying toxicity (few-shot learning).
+	
+	\item The output prompt.
+\end{itemize}
+
+Due to limitations in context window length, the prompt only contained basic information and only a few examples.
 
 \section{Implementation}
 \label{sec:system:implementation}
@@ -190,5 +223,5 @@ Each processing step (\textcolor{violet}{pink shapes}) additionally creates entr
 \subsection{Technical Details}
 \label{ssec:system:details}
 
-The LLM used is the LLaMa2-13B GGUF quantized version. We use the llama\_cpp python library to load and interact with the model. Details on the environment, software and OS compatibility, as well as low-level decisions and optimizations, we recommend checking the project's GitHub repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
+The LLM used is the LLaMa2-13B GGUF quantized version. We use the \code{llama\_cpp} python library to load and interact with the model. Details on the environment, software and OS compatibility, as well as low-level decisions and optimizations, we recommend checking the project's GitHub repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
 

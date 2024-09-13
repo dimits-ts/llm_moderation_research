@@ -41,7 +41,7 @@ def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
     ax.set_ylabel("")
     ax.set_xlabel("")
     ax.set_xlim(0, 5)
-    ax.legend(title="Annotator Demographic", fontsize="6", title_fontsize="6.5")
+    ax.legend(title="Annotator Demographic", fontsize="6", title_fontsize="6.5", loc="upper right")
 
 
 def pvalue_heatmap(

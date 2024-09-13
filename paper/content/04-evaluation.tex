@@ -107,7 +107,25 @@ We produce three synthetic datasets:
 	\item The \textbf{Controversial Comments Dataset}, containing the comments in which the annotators disagreed upon. Includes comment and conversation IDs for matching with the other datasets, the nDFU \cite{pavlopoulos-likas-2024-polarized} score of each comments, and the individual annotations for each annotator SDB.
 \end{itemize}
 
-%TODO: Add table with dataset statistics
+Descriptive statistics for the above datasets can be found in Table \ref{tab:datasets}. Some datasets are provided in the form of sets of JSON files, in which case we use the row and column numbers from their converted form as \code{pandas dataframes}. All datasets contain primary and foreing keys in the form of unique IDs enabling the user to freely combine information from all three datasets.
+
+
+\begin{table}
+	\begin{tabular}
+		{ |p{6cm}|p{1cm}|p{1.5cm}|p{2cm}|}
+		\hline
+		\cellcolor{blue!25}\textbf{Name} & \cellcolor{blue!25}\textbf{Rows} & \cellcolor{blue!25}\textbf{Columns} & \cellcolor{blue!25}\textbf{Format}\\
+		\hline
+		Synthetic Dialogues Dataset & 244 & 12 & JSON\\
+		\hline
+		Automated Annotation Dataset & 2302 & 7 & JSON\\
+		\hline
+		Controversial Comments Dataset & 28 & 12 & CSV\\
+		\hline
+	\end{tabular}
+	\caption{Descriptive statistics of the synthetic datasets produced in this thesis.}
+	\label{tab:datasets}
+\end{table}
 
 
 

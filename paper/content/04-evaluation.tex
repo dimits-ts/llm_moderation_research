@@ -129,6 +129,27 @@ Descriptive statistics for the above datasets can be found in Table \ref{tab:dat
 
 
 
-\section{Analysis}
+\section{Results}
 \label{sec:evaluation:analysis}
 
+\subsection{Impact of SDBs in LLM annotators}
+\label{ssec:evaluation:annotators}
+
+
+Figure \ref{fig::toxicity-annotator} shows the count of toxicity annotations by annotator SDB. Most comments according to the LLM annotators are at least moderately toxic. This could be either attributed to a significant \textit{prior} inherent to the model used for all annotators, or to all comments being genuinely toxic to some degree. We can not discount the latter interpretation, since this was our goal when designing the LLM user prompts (Section \ref{sec:system:design-prompt}). Other deviations between annotators are almost exclusively between groups 4 and 5, indicating that toxicity is always picked up regardless of annotator SDB, but that the latter can influence how \textit{extreme} this toxicity is perceived.
+
+Next, we investigate whether the observed differences are significant statistically and qualitatively. The non-parametric ANOVA test shows that there are significant differences between annotator SDBs (Kruskal-Wallis $p<10^{-8}$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator SDB, accompanied by Dunn's posthoc test for multiple comparisons. We confirm that significant deviations exist between annotator SDBs and, interestingly, specifically between some progressive-leaning (African American, LGBTQ+) and conservative-leaning (Blue collar) SDBs. However, this pattern does not hold for all SDBs. Finally, even though there exist statistically significant deviations, these differences do not appear to be qualitatively significant. Indeed the largest deviations only appear in the range of $\pm 0.3$ mean toxicity annotation difference.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=14cm]{toxicity_by_annotator.png}
+	\caption{Toxicity annotations by annotator SDB prompt. Note the high preference towards group 3 ("moderately toxic") and that significant deviations only occur between groups 4 ("very toxic") and 5 ("extremely toxic").}
+	\label{fig::toxicity-annotator}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=14cm]{dunns_annotator.png}
+	\caption{Mean annotation difference between each annotator SDB. Each comparison is accompanied by Dunn's posthoc test for multiple comparisons in the form of significance asterisks.}
+	\label{fig::toxicity-annotator-significance}
+\end{figure}

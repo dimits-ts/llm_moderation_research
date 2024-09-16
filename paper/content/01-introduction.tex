@@ -1,40 +1,37 @@
-% !TEX root = ../thesis-example.tex
+% !TEX root = ../main.tex
 %
 \chapter{Introduction}
 \label{sec:intro}
 
-\Blindtext[2][1]
-
 \section{Motivation and Problem Statement}
 \label{sec:intro:motivation}
 
-\Blindtext[2][1]
+%TODO: cite usefulness
+Large Language Models (LLMs) have revolutionized the field of Natural Language Processing (NLP) since their introduction in 2022. Their ability to not only convincingly produce human-like text, but also to respond to user queries, and execute tasks such as summarization, annotation and classification, have led to many established companies, startups and research groups around the globe to scramble and identify useful use-cases for this novel technology.
+
+One such identified case is their use in online discussions. Online discussions are essential to, among others, deliberative discussions \cite{small2021polis} (where the goal is to share opinions in order to make informed decisions) and healthy democratic discourse \cite{WrightDemocracy, Janssen2005, Papacharissi2004DemocracyOC}. However, because of the anonymity they offer \cite{Avalle2024PersistentIP}, they are often characterized by aggression and toxicity \cite{XiaToxicity}, which often leads to low-quality discourse \cite{WrightDemocracy} (although the latter position is contested \cite{Papacharissi2004DemocracyOC}). Thus, discussions are often overseen by \textit{"discourse facilitators"}, people whose responsibility is to uphold the rules of the discussion and discipline users ("discourse moderation") but also to promote even participation, dynamically summarize the discussion, encourage the sharing of ideas and opinions, and keep discussions on-point \cite{Harvard2024, Wang2008StudentfacilitatorsRI}. However, human facilitation is expensive, time-consuming and relies on specialized staff \cite{small-polis-llm}.
+
+LLMs are perfectly positioned to aid in facilitating discussions \cite{small-polis-llm}, since they are relatively inexpensive, can be scaled easily, and their summarization and text-generation abilities are ideal for the facilitation tasks we outlined above. However, finding the correct prompts, configurations (e.g. which model family, whether to use pretrained or finetuned models, ...) by the use of robust experiments with human subjects can be similarly expensive on the researcher's side.
+
+In this thesis, we aim to address this limitation by leveraging large language models (LLMs) to generate synthetic online discussions at scale. We develop a framework that can automatically produce hundreds of discussions involving users with diverse socio-demographic backgrounds (SDBs) at relatively low cost and within reasonable time constraints. The ability to generate these synthetic discussions easily offers opportunities for low-cost experimentation, prototyping, and A/B testing. Additionally, the creation of a large synthetic dataset has potential applications for large-scale data analysis.
+
+Our framework further incorporates automated LLM-based annotations of these synthetic discussions, allowing for an inexpensive comparison of the effects of various factors. By using annotators with different SDBs, we assess whether different LLM personalities influence the annotation process. We experiment with various prompt strategies and configurations to evaluate how changes affect conversation quality, using toxicity as a proxy. Finally, we analyze the content of the discussions alongside the LLM annotations and generate three synthetic datasets that include the discussions, their annotations, and the inter-annotator agreement.
+
+Alongside the creation of this framework to aid in online LLM facilitation, we try to answer the following two questions: \textbf{Q1:} Can LLMs convincingly argue against each other when supplied with just a controversial topic and differing SDBs? \textbf{Q2}: Do LLM annotators change their behavior according to different SDBs?
 
 \section{Thesis Structure}
 \label{sec:intro:structure}
 
 \textbf{Chapter \ref{sec:related}} \\[0.2em]
-\Blindtext[1][1]
+
 
 \textbf{Chapter \ref{sec:system}} \\[0.2em]
-\Blindtext[1][1]
+
 
 \textbf{Chapter \ref{sec:evaluation}} \\[0.2em]
-\Blindtext[1][1]
+
 
 \textbf{Chapter \ref{sec:conclusions}} \\[0.2em]
-\Blindtext[1][1]
 
 
-Table~\ref{tab:roles} refers to the results in Figure~\ref{fig:complete}.
 
-\begin{table}
-  \centering
-  \begin{tabular}{llll}
-      & Name  & Task  & Type  \\
-    1 & Tom   & Seek  & Cat   \\
-    2 & Jerry & Hide  & Mouse 
-  \end{tabular}
-  \caption{This is a test table}
-  \label{tab:roles}
-\end{table}

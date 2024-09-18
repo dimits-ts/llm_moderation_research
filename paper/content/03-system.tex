@@ -50,7 +50,7 @@ The SDF is comprised of two main functions; Synthetic Dialogue Creation and Auto
 \subsection{Synthetic Dialogue Creation}
 \label{ssec:system:creation}
 
-The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation}.
+The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation} and in Algorithm \ref{al::dialogue-creation}.
 
 \begin{figure}
 	\centering
@@ -68,6 +68,36 @@ The two Users and the Moderator are all controlled by the same LLM instance; we 
 	\item \textbf{Context}, information known to all users.
 	\item \textbf{Instructions}, potentially unique to each actor. 
 \end{itemize}
+
+
+\begin{algorithm}
+	\caption{Synthetic Dialogue Creation algorithm} 
+	\label{al::dialogue-creation}
+	\hspace*{\algorithmicindent} \textbf{Input} users, maxTurns, historyLength\\
+	\hspace*{\algorithmicindent} \textbf{Output} the conversation logs
+	\begin{algorithmic}[1]	
+		\State turn = 0
+		\State logs = list()
+		\State history = fifo(maxSize=historyLength)
+		\State 
+		\While{turn < maxTurns}
+			\For{user in users}
+				\State response = user.speak(history)
+				\State logs.add([user.name(), response])
+				\State history.add([user.name(), response])
+				\State
+				\State moderator.speak(history)
+				\State logs.add([moderator.name(), response])
+				\State history.add([moderator.name(), response])
+			\EndFor
+			\State turn ++
+		\EndWhile
+		
+		\State \Return logs
+		
+	\end{algorithmic} 
+\end{algorithm}
+
 
 
 \subsection{Automated Dialogue Annotation}
@@ -92,6 +122,26 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 	\caption{The annotation loop on which the SDF operates. Note the purposeful similarity of the function to Figure \ref{fig::conversation}.}
 	\label{fig::annotation}
 \end{figure}
+
+\begin{algorithm}
+	\caption{Synthetic Dialogue Annotation algorithm} 
+	\label{al::dialogue-annotation}
+	\hspace*{\algorithmicindent} \textbf{Input} annotator, logs, historyLength\\
+	\hspace*{\algorithmicindent} \textbf{Output} the conversation logs
+	\begin{algorithmic}[1]	
+		\State annotations = list()
+		\State history = fifo(maxSize=historyLength)
+		\State 
+		\For{message in logs}
+			\State history.add(message)
+			\State response = annotator.speak(message, history)
+			\State annotations.add([message, response])
+		\EndFor
+		
+		\State \Return annotations
+		
+	\end{algorithmic} 
+\end{algorithm}
 
 
 \section{Prompt Design}

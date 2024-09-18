@@ -205,16 +205,16 @@ The framework provides a variety of APIs to access the SDL from the more standar
 \subsection{High-level view of the system}
 \label{ssec:system:overview}
 
-A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\textcolor{green}{green shapes}) can be provided by either JSON files or programmatically, depending on the entry-point (\textcolor{blue}{blue shapes}) used. 
+A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\colorSystemConfig{green shapes}) can be provided by either JSON files or programmatically, depending on the entry-point (\colorSystemEntrypoint{blue shapes}) used. 
 
 The procedure described in the figure, enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests e.t.c.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
 
-Each processing step (\textcolor{violet}{pink shapes}) additionally creates entries on our generated dataset, be it the conversation logs with rich meta-data (\textcolor{violet}{"Generate Conversation"}), multi-annotator, multi-dimensional annotations (\textcolor{violet}{"Generate Annotation"}) or controversial comments (\textcolor{violet}{"Data Analysis"}).
+Each processing step (\colorSystemProcessing{pink shapes}) additionally creates entries on our generated dataset, be it the conversation logs with rich meta-data (\colorSystemProcessing{"Generate Conversation"}), multi-annotator, multi-dimensional annotations (\colorSystemProcessing{"Generate Annotation"}) or controversial comments (\colorSystemProcessing{"Data Analysis"}).
 
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{system_light.png}
-	\caption{An abstract view of the SDF. \textcolor{green}{Green shapes} represent various configurations, \textcolor{blue}{blue shapes} entry points (see Section \ref{ssec:system:entrypoints}), \textcolor{violet}{pink ones} processes delegated to the SDL, and \textbf{white} ones exported data.}
+	\caption{An abstract view of the SDF. \colorSystemConfig{Green shapes} represent various configurations, \colorSystemEntrypoint{blue shapes} entry points (see Section \ref{ssec:system:entrypoints}), \colorSystemProcessing{pink ones} processes delegated to the SDL, and \textbf{white} ones exported data.}
 	\label{fig::system}
 \end{figure}
 

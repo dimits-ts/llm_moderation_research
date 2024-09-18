@@ -68,7 +68,7 @@
 \usepackage{alphabeta}
 \usepackage{graphicx}
 \graphicspath{ {./figs/} {../src/output/graphs} }
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{colortbl}
 
 
@@ -107,6 +107,9 @@
 % **************************************************
 
 \newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\colorSystemEntrypoint}[1]{\textcolor{Blue}{#1}}
+\newcommand{\colorSystemProcessing}[1]{\textcolor{VioletRed}{#1}}
+\newcommand{\colorSystemConfig}[1]{\textcolor{ForestGreen}{#1}}
 
 % automatic row numbers
 \usepackage{array,etoolbox}

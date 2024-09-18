@@ -50,7 +50,7 @@ The SDF is comprised of two main functions; Synthetic Dialogue Creation and Auto
 \subsection{Synthetic Dialogue Creation}
 \label{ssec:system:creation}
 
-The simplest form of conversation is one between two actors. While the SDF is capable at holding conversations over an arbitrary number of users, for the purposes of this example we will assume only two users are present, as was the case in our experiments. We also add a third actor, the Moderator, who oversees the conversation. An overview of the conversation loop can be found in Figure \ref{fig::conversation} and in Algorithm \ref{al::dialogue-creation}.
+We use a simplified version of the LLM discussion framework outlined in \cite{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
 
 \begin{figure}
 	\centering
@@ -114,7 +114,7 @@ Using LLMs as annotators imposes both a challenge and an opportunity, since anno
 
 In this thesis, we use the second option.
 
-We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator, that is for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation}.
+We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator, that is for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
 
 \begin{figure}
 	\centering
@@ -127,7 +127,7 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 	\caption{Synthetic Dialogue Annotation algorithm} 
 	\label{al::dialogue-annotation}
 	\hspace*{\algorithmicindent} \textbf{Input} annotator, logs, historyLength\\
-	\hspace*{\algorithmicindent} \textbf{Output} the conversation logs
+	\hspace*{\algorithmicindent} \textbf{Output} the annotation logs
 	\begin{algorithmic}[1]	
 		\State annotations = list()
 		\State history = fifo(maxSize=historyLength)
@@ -139,7 +139,6 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 		\EndFor
 		
 		\State \Return annotations
-		
 	\end{algorithmic} 
 \end{algorithm}
 
@@ -180,7 +179,7 @@ On the other hand, our moderator prompts were largely based on the eCornell mode
 \subsection{"Moderation Game" prompts}
 \label{ssec:system:game-prompt}
 
-In our experiments we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals.
+In our experiments we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \cite{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
 
 Thus, the user scores were defined as:
 \begin{itemize}

@@ -19,7 +19,7 @@ Functional requirements:
 	\item The system must support multiple LLM types, with potentially different libraries handling them.
 	\item The system must support a conversation with at least two LLM users.
 	\item The system must support socio-demographic backgrounds (SDBs) to be given to LLM users.
-	\item The system must support the existence and absence of a third LLM user, posing as a moderator.
+	\item The system must support the existence and absence of a separate LLM user, posing as a moderator.
 	\item The moderator must be able to intervene at any point in the conversation.
 	\item The moderator must be able to "ban" users, preventing them from further commenting.
 	\item The output of the system must be serializable and easily parsable.
@@ -35,7 +35,7 @@ Non functional requirements:
 	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
-Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail at all three non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases making, their API convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail at most non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases, making their API convoluted and their computational requirements significant. While the convoluted API issue could be circumvented by employing the Adapter pattern \cite{gamma1995design}, these frameworks still necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller use-case such as ours, will most likely remain unutilized.
 
 Thus the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
@@ -103,9 +103,9 @@ The two Users and the Moderator are all controlled by the same LLM instance; we 
 \subsection{Automated Dialogue Annotation}
 \label{ssec:system:annotation}
 
-As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be ML-based instead of DL-based \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. To bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
+As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be ML-based instead of DL-based \cite{anjum2024hate}. Using a diverse set of specialized models, each with its own libraries, preprocessing requirements and effectiveness, would severely restrict our ability to rapidly change annotation criteria at-scale. To bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
 
-Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional ML and even DL models, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
+Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional ML and even DL models with some difficulty, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
 
 \begin{itemize}
 	\item Attempt to find a prompt which produces results closer to what would be expected of a human annotator.
@@ -198,6 +198,8 @@ and their moderator equivalents as:
 	\item Banned a participant: -5 points
 \end{itemize}
 
+The weights of the above actions can be modeled as experimental hyper-parameters. Alternatively, they could be handled as regular parameters, optimizable during training. Another idea would be to use Reinforcement Learning to learn both the optimal policies and their weights automatically. The above applications however are out of the scope of this thesis.
+
 
 \subsection{Annotator prompts}
 \label{ssec:system:annotator-prompt}
@@ -240,12 +242,12 @@ The library additionally provides the \textbf{annotator.py} and \textbf{util.py}
 \subsection{Framework entry-points}
 \label{ssec:system:entrypoints}
 
-The framework provides a variety of APIs to access the SDL from the more standardized (which necessitate no programming) to the more flexible (direct access to the library's public API). These are:
+The framework provides a variety of APIs to access the SDL, from the more standardized (which necessitate no programming) to the more flexible (direct access to the library's public API). These are:
 
 \begin{itemize}
-	\item Automated python scripts which, when given a JSON configuration file, begin a batch production of automated discussions.
+	\item Automated python scripts which, when given a JSON configuration file, begin a batch production of synthetic discussions.
 	
-	\item Jupyter notebooks with explanatory high-level documentation, which are used for on-boarding users to the framework and quick experimentation.
+	\item Jupyter notebooks with explanatory high-level documentation, which are used for on-boarding users to the framework and for quick experimentation.
 	
 	\item The exported SDL itself.
 \end{itemize}
@@ -254,9 +256,7 @@ The framework provides a variety of APIs to access the SDL from the more standar
 \subsection{High-level view of the system}
 \label{ssec:system:overview}
 
-A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\colorSystemConfig{green shapes}) can be provided by either JSON files or programmatically, depending on the entry-point (\colorSystemEntrypoint{blue shapes}) used. 
-
-The procedure described in the figure, enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests e.t.c.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
+A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\colorSystemConfig{green shapes}) can be provided by either JSON files or programmatically, depending on the entry-point (\colorSystemEntrypoint{blue shapes}) used. The system enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests e.t.c.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
 
 Each processing step (\colorSystemProcessing{pink shapes}) additionally creates entries on our generated dataset, be it the conversation logs with rich meta-data (\colorSystemProcessing{"Generate Conversation"}), multi-annotator, multi-dimensional annotations (\colorSystemProcessing{"Generate Annotation"}) or controversial comments (\colorSystemProcessing{"Data Analysis"}).
 

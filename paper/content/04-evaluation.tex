@@ -26,7 +26,7 @@ While the SDF is capable at holding conversations over an arbitrary number of us
 	\item Pick conversation configurations such as context length, conversation length e.t.c.
 \end{enumerate}
 
-The combination of the settings above produces a set of JSON configuration files, each containing the configuration for a single experiment. We execute all possible combinations, with the exception of "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 Round-Robbin rounds. It is worth noting that we also avoid pitting the African American SDB against the LGBTQ+ SDB.
+The combination of the settings above produces a set of JSON configuration files, each containing the configuration for a single experiment. We execute all possible combinations, with the exception of "freezing" configurations such as conversation length (3 Round Robbin rounds) and context window (4 past comments). It is worth noting that we also avoid pitting the African American SDB against the LGBTQ+ SDB.
 
 \begin{table}
 	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
@@ -107,7 +107,7 @@ We produce three synthetic datasets:
 	\item The \textbf{Controversial Comments Dataset}, containing the comments in which the annotators disagreed upon. Includes comment and conversation IDs for matching with the other datasets, the nDFU \cite{pavlopoulos-likas-2024-polarized} score of each comments, and the individual annotations for each annotator SDB.
 \end{itemize}
 
-Descriptive statistics for the above datasets can be found in Table \ref{tab:datasets}. Some datasets are provided in the form of sets of JSON files, in which case we use the row and column numbers from their converted form as \code{pandas dataframes}. All datasets contain primary and foreing keys in the form of unique IDs enabling the user to freely combine information from all three datasets.
+Descriptive statistics for the above datasets can be found in Table \ref{tab:datasets}. Some datasets are provided in the form of sets of JSON files, in which case their statistics use the row and column numbers from their converted form as \code{pandas dataframes}. All datasets contain primary and foreign keys in the form of unique IDs enabling the user to freely combine information from all three datasets.
 
 
 \begin{table}
@@ -178,7 +178,7 @@ The invariance of the LLM user's toxicity towards the presence of a moderator in
 
 In this section, we test the following hypothesis: \textbf{Different LLM annotator SDB prompts meaningfully influence the toxicity \textit{for the same} given conversation}. 
 
-First of all, we check whether disagreement exists between the various annotations. Figure \ref{fig::toxicity-ndfu} shows the normalized Distance From Unimodality (nDFU) \cite{pavlopoulos-likas-2024-polarized} scores for each synthetically created comment. The majority of comments are in perfect annotator agreement ($nDFU=0$), while a few are in perfect disagreement ($nDFU=1$).
+First of all, we check whether disagreement exists between the various annotations. Figure \ref{fig::toxicity-ndfu} shows the normalized Distance From Unimodality (nDFU) \cite{pavlopoulos-likas-2024-polarized} scores for each synthetically created comment. The nDFU measures the amount of polarization between the annotators; a comment where the annotators are split between two annotations would have maximum disagreement ($nDFU=1$). The majority of comments are in perfect annotator agreement ($nDFU=0$), while a few are in perfect disagreement ($nDFU=1$).
 
 \begin{figure}
 	\centering
@@ -205,14 +205,14 @@ Next, we investigate whether the observed differences are significant statistica
 	\label{fig::toxicity-annotator-significance}
 \end{figure}
 
-Finally, we manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context on which it was posted, which was in response to an overtly racist comment. While two examples are by no means a proof, they alongside many others in the dataset, display that \textbf{annotators seem to differ in their priors}.
+Finally, we manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context on which it was posted, which was in response to an overtly racist comment. While two examples are by no means a proof, they alongside many others in the dataset, display that \textbf{annotators seem to only differ in their priors}.
 
-The conclusion that SDB prompts do not meaningfully influence LLM annotators is further supported by testing for a-posteriori unimodality \cite{pavlopoulos-likas-2024-polarized}, a measure used to attribute inter-annotator disagreement to annotator groups, as all SDBs fail the test (significant deviations from unimodality for each individual SDB).
+The conclusion that SDB prompts do not meaningfully influence LLM annotators is further supported by testing for a-posteriori unimodality \cite{pavlopoulos-likas-2024-polarized}, a measure used to attribute inter-annotator disagreement to annotator groups. In our experiments, all SDBs fail the test, therefore significant deviations from unimodality exist within each individual SDB, and not between the different SDBs.
 
 
 \begin{table}
 	\centering
-	\begin{tabular}{|p{3cm}|p{5cm}|p{5cm}|}
+	\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
 		\hline
 		\cellcolor{blue!25}\textbf{} & \cellcolor{blue!25}\textbf{Comment\#1} & \cellcolor{blue!25}\textbf{Comment\#2}\\
 		\hline
@@ -240,6 +240,8 @@ The conclusion that SDB prompts do not meaningfully influence LLM annotators is 
 		\textbf{W.E.I.R.D} & 4 & 5\\
 		\hline
 	\end{tabular}
-	\caption{Examples of annotations showcasing that SDBs influence annotators in a constant way, regardless of message content and context.}
+	\caption{Examples of annotations showcasing that SDBs influence annotators in a constant matter, regardless of message content and context.}
 	\label{tab:ndfu-anomaly}
 \end{table}
+
+%TODO: add context?

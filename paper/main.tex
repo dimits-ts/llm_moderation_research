@@ -36,27 +36,27 @@
 \newcommand{\thesisDate}{June 2024}
 \newcommand{\thesisVersion}{First Draft}
 
-\newcommand{\thesisSupervisor}{Ion Androutsopoulos}
-\newcommand{\thesisSupervisorTitle}{Prof.}
+\newcommand{\thesisSupervisor}{John Pavlopoulos}
+\newcommand{\thesisSupervisorTitle}{Assistant Prof.}
 \newcommand{\thesisSupervisorUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisSupervisorDepartment}{\protect{Department of Informatics}}
 
-% TODO: I don´t know how to include two supervisors
-\newcommand{\thesisReviewerOne}{Ioannis Pavlopoulos}
-\newcommand{\thesisReviewerOneTitle}{Assoc. Prof.}
+\newcommand{\thesisReviewerOne}{Ion Androutsopoulos}
+\newcommand{\thesisReviewerOneTitle}{Prof.}
 \newcommand{\thesisReviewerOneUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisReviewerOneDepartment}{\protect{Department of Informatics}}
 
 % TODO: Removing the 2nd reviewer results in compilation errors I can not trace
-\newcommand{\thesisReviewerTwo}{Richard Miles}
-\newcommand{\thesisReviewerTwoTitle}{Asst. Prof.}
-\newcommand{\thesisReviewerTwoUniversity}{\protect{University of Athens}}
-\newcommand{\thesisReviewerTwoDepartment}{\protect{Department of Informatics and Telecommunications}}
+\newcommand{\thesisReviewerTwo}{Theodoros Evgeniou}
+\newcommand{\thesisReviewerTwoTitle}{Prof.}
+\newcommand{\thesisReviewerTwoUniversity}{\protect{INSEAD}}
+\newcommand{\thesisReviewerTwoDepartment}{\protect{Decision Sciences and Technology Management}}
 
+% TODO: empty commands?
 \newcommand{\thesisUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisUniversityDepartment}{Department of Informatics}
-\newcommand{\thesisUniversityInstitute}{School of Information Sciences and Technology}
-\newcommand{\thesisUniversityGroup}{Mobile Multimedia Laboratory}
+\newcommand{\thesisUniversityInstitute}{}
+\newcommand{\thesisUniversityGroup}{}
 \newcommand{\thesisUniversityCity}{Athens, Greece}
 
 % **************************************************
@@ -66,6 +66,12 @@
 \usepackage[utf8]{inputenc}     % defines file's character encoding
 \usepackage[greek,english]{babel} % babel system, adjust the language of the content
 \usepackage{alphabeta}
+\usepackage{graphicx}
+\graphicspath{ {./figs/} {../src/output/graphs} }
+\usepackage[dvipsnames]{xcolor}
+\usepackage{colortbl}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 
 
 \usepackage[                    % clean thesis style
@@ -98,6 +104,21 @@
 \usepackage{acronym}
 \usepackage{libertine}
 
+% **************************************************
+% Custom commands
+% **************************************************
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\colorSystemEntrypoint}[1]{\textcolor{Blue}{#1}}
+\newcommand{\colorSystemProcessing}[1]{\textcolor{VioletRed}{#1}}
+\newcommand{\colorSystemConfig}[1]{\textcolor{ForestGreen}{#1}}
+
+% automatic row numbers
+\usepackage{array,etoolbox}
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
 
 % **************************************************
 % Document CONTENT
@@ -125,7 +146,7 @@
 \cleardoublepage
 %
 \input{content/acknowledgements} % INCLUDE: acknowledgement
-\addcontentsline{toc}{chapter}{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgments}
 \cleardoublepage
 %
 
@@ -133,6 +154,7 @@
 \tableofcontents                % display table of contents
 \cleardoublepage
 
+%TODO: name
 % --------------------------
 % Body matter
 % --------------------------

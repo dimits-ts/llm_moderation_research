@@ -1,40 +1,44 @@
-% !TEX root = ../thesis-example.tex
+% !TEX root = ../main.tex
 %
 \chapter{Introduction}
 \label{sec:intro}
 
-\Blindtext[2][1]
-
 \section{Motivation and Problem Statement}
 \label{sec:intro:motivation}
 
-\Blindtext[2][1]
+%TODO: cite usefulness
+Large Language Models (LLMs) have revolutionized the field of Natural Language Processing (NLP) since their introduction in 2022. Their ability to not only convincingly produce human-like text, but also to respond to user queries, and execute tasks such as summarization, annotation and classification, have led to many established companies, startups and research groups around the globe to scramble and identify useful use-cases for this novel technology.
+
+One such identified case is their use in online discussions. The online environment is essential to, among others, deliberative discussions \cite{small2021polis} (where the goal is to share opinions in order to make informed decisions) and healthy democratic discourse \cite{WrightDemocracy, Janssen2005, Papacharissi2004DemocracyOC}. However, because of the anonymity it offers \cite{Avalle2024PersistentIP}, they are often characterized by aggression and toxicity \cite{XiaToxicity}, which often leads to low-quality discourse \cite{WrightDemocracy} (although the latter position is contested \cite{Papacharissi2004DemocracyOC}). Thus, discussions are often overseen by \textit{"discourse facilitators"}, people whose responsibility is to uphold the rules of the discussion and discipline users ("discourse moderation") but also to promote even participation, dynamically summarize the discussion, encourage the sharing of ideas and opinions, and keep discussions on-point \cite{Harvard2024, Wang2008StudentfacilitatorsRI}. However, human facilitation is expensive, time-consuming and often relies on specialized staff \cite{small-polis-llm}.
+
+LLMs are perfectly positioned to aid in facilitating discussions \cite{small-polis-llm}, since they are relatively inexpensive, can be scaled easily, and their summarization and text-generation abilities are ideal for the facilitation tasks we outlined above. However, finding the correct prompts, configurations (e.g. which model family, whether to use pretrained or finetuned models, ...) by the use of robust experiments with human subjects can be similarly expensive on the researchers' side.
+
+In this thesis, we aim to address this limitation by leveraging large language models (LLMs) to generate synthetic online discussions at scale. We develop a framework that can automatically produce hundreds of discussions involving users with diverse socio-demographic backgrounds (SDBs) at relatively low cost and within reasonable time constraints. The ability to generate these synthetic discussions easily offers opportunities for low-cost experimentation, prototyping, and A/B testing. Additionally, the creation of a large synthetic dataset has potential applications for large-scale data analysis. Both source code, and datasets can be found at the project's repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
+
+Our framework further incorporates automated LLM-based annotations of these synthetic discussions, allowing for an inexpensive comparison of the effects of various factors. By using annotators with different SDBs, we assess whether different LLM personalities influence the annotation process. We experiment with various prompt strategies and configurations to evaluate how they affect conversation quality, using toxicity as a proxy. Finally, we analyze the content of the discussions alongside the LLM annotations and generate three synthetic datasets that include the discussions, their annotations, and the inter-annotator agreement.
+
+Alongside the creation of this framework to aid in online LLM facilitation, we try to answer the following two questions: \textbf{Q1:} Can LLMs convincingly argue against each other when supplied with just a controversial topic and differing SDBs? \textbf{Q2}: Do LLM annotators change their behavior according to different SDBs?
 
 \section{Thesis Structure}
 \label{sec:intro:structure}
 
 \textbf{Chapter \ref{sec:related}} \\[0.2em]
-\Blindtext[1][1]
+
+This chapter reviews the relevant literature in the field. In Section \ref{sec:related:sec1} (Background), we explore how humans engage in argumentation, the role of discussion within group contexts, methods for measuring argument quality, and the fundamental concepts of large language models (LLMs). Section \ref{sec:related:sec2} (Related Work) delves into previous research on LLM self-talk, the creation of synthetic discussion datasets, and the behavior of LLMs when provided with socio-demographic backgrounds. We also examine hypothesized and applied facilitation tasks, practical metrics for assessing argument quality, the risks and challenges of synthesizing discussions exclusively with LLMs, and existing datasets related to argument quality, synthetic discussions, and discourse facilitation.
+
 
 \textbf{Chapter \ref{sec:system}} \\[0.2em]
-\Blindtext[1][1]
+
+In this chapter, we describe the inner mechanisms of our framework. Section \ref{sec:system:requirements} (Requirements) outlines the functional and non-functional requirements for our new framework, explaining why existing frameworks fail to meet these needs. Section \ref{sec:system:design-system} (System Design) provides a high-level overview of the framework, detailing the synthetic discussion creation loop, the various user-configurable options, as well as the automated LLM annotation process. In Section \ref{sec:system:design-prompt} (Prompt Design), we discuss the different prompt templates and strategies used in both the synthetic creation and annotation loops. Lastly, Section \ref{sec:system:implementation} (Implementation) describes the framework's codebase, API, and technical implementation details.
 
 \textbf{Chapter \ref{sec:evaluation}} \\[0.2em]
-\Blindtext[1][1]
+
+This chapter details the experiments conducted in this thesis and their outcomes. In Section \ref{sec:evaluation:experimental} (Experimental Setup) we describe the configurations and setup for the synthetic discussion creation and annotation tasks. Section \ref{sec:evaluation:datasets} (Produced Datasets)  presents the synthetic datasets generated by the framework during the experiments.  Finally, in Section \ref{sec:evaluation:analysis} (Results) we analyze the annotation results and examine how various factors impacted the quality (specifically, toxicity) of the synthetic conversations.
+
 
 \textbf{Chapter \ref{sec:conclusions}} \\[0.2em]
-\Blindtext[1][1]
+
+This chapter summarizes the objectives and findings of the thesis. We address the research questions outlined in the introduction and highlight key patterns and conclusions drawn from the analysis of the experiments.
 
 
-Table~\ref{tab:roles} refers to the results in Figure~\ref{fig:complete}.
 
-\begin{table}
-  \centering
-  \begin{tabular}{llll}
-      & Name  & Task  & Type  \\
-    1 & Tom   & Seek  & Cat   \\
-    2 & Jerry & Hide  & Mouse 
-  \end{tabular}
-  \caption{This is a test table}
-  \label{tab:roles}
-\end{table}

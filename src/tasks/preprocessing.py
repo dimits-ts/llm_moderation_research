@@ -1,5 +1,6 @@
 import pandas as pd
 
+import math
 import os
 import json
 import re
@@ -29,7 +30,6 @@ def import_conversations(conv_dir: str) -> pd.DataFrame:
             conv = json.load(fin)
 
         conv = pd.json_normalize(conv)
-        conv = conv[["id", "user_prompts", "logs"]]
         conv = conv.explode("logs")
         # get name, not path of parent directory
         conv["conv_variant"] = os.path.basename(os.path.dirname(file_path))
@@ -39,11 +39,10 @@ def import_conversations(conv_dir: str) -> pd.DataFrame:
         rows.append(conv)
 
     full_df = pd.concat(rows)
-    full_df = full_df.set_index("id")
     return full_df
 
 
-def import_annotations(annot_dir: str) -> pd.DataFrame:
+def import_annotations(annot_dir: str, round: bool, sentinel_value: int=-1) -> pd.DataFrame:
     """
     Import annotation data from a directory containing JSON files and convert them to a DataFrame.
 
@@ -52,6 +51,10 @@ def import_annotations(annot_dir: str) -> pd.DataFrame:
 
     :param annot_dir: Path to the directory containing the annotation JSON files.
     :type annot_dir: str
+    :param round: Whether to discretize annotation values to integers. If so, NaN values will  be replaced with sentinel_value
+    :type round: bool
+    :param sentinel_value: The value of NaN annotation values. Used only if round_down is True
+    :type sentinel_value: bool
     :return: A DataFrame with annotation data, including conversation ID, annotator prompts,
              messages, and toxicity values.
     :rtype: pd.DataFrame
@@ -67,17 +70,21 @@ def import_annotations(annot_dir: str) -> pd.DataFrame:
             conv = json.load(fin)
 
         conv = pd.json_normalize(conv)
-        conv = conv[["conv_id", "annotator_prompt", "logs"]]
         conv = conv.explode("logs")
         conv.annotator_prompt = conv.annotator_prompt.apply(_extract_attributes)
         conv["message"] = conv.logs.apply(lambda x: x[0])
         conv["toxicity"] = conv.logs.apply(lambda x: x[1])
         conv["toxicity"] = conv.toxicity.apply(_extract_toxicity_value)
+
+        if round:
+            conv["toxicity"] = conv["toxicity"].apply(
+                lambda x: -1 if math.isnan(x) else int(x)
+            )
+
         del conv["logs"]
         rows.append(conv)
 
     full_df = pd.concat(rows)
-    full_df = full_df.set_index("conv_id")
     return full_df
 
 
@@ -93,7 +100,7 @@ def _files_from_dir_recursive(start_path="."):
 
     :example:
        >>> file_paths = _files_from_dir_recursive("/path/to/data")
-   """
+    """
     all_files = []
     for root, dirs, files in os.walk(start_path):
         for file in files:
@@ -126,25 +133,25 @@ def _extract_attributes(text: str) -> str | None:
     return None
 
 
-def _extract_toxicity_value(text: str) -> str | None:
+def _extract_toxicity_value(text: str) -> float | None:
     """
-   Extract toxicity value from a given text using a regular expression.
+    Extract toxicity value from a given text using a regular expression.
 
-   This function searches for the pattern "Toxicity=<number>" in the provided text and
-   returns the toxicity value as a string. If no match is found, it returns None.
+    This function searches for the pattern "Toxicity=<number>" in the provided text and
+    returns the toxicity value as a string. If no match is found, it returns None.
 
-   :param text: The input string containing toxicity information.
-   :type text: str
-   :return: The extracted toxicity value, or None if no match is found.
-   :rtype: str | None
+    :param text: The input string containing toxicity information.
+    :type text: str
+    :return: The extracted toxicity value, or None if no match is found.
+    :rtype: float | None
 
-   :example:
-       >>> toxicity = _extract_toxicity_value("Toxicity=4.5")
-       >>> print(toxicity)  # Output: "4.5"
-   """
+    :example:
+        >>> toxicity = _extract_toxicity_value("Toxicity=4.5")
+        >>> print(toxicity)  # Output: "4.5"
+    """
     # Regex pattern to match "Toxicity=<number>"
     pattern = r"Toxicity=(\d+\.?\d*)"
     match = re.search(pattern, text)
     if match:
-        return match.group(1)
+        return float(match.group(1))
     return None

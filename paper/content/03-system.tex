@@ -3,16 +3,12 @@
 \chapter{System Design and Implementation}
 \label{sec:system}
 
-A very important part of this thesis is the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
+A very important part of this thesis is the development of the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
 
 \section{Requirements}
 \label{sec:system:requirements}
 
-%TODO: add LLM annotators
-
-The requirements for the \ac{SDF} were not obtained by standard Requirement Solicitation procedures. Instead, they were iteratively solicited during weekly meetings. Thus, no formal document detailing them exists. 
-
-However, the interested stakeholders, in the context of the wider research effort, ultimately decided on a combination of the below requirements. We denote the \ac{SDF} as "the system" for this section.
+The requirements for the \ac{SDF} were not obtained by standard requirement solicitation procedures.  Thus, no formal document detailing them exists. Instead, they were iteratively solicited during weekly meetings with the wider research team, who ultimately decided on a combination of the below requirements. We denote the \ac{SDF} as "the system" for this section.
 
 Functional requirements:
 \begin{enumerate}
@@ -109,7 +105,7 @@ Using LLMs as annotators imposes both a challenge and an opportunity, since anno
 
 \begin{itemize}
 	\item Attempt to find a prompt which produces results closer to what would be expected of a human annotator.
-	\item Lean into the subjectiveness of LLM decision-making and use many LLM annotators, each with a different \ac{SDB}, then use inter-annotator analysis techniques.
+	\item Lean into the subjectiveness of LLM decision-making and use many LLM annotators, each with a different \ac{SDB}, then compute inter-annotator agreement.
 \end{itemize}
 
 In this thesis, we use the second option.

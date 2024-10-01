@@ -8,18 +8,18 @@
 % Document Class Definition
 % **************************************************
 \documentclass[%
-    paper=A4,                   % paper size --> A4 is default in Germany
-    twoside=true,               % one side or two side printing
-    openright,                  % double page cleaning ends up right side
-    parskip=full,               % spacing value / method for paragraphs
-    chapterprefix=true,         % prefix for chapter marks
-    11pt,                       % font size
-    headings=normal,            % size of headings
-    bibliography=totoc,         % include bib in toc
-    listof=totoc,               % include list of entries in toc
-    titlepage=on,               % own page for each title page
-    captions=tableabove,        % display table captions above the float env
-    draft=false,                % value for draft version
+paper=A4,                   % paper size --> A4 is default in Germany
+twoside=true,               % one side or two side printing
+openright,                  % double page cleaning ends up right side
+parskip=full,               % spacing value / method for paragraphs
+chapterprefix=true,         % prefix for chapter marks
+11pt,                       % font size
+headings=normal,            % size of headings
+bibliography=totoc,         % include bib in toc
+listof=totoc,               % include list of entries in toc
+titlepage=on,               % own page for each title page
+captions=tableabove,        % display table captions above the float env
+draft=false,                % value for draft version
 ]{scrreprt}%
 
 % **************************************************
@@ -32,9 +32,10 @@
 % **************************************************
 \newcommand{\thesisTitle}{Mitigating Polarisation in Online Discussions Through Adaptive Moderation Techniques}
 \newcommand{\thesisAuthor}{Dimitris Tsirmpas}
-\newcommand{\thesisSubject}{Documentation}
-\newcommand{\thesisDate}{June 2024}
-\newcommand{\thesisVersion}{First Draft}
+% Can't use \ac commands since they are declared below
+\newcommand{\thesisSubject}{Natural Language Processing, System Design}
+\newcommand{\thesisDate}{October 2024}
+\newcommand{\thesisVersion}{Second Draft}
 
 \newcommand{\thesisSupervisor}{John Pavlopoulos}
 \newcommand{\thesisSupervisorTitle}{Assistant Prof.}
@@ -46,15 +47,15 @@
 \newcommand{\thesisReviewerOneUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisReviewerOneDepartment}{\protect{Department of Informatics}}
 
-% TODO: Removing the 2nd reviewer results in compilation errors I can not trace
+% Removing the 2nd reviewer results in compilation errors I can not trace
 \newcommand{\thesisReviewerTwo}{Theodoros Evgeniou}
 \newcommand{\thesisReviewerTwoTitle}{Prof.}
 \newcommand{\thesisReviewerTwoUniversity}{\protect{INSEAD}}
 \newcommand{\thesisReviewerTwoDepartment}{\protect{Decision Sciences and Technology Management}}
 
-% TODO: empty commands?
-\newcommand{\thesisUniversity}{\protect{Athens University of Economics and Business}}
-\newcommand{\thesisUniversityDepartment}{Department of Informatics}
+
+\newcommand{\thesisUniversity}{\protect{Athens University of Economics and Business }}
+\newcommand{\thesisUniversityDepartment}{Department of Informatics }
 \newcommand{\thesisUniversityInstitute}{}
 \newcommand{\thesisUniversityGroup}{}
 \newcommand{\thesisUniversityCity}{Athens, Greece}
@@ -75,30 +76,30 @@
 
 
 \usepackage[                    % clean thesis style
-    figuresep=colon,%
-    sansserif=false,%
-    hangfigurecaption=false,%
-    hangsection=true,%
-    hangsubsection=true,%
-    colorize=full,%
-    colortheme=bluemagenta,%
+figuresep=colon,%
+sansserif=false,%
+hangfigurecaption=false,%
+hangsection=true,%
+hangsubsection=true,%
+colorize=full,%
+colortheme=bluemagenta,%
 % LLT: Use biber if using UTF8 encoding
 %   bibsys=bibtex,%
-    bibsys=biber,%
-    bibfile=refs,%
-    bibstyle=alphabetic,%
+bibsys=biber,%
+bibfile=refs,%
+bibstyle=alphabetic,%
 ]{cleanthesis}
 
 \hypersetup{                    % setup the hyperref-package options
-    pdftitle={\thesisTitle},    %   - title (PDF meta)
-    %pdfsubject={\thesisSubject},%  - subject (PDF meta)
-    pdfauthor={\thesisAuthor},    %   - author (PDF meta)
-    plainpages=false,           %   -
-    colorlinks=false,           %   - colorize links?
-    pdfborder={0 0 0},          %   -
-    breaklinks=true,            %   - allow line break inside links
-    bookmarksnumbered=true,     %
-    bookmarksopen=true          %
+	pdftitle={\thesisTitle},    %   - title (PDF meta)
+	pdfsubject={\thesisSubject},%  - subject (PDF meta)
+	pdfauthor={\thesisAuthor},    %   - author (PDF meta)
+	plainpages=false,           %   -
+	colorlinks=false,           %   - colorize links?
+	pdfborder={0 0 0},          %   -
+	breaklinks=true,            %   - allow line break inside links
+	bookmarksnumbered=true,     %
+	bookmarksopen=true          %
 }
 
 \usepackage{acronym}
@@ -124,99 +125,99 @@
 % Document CONTENT
 % **************************************************
 \begin{document}
-% --------------------------
-% rename document parts
-% --------------------------
-%\renewcaptionname{ngerman}{\figurename}{Abb.}
-%\renewcaptionname{ngerman}{\tablename}{Tab.}
-\renewcaptionname{english}{\figurename}{Fig.}
-\renewcaptionname{english}{\tablename}{Tab.}
-
-% --------------------------
-% Front matter
-% --------------------------
-\pagenumbering{roman}           % roman page numbing (invisible for empty page style)
-\pagestyle{empty}               % no header or footers
-\input{content/titlepages}      % INCLUDE: all titlepages
-\cleardoublepage
-
-\pagestyle{plain}               % display just page numbers
-\input{content/abstract}        % INCLUDE: the abstracts (english and greek)
-\addcontentsline{toc}{chapter}{Abstract}
-\cleardoublepage
-%
-\input{content/acknowledgements} % INCLUDE: acknowledgement
-\addcontentsline{toc}{chapter}{Acknowledgments}
-\cleardoublepage
-%
-
-\setcounter{tocdepth}{2}        % define depth of toc
-\tableofcontents                % display table of contents
-\cleardoublepage
-
-%TODO: name
-% --------------------------
-% Body matter
-% --------------------------
-\pagenumbering{arabic}          % arabic page numbering
-\setcounter{page}{1}            % set page counter
-\pagestyle{maincontentstyle}    % fancy header and footer
-
-\input{content/01-introduction} % INCLUDE: introduction
-\input{content/02-related-work} % INCLUDE: related work
-\input{content/03-system}   % INCLUDE: system
-\input{content/04-evaluation} % INCLUDE: concepts
-\input{content/05-conclusions} % INCLUDE: conclusion
-\cleardoublepage
-
-
-
-
-% --------------------------
-% Back matter
-% --------------------------
-\let\cleardoublepage\clearpage
-
-{
-  \setstretch{1.3}
-  \renewcommand{\bibfont}{\normalfont\small}
-  \setlength{\biblabelsep}{0pt}
-  \setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
-  \printbibliography[]
-  %\printbibliography[nottype=online]
-  %\printbibliography[heading=subbibliography,title={Websites},type=online,prefixnumbers={@}]
-}
-
-
-
-\chapter*{List of Acronyms}
-\pdfbookmark[0]{Acronym}{Acronym}
-\addcontentsline{toc}{chapter}{List of Acronyms}
-\label{sec:acronym}
-\input{content/acronym}
-
-
-
-\chapter*{\listfigurename}
-\addcontentsline{toc}{chapter}{\listfigurename}
-\renewcommand{\listfigurename}{\vspace{-2.5cm}}
-\listoffigures
-
-
-\chapter*{\listtablename}
-\addcontentsline{toc}{chapter}{\listtablename}
-\renewcommand{\listtablename}{\vspace{-2.5cm}}
-\listoftables
-
-\listofalgorithms
-
-%\input{content/declaration}
-%\clearpage
-
-%\newpage
-%\mbox{}
-
-% **************************************************
-% End of Document CONTENT
-% **************************************************
+	% --------------------------
+	% rename document parts
+	% --------------------------
+	%\renewcaptionname{ngerman}{\figurename}{Abb.}
+	%\renewcaptionname{ngerman}{\tablename}{Tab.}
+	\renewcaptionname{english}{\figurename}{Fig.}
+	\renewcaptionname{english}{\tablename}{Tab.}
+	
+	% --------------------------
+	% Front matter
+	% --------------------------
+	\pagenumbering{roman}           % roman page numbing (invisible for empty page style)
+	\pagestyle{empty}               % no header or footers
+	\input{content/titlepages}      % INCLUDE: all titlepages
+	\cleardoublepage
+	
+	\pagestyle{plain}               % display just page numbers
+	\input{content/abstract}        % INCLUDE: the abstracts (english and greek)
+	\addcontentsline{toc}{chapter}{Abstract}
+	\cleardoublepage
+	%
+	\input{content/acknowledgements} % INCLUDE: acknowledgement
+	\addcontentsline{toc}{chapter}{Acknowledgments}
+	\cleardoublepage
+	%
+	
+	\setcounter{tocdepth}{2}        % define depth of toc
+	\tableofcontents                % display table of contents
+	\cleardoublepage
+	
+	%TODO: name
+	% --------------------------
+	% Body matter
+	% --------------------------
+	\pagenumbering{arabic}          % arabic page numbering
+	\setcounter{page}{1}            % set page counter
+	\pagestyle{maincontentstyle}    % fancy header and footer
+	
+	\input{content/01-introduction} % INCLUDE: introduction
+	\input{content/02-related-work} % INCLUDE: related work
+	\input{content/03-system}   % INCLUDE: system
+	\input{content/04-evaluation} % INCLUDE: concepts
+	\input{content/05-conclusions} % INCLUDE: conclusion
+	\cleardoublepage
+	
+	
+	
+	
+	% --------------------------
+	% Back matter
+	% --------------------------
+	\let\cleardoublepage\clearpage
+	
+	{
+		\setstretch{1.3}
+		\renewcommand{\bibfont}{\normalfont\small}
+		\setlength{\biblabelsep}{0pt}
+		\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
+		\printbibliography[]
+		%\printbibliography[nottype=online]
+		%\printbibliography[heading=subbibliography,title={Websites},type=online,prefixnumbers={@}]
+	}
+	
+	
+	
+	\chapter*{List of Acronyms}
+	\pdfbookmark[0]{Acronym}{Acronym}
+	\addcontentsline{toc}{chapter}{List of Acronyms}
+	\label{sec:acronym}
+	\input{content/acronym}
+	
+	
+	
+	\chapter*{\listfigurename}
+	\addcontentsline{toc}{chapter}{\listfigurename}
+	\renewcommand{\listfigurename}{\vspace{-2.5cm}}
+	\listoffigures
+	
+	
+	\chapter*{\listtablename}
+	\addcontentsline{toc}{chapter}{\listtablename}
+	\renewcommand{\listtablename}{\vspace{-2.5cm}}
+	\listoftables
+	
+	\listofalgorithms
+	
+	\input{content/declaration}
+	\clearpage
+	
+	%\newpage
+	%\mbox{}
+	
+	% **************************************************
+	% End of Document CONTENT
+	% **************************************************
 \end{document}

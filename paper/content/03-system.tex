@@ -14,7 +14,7 @@ Functional requirements:
 \begin{enumerate}
 	\item The system must support multiple LLM types, with potentially different libraries handling them.
 	\item The system must support a conversation with at least two LLM users.
-	\item The system must support socio-demographic backgrounds (SDBs) to be given to LLM users.
+	\item The system must support \acp{SDB} to be given to LLM users.
 	\item The system must support the existence and absence of a third LLM user, posing as a moderator.
 	\item The moderator must be able to intervene at any point in the conversation.
 	\item The moderator must be able to "ban" users, preventing them from further commenting.
@@ -31,22 +31,22 @@ Non-functional requirements:
 	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
-Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail at all three non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases making, their \ac{API} convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases, making their \ac{API} convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
 
-Thus the solution of building our own framework is the only practical way of satisfying all the requirements above.
+Thus, the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
 
 
 \section{System Design}
 \label{sec:system:design-system}
 
-The \ac{SDF} consists of two main functions; Synthetic Dialogue Creation and Automatic Dialogue Annotation. In this section, we will explain how these two functions work conceptually and what their goals are.
+The \ac{SDF} consists of two main functions; \textbf{Synthetic Dialogue Creation} and \textbf{Automatic Dialogue Annotation}. In this section, we will explain how these two functions work conceptually and what their goals are.
 
 
 \subsection{Synthetic Dialogue Creation}
 \label{ssec:system:creation}
 
-We use a simplified version of the LLM discussion framework outlined in \cite{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
+We use a simplified version of the LLM discussion framework outlined in \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
 
 \begin{figure}
 	\centering
@@ -99,9 +99,11 @@ The two Users and the Moderator are all controlled by the same LLM instance; we 
 \subsection{Automated Dialogue Annotation}
 \label{ssec:system:annotation}
 
-As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be ML-based instead of DL-based \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. To bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
+As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be \ac{ML}-based instead of \ac{DL}-based \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. 
 
-Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional ML and even DL models, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
+In order to bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
+
+Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional \ac{ML} and even \ac{DL} models, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
 
 \begin{itemize}
 	\item Attempt to find a prompt which produces results closer to what would be expected of a human annotator.
@@ -110,7 +112,7 @@ Using LLMs as annotators imposes both a challenge and an opportunity, since anno
 
 In this thesis, we use the second option.
 
-We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator; in other words, for each comment the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
+We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator; in other words, for each comment, the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
 
 \begin{figure}
 	\centering
@@ -153,7 +155,7 @@ Our user instruction prompts in general were designed with the following criteri
 	
 	\item Anonymity makes people more likely to assume other participants are not arguing in good faith, especially in toxic environments \cite{Avalle2024PersistentIP}.
 	
-	\item People are not told what to believe when entering a discussion, but form opinions based on (besides many other factors) their \ac{SDB}.  %TODO citation needed?
+	\item People are not told what to believe when entering a discussion, but form opinions based on (besides many other factors) their \ac{SDB}. 
 	
 \end{itemize}
 
@@ -175,7 +177,7 @@ On the other hand, our moderator prompts were largely based on the Cornell eRule
 \subsection{"Moderation Game" prompts}
 \label{ssec:system:game-prompt}
 
-In our experiments, we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \cite{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
+In our experiments, we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
 
 Thus, the user scores were defined as:
 \begin{itemize}
@@ -236,10 +238,10 @@ The library additionally provides the \textbf{annotator.py} and \textbf{util.py}
 \subsection{Framework entry-points}
 \label{ssec:system:entrypoints}
 
-The framework provides a variety of APIs to access the \ac{SDL} from the more standardized (which necessitate no programming) to the more flexible (direct access to the library's public \ac{API}). These are:
+The framework provides a variety of \acp{API} to access the \ac{SDL} from the more standardized (which necessitate no programming) to the more flexible (direct access to the library's public \ac{API}). These are:
 
 \begin{itemize}
-	\item Automated python scripts which, when given a \ac{JSON} configuration file, begin a batch production of automated discussions.
+	\item Automated python scripts which, when given a \ac{JSON} configuration file, begin batch production of automated discussions.
 	
 	\item Jupyter notebooks with explanatory high-level documentation, which are used for on-boarding users to the framework and quick experimentation.
 	
@@ -250,7 +252,7 @@ The framework provides a variety of APIs to access the \ac{SDL} from the more st
 \subsection{High-level view of the system}
 \label{ssec:system:overview}
 
-A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\colorSystemConfig{green shapes}) can be provided by either \ac{JSON} files or programmatically, depending on the entry-point (\colorSystemEntrypoint{blue shapes}) used. 
+A high-level overview of the system can be found in Figure \ref{fig::system}. The configurations (\colorSystemConfig{green shapes}) can be provided by either \ac{JSON} files or programmatically, depending on the entry-point (\colorSystemEntrypoint{blue shapes}) used. The actual processing steps (\colorSystemProcessing{pink shapes}) are executed through the \ac{SDL}. The resulting data (\textbf{white shapes}) are then exported as datasets and used in subsequent analyses.
 
 The procedure described in the figure, enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests e.t.c.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
 

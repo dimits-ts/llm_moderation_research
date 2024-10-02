@@ -13,9 +13,9 @@
 While the \ac{SDF} is capable of holding conversations over an arbitrary number of users, for the purposes of our experiments, we assume only two users are present. We initially run the \ac{SDF} with the following configurations:
 
 \begin{enumerate}
-	\item Select a controversial topic from Table \ref{tab:topics}. The topics were adapted from \cite{pavlopoulos-likas-2024-polarized}, and in some cases abbreviated in order to fit the input context limits of the local LLM instance. 
+	\item Select a controversial topic from Table \ref{tab:topics}. The topics were adapted from \citet{pavlopoulos-likas-2024-polarized}, and in some cases abbreviated in order to fit the input context limits of the local LLM instance. 
 	
-	\item Select names and \acp{SDB} for user 1 and user 2. A full list of \acp{SDB} used can be found in Table \ref{tab:user-sdbs}
+	\item Select names and \acp{SDB} for user 1 and user 2. A full list of \acp{SDB} used can be found in Table \ref{tab:user-sdbs}.
 	
 	\item Select whether a moderator is present.
 	
@@ -45,7 +45,7 @@ The combination of the settings above produces a set of \ac{JSON} configuration 
 		All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don’t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.\\
 		\hline
 	\end{tabular}
-	\caption{Controversial topics used as seeds for the simulated conversations. Excerpts selected from \cite{pavlopoulos-likas-2024-polarized}.}
+	\caption{Controversial topics used as seeds for the simulated conversations. Excerpts selected from \citet{pavlopoulos-likas-2024-polarized}.}
 	\label{tab:topics}
 \end{table}
 
@@ -69,7 +69,7 @@ The combination of the settings above produces a set of \ac{JSON} configuration 
 
 For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of 4.
 
-For the purposes of analyzing inter-annotator agreement we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the dispersion of opinion distributions in a data set. DFU, or Discrepancy From Unimodality, is originally defined as the maximum difference between consecutive bins in a histogram representing the distribution of opinions. It is based on the assumption that opinions can be divided into several categories, and each category’s frequency is recorded in the histogram. To normalize DFU, it is divided by the frequency of the most common opinion category (the mode). This step scales the measure so that the final score falls between 0 and 1, where 0 represents a unimodal distribution (indicating consensus around a single opinion) and 1 indicates maximum discrepancy in a multimodal distribution (indicating significant variation in opinions). The normalization helps to make the measure more interpretable, especially when comparing different distributions. Without normalization, the DFU score could be difficult to interpret because it is unbounded and dependent on the scale of the original data. The normalized DFU provides a standardized way to assess the spread of opinions, where values closer to 1 suggest a higher degree of opinion variation or disagreement.
+For the purposes of analyzing inter-annotator agreement we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the dispersion of opinion distributions in a data set. DFU, or Discrepancy From Unimodality, is originally defined as the maximum difference between consecutive bins in a histogram representing the distribution of opinions. It is based on the assumption that opinions can be divided into several categories, and each category’s frequency is recorded in the histogram. To normalize DFU, it is divided by the frequency of the most common opinion category (the mode). This step scales the measure so that the final score falls between 0 and 1, where 0 represents a unimodal distribution (indicating consensus around a single opinion) and 1 indicates maximum discrepancy in a multimodal distribution (indicating significant variation in opinions). The normalization helps to make the measure more interpretable, especially when comparing different distributions. Without normalization, the DFU score could be difficult to interpret because it is unbounded and dependent on the scale of the original data.
 
 \begin{table}
 	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
@@ -129,16 +129,15 @@ Descriptive statistics for the above datasets can be found in Table \ref{tab:dat
 \end{table}
 
 
-%TODO: citet instead of cite when appropriate
 \section{Results}
 \label{sec:evaluation:analysis}
 
 \subsection{Impact of prompting strategies and moderator presence}
 \label{ssec:evaluation:users}
 
-In this section, we investigate the following hypothesis: \textbf{Different prompting strategies and moderator presence influence the toxicity of the conversations with same topic and configuration}. The strategies used are the ones described in Section \ref{sec:system:design-prompt}.
+In this section, we investigate the following hypothesis: \textbf{Different prompting strategies and moderator presence influence the toxicity of the conversations with identical topic and configuration}. The strategies used are the ones described in Section \ref{sec:system:design-prompt}.
 
-Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays subsumed toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive SDBs such as the "African American" (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
+Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
 
 The non-parametric ANOVA test shows that there are significant differences between strategies/moderator presence (Kruskal-Wallis $p=0$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. The color of each cell denotes the quantitative difference between the mean annotation scores, while the starts denote statistical significance. For example, the vanilla prompts without a moderator had $0.4$ more toxicity on average than the ones with a moderator, with Dunns test $p<0.001$. We thus confirm that significant deviations exist between all combinations, apart from the existence of the moderator in the "Moderation Game" prompt.
 

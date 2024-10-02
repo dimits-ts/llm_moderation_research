@@ -112,7 +112,7 @@ def calculate_unimodality(df, opinions_col, dimension_col):
 
 
 # code from John Pavlopoulos https://github.com/ipavlopoulos/ndfu/blob/main/src/__init__.py
-def dfu(input_data, histogram_input=True, normalised=True):
+def ndfu(input_data, histogram_input=True, normalised=True):
     """The Distance From Unimodality measure
     :param: input_data: the data, by default the relative frequencies of ratings
     :param: histogram_input: False to compute rel. frequencies (ratings as input)

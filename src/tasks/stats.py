@@ -9,23 +9,23 @@ from itertools import combinations
 
 def posthoc_dunn(df: pd.DataFrame, val_col: str, group_col: str) -> pd.DataFrame:
     """
-   Perform Dunn's post-hoc test with Bonferroni correction for multiple comparisons.
-   :param df: The input DataFrame containing the data.
-   :type df: pd.DataFrame
-   :param val_col: The column name containing the values to be compared between groups.
-   :type val_col: str
-   :param group_col: The column name containing the group labels.
-   :type group_col: str
-   :return: A DataFrame containing pairwise p-values after Bonferroni correction.
-   :rtype: pd.DataFrame
+    Perform Dunn's post-hoc test with Bonferroni correction for multiple comparisons.
+    :param df: The input DataFrame containing the data.
+    :type df: pd.DataFrame
+    :param val_col: The column name containing the values to be compared between groups.
+    :type val_col: str
+    :param group_col: The column name containing the group labels.
+    :type group_col: str
+    :return: A DataFrame containing pairwise p-values after Bonferroni correction.
+    :rtype: pd.DataFrame
 
-   :example:
-       >>> example_df = pd.DataFrame({
-       ...     'value': [1.2, 2.3, 2.5, 3.1],
-       ...     'group': ['A', 'B', 'A', 'B']
-       ... })
-       >>> posthoc_dunn(example_df, val_col='value', group_col='group')
-   """
+    :example:
+        >>> example_df = pd.DataFrame({
+        ...     'value': [1.2, 2.3, 2.5, 3.1],
+        ...     'group': ['A', 'B', 'A', 'B']
+        ... })
+        >>> posthoc_dunn(example_df, val_col='value', group_col='group')
+    """
     posthoc = scikit_posthocs.posthoc_dunn(
         df, val_col=val_col, group_col=group_col, p_adjust="bonferroni"
     )
@@ -38,7 +38,9 @@ def posthoc_dunn(df: pd.DataFrame, val_col: str, group_col: str) -> pd.DataFrame
 
 
 # produced by ChatGPT
-def pairwise_diffs(df: pd.DataFrame, groupby_cols: list[str], value_col: str) -> pd.DataFrame:
+def pairwise_diffs(
+    df: pd.DataFrame, groupby_cols: list[str], value_col: str
+) -> pd.DataFrame:
     """
     Calculate pairwise differences in mean values between groups.
 
@@ -63,10 +65,12 @@ def pairwise_diffs(df: pd.DataFrame, groupby_cols: list[str], value_col: str) ->
 
     # create an NxN DataFrame to store the pairwise differences
     annotator_prompts = mean_values.columns
-    diff_matrix = pd.DataFrame(index=annotator_prompts, columns=annotator_prompts, dtype=float)
+    diff_matrix = pd.DataFrame(
+        index=annotator_prompts, columns=annotator_prompts, dtype=float
+    )
 
     # calculate pairwise differences between annotator prompts
-    for (annotator_prompt_1, annotator_prompt_2) in combinations(annotator_prompts, 2):
+    for annotator_prompt_1, annotator_prompt_2 in combinations(annotator_prompts, 2):
         differences = mean_values[annotator_prompt_1] - mean_values[annotator_prompt_2]
         average_diff = differences.mean()
 
@@ -81,34 +85,49 @@ def pairwise_diffs(df: pd.DataFrame, groupby_cols: list[str], value_col: str) ->
 
 
 # method from John Pavlopoulos (https://aclanthology.org/2024.eacl-long.117)
-# code adapted from ChatGPT
-def calculate_unimodality(df, opinions_col, dimension_col):
+def aposteriori_unimodality(grouped_annotations: list[np.array]) -> tuple[float, float]:
+    """Run a statistical test for the aposteriori unimodality for annotations divided by a certain feature.
+    If global nDFU > 0 and the retuned pvalue is low, then we reject the hypothesis that the
+    feature does not explain the observed polarization.
+
+    This test calculates the nDFU of all the annotations, and then the nDFU of each factor of the selected feature.
+    If global nDFU > 0 but for all factors, nDFU_{factor} == 0, then we reject the aposteriori unimodality hypothesis.
+    Instead of returning the individual nDFUs, this function runs a Wilcoxon test to determine if all nDFUs are 0.
+    We use a non-parametric test because annotations rarely follow the normal distribution, and are typically few in number.
+
+    :param grouped_annotations: the annotations, grouped by each factor for the selected feature
+    :type grouped_annotations: list[np.array]
+    :return: the global nDFU, and the 1-pvalue that all ndfus are zero
+    :rtype: tuple[float, float]
     """
-    Calculate unimodality for the given opinions partitioned by a specified dimension.
+    # combine into flat array
+    global_annotations = np.concatenate(grouped_annotations, axis=0)
+    global_ndfu = ndfu(global_annotations)
 
-    Parameters:
-    df (pd.DataFrame): The dataframe containing opinions and dimensions.
-    opinions_col (str): The column name for opinions (X).
-    dimension_col (str): The column name for the dimension (D) to partition by.
+    grouped_unimodality_pvalue = _groups_are_unimodal(grouped_annotations)
+    return global_ndfu, 1 - grouped_unimodality_pvalue
 
-    Returns:
-    dict: A dictionary with the dimension value as the key and the unimodality result as the value.
+
+def _groups_are_unimodal(grouped_annotations: list[np.array]) -> float:
+    """Test whether the nDFU of each factor of the feature are zero, using a Wilcoxon test.
+
+    :param grouped_annotations: the annotations, grouped by each factor for the selected feature
+    :type grouped_annotations: list[np.array]
+    :return: the pvalue that all ndfus are zero
+    :rtype: float
     """
-    unimodality_results = {}
-
-    # Partition the opinions based on the dimension
-    groups = df.groupby(dimension_col)[opinions_col].apply(list)
-
-    for dimension_value, opinions in groups.items():
-        if len(opinions) > 1:
-            # Perform Hartigan’s Dip Test for unimodality
-            dip, p_value = diptest.diptest(np.array(opinions))
-            unimodality_results[dimension_value] = p_value
-        else:
-            # If there's only one opinion, it's trivially unimodal
-            unimodality_results[dimension_value] = 1
-
-    return unimodality_results
+    grouped_ndfu = np.array(
+        [ndfu(annotation_group) for annotation_group in grouped_annotations]
+    )
+    # Use wilcoxon because we can not assume normality or random sampling
+    # (realistically, annotations will be few)
+    _, pvalue = scipy.stats.wilcoxon(
+        grouped_ndfu, np.zeros_like(grouped_ndfu), alternative="greater"
+    )
+    # H_0: all ndfus are 0 => feature explains polarization
+    # H_a: at least 1 ndfu > 0 => feature does not explain polarization
+    # use 1-pvalue to reverse the above. Now, if p is low, we accept that feature explains polarization
+    return pvalue
 
 
 # code from John Pavlopoulos https://github.com/ipavlopoulos/ndfu/blob/main/src/__init__.py

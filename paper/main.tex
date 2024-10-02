@@ -37,18 +37,18 @@ draft=false,                % value for draft version
 \newcommand{\thesisDate}{October 2024}
 \newcommand{\thesisVersion}{Second Draft}
 
-\newcommand{\thesisSupervisor}{John Pavlopoulos}
+\newcommand{\thesisSupervisor}{John Pavlopoulos }
 \newcommand{\thesisSupervisorTitle}{Assistant Prof.}
 \newcommand{\thesisSupervisorUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisSupervisorDepartment}{\protect{Department of Informatics}}
 
-\newcommand{\thesisReviewerOne}{Ion Androutsopoulos}
+\newcommand{\thesisReviewerOne}{Ion Androutsopoulos }
 \newcommand{\thesisReviewerOneTitle}{Prof.}
 \newcommand{\thesisReviewerOneUniversity}{\protect{Athens University of Economics and Business}}
 \newcommand{\thesisReviewerOneDepartment}{\protect{Department of Informatics}}
 
 % Removing the 2nd reviewer results in compilation errors I can not trace
-\newcommand{\thesisReviewerTwo}{Theodoros Evgeniou}
+\newcommand{\thesisReviewerTwo}{Theodoros Evgeniou }
 \newcommand{\thesisReviewerTwoTitle}{Prof.}
 \newcommand{\thesisReviewerTwoUniversity}{\protect{INSEAD}}
 \newcommand{\thesisReviewerTwoDepartment}{\protect{Decision Sciences and Technology Management}}
@@ -58,7 +58,9 @@ draft=false,                % value for draft version
 \newcommand{\thesisUniversityDepartment}{Department of Informatics }
 \newcommand{\thesisUniversityInstitute}{}
 \newcommand{\thesisUniversityGroup}{}
-\newcommand{\thesisUniversityCity}{Athens, Greece}
+\newcommand{\thesisUniversityCity}{Athens, Greece }
+\newcommand{\thesisUniversityStreetAddress}{Patision 76}
+\newcommand{\thesisUniversityPostalCode}{10434}
 
 % **************************************************
 % Load and Configure Packages
@@ -183,9 +185,10 @@ bibstyle=alphabetic,%
 		\renewcommand{\bibfont}{\normalfont\small}
 		\setlength{\biblabelsep}{0pt}
 		\setlength{\bibitemsep}{0.5\baselineskip plus 0.5\baselineskip}
-		\printbibliography[]
-		%\printbibliography[nottype=online]
-		%\printbibliography[heading=subbibliography,title={Websites},type=online,prefixnumbers={@}]
+		%\printbibliography[]
+		\printbibliography[nottype=online]
+		% Ignore the warning, do NOT change this
+		\printbibliography[heading=subbibliography,title={Websites},type=online,prefixnumbers={@}]
 	}
 	
 	

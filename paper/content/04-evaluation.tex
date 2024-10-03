@@ -132,6 +132,39 @@ Descriptive statistics for the above datasets can be found in Table \ref{tab:dat
 \section{Results}
 \label{sec:evaluation:analysis}
 
+\subsection{Observations on the behavior of synthetic user SDBs}
+
+The seed comments used to start the synthetic conversations were split into two political subjects; racism on the basis of racial identity, and on sexual orientation. 
+
+Table \ref{tab:user-sdb-behavior} presents the expected and actual behavior of synthetic users from different \acp{SDB} across the two polarized topics. The observations reveal notable deviations from expected behaviors.
+
+For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak, always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since traditionally, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. In contrast, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
+
+These observations should caution on the dangers of biases leaking through \acp{SDB}. Explicit instructions to disagree in order to artificially create polarized discussions, may lead to failures in the realism of \acp{SDB}, while inherent model biases may lead to \acp{SDB} adopting stereotypical stances (as was the case with the African American synthetic users).
+
+\begin{table}
+	\begin{tabular}
+		{ |p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\cellcolor{blue!25}\textbf{LLM user SDB} & \cellcolor{blue!25}\textbf{Topic} & \cellcolor{blue!25}\textbf{Expected behavior} & \cellcolor{blue!25}\textbf{Actual behavior}\\
+		\hline
+		\ac{W.E.I.R.D.} & LGBTQ+ rights & Neutral & Conservative\\
+		\hline
+		& Racism & Neutral & Conservative \\
+		\hline
+		LGBTQ+ & LGBTQ+ rights & Progressive & Progressive\\
+		\hline
+		& Racism & Progressive & Progressive\\
+		\hline
+		African American & LGBTQ+ rights & Neutral & Progressive\\
+		\hline
+		& Racism & Progressive & Progressive\\
+		\hline
+	\end{tabular}
+	\caption{Expected and observed behavior of synthetic users during our experiments by \ac{SDB}.}
+	\label{tab:user-sdb-behavior}
+\end{table}
+
 \subsection{Impact of prompting strategies and moderator presence}
 \label{ssec:evaluation:users}
 
@@ -191,9 +224,37 @@ We foremost check whether disagreement exists between the various annotations. F
 
 Subsequently, we check where exactly these disagreements crop up. Figure \ref{fig::toxicity-annotator} shows the count of toxicity annotations by annotator \ac{SDB}. Most comments according to the LLM annotators are at least moderately toxic. This could be either attributed to a significant \textit{prior} inherent to the model used for all annotators, or to all comments being genuinely toxic to some degree. We can not discount the latter interpretation, since this was our goal when designing the LLM user prompts (Section \ref{sec:system:design-prompt}). Other deviations between annotators are almost exclusively between groups 4 and 5, indicating that toxicity is always picked up regardless of annotator \ac{SDB}, but that the latter can influence how \textit{extreme} this toxicity is perceived.
 
-%TODO: I need to address the progressiveness question
-%TODO: I think most "neutral" prompts lean towards progressiveness. Discuss this.
 Next, we investigate whether the observed differences are significant statistically and qualitatively. The non-parametric ANOVA test shows that there are significant differences between annotator \acp{SDB} (Kruskal-Wallis $p<10^{-8}$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. We confirm that significant deviations exist between annotator \acp{SDB} and, interestingly, specifically between some progressive-leaning (African American, LGBTQ+) and conservative-leaning (Blue collar) \acp{SDB}. \textit{However, this pattern does not hold for all \acp{SDB}}, for instance between the "African American" and "Gamer" prompts where no significant deviations are observed. Finally, even though there exist statistically significant deviations, these differences are not considerable. Indeed, the largest deviations only appear in the range of $\pm 0.3$ mean toxicity annotation difference.
+
+From Figure \ref{fig::toxicity-annotator-significance} we can infer the existence of behavioral clusters for each \ac{SDB}. Table \ref{tab:annotator-sdb-behavior} showcases the expected and actual clusters for each \ac{SDB} as inferred by the mean difference of annotations showcased in Figure \ref{fig::toxicity-annotator-significance}. Note that our expected behavioral model is completely different from the actual annotations, indicating that \acp{SDB} have failed to model human annotators.
+
+
+\begin{table}
+	\begin{tabular}
+		{ |p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\cellcolor{blue!25}\textbf{LLM user SDB} & \cellcolor{blue!25}\textbf{Expected cluster} & \cellcolor{blue!25}\textbf{Actual cluster}\\
+		\hline
+		Blue Collar & Conservative & 1 \\
+		\hline
+		Grandma & Conservative & 2\\
+		\hline
+		LGBTQ+ & Progressive & 2\\
+		\hline
+		\ac{W.E.I.R.D.} & Neutral & 3\\
+		\hline
+		African American & Progressive & 3\\
+		\hline
+		Professor & Neutral & 3\\
+		\hline
+		Control & Neutral & 3\\
+		\hline
+		Gamer & Conservative & 3\\
+		\hline
+	\end{tabular}
+	\caption{Expected and observed clusters of synthetic annotators during our experiments by \ac{SDB}.}
+	\label{tab:annotator-sdb-behavior}
+\end{table}
 
 \begin{figure}
 	\centering
@@ -209,6 +270,7 @@ Next, we investigate whether the observed differences are significant statistica
 	\label{fig::toxicity-annotator-significance}
 \end{figure}
 
+%TODO: add this to thesis contributions if ok
 In order to further examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. 
 
 Let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) > 0$, but $nDFU(X_i) = 0, \forall i \in G$. This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close, but not 0. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. 

@@ -84,7 +84,6 @@ def pairwise_diffs(
     return diff_matrix
 
 
-# method from John Pavlopoulos (https://aclanthology.org/2024.eacl-long.117)
 def aposteriori_unimodality(grouped_annotations: list[np.array]) -> tuple[float, float]:
     """Run a statistical test for the aposteriori unimodality for annotations divided by a certain feature.
     If global nDFU > 0 and the retuned pvalue is low, then we reject the hypothesis that the
@@ -132,7 +131,7 @@ def _groups_are_unimodal(grouped_annotations: list[np.array]) -> float:
 
 # code from John Pavlopoulos https://github.com/ipavlopoulos/ndfu/blob/main/src/__init__.py
 def ndfu(input_data, histogram_input=True, normalised=True):
-    """The Distance From Unimodality measure
+    """The normalized Distance From Unimodality measure
     :param: input_data: the data, by default the relative frequencies of ratings
     :param: histogram_input: False to compute rel. frequencies (ratings as input)
     :return: the DFU score

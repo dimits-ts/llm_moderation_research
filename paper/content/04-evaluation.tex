@@ -69,7 +69,7 @@ The combination of the settings above produces a set of \ac{JSON} configuration 
 
 For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of 4.
 
-For the purposes of analyzing inter-annotator agreement we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the dispersion of opinion distributions in a data set. DFU, or Discrepancy From Unimodality, is originally defined as the maximum difference between consecutive bins in a histogram representing the distribution of opinions. It is based on the assumption that opinions can be divided into several categories, and each category’s frequency is recorded in the histogram. To normalize DFU, it is divided by the frequency of the most common opinion category (the mode). This step scales the measure so that the final score falls between 0 and 1, where 0 represents a unimodal distribution (indicating consensus around a single opinion) and 1 indicates maximum discrepancy in a multimodal distribution (indicating significant variation in opinions). The normalization helps to make the measure more interpretable, especially when comparing different distributions. Without normalization, the DFU score could be difficult to interpret because it is unbounded and dependent on the scale of the original data.
+For the purposes of analyzing inter-annotator agreement, we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the polarization of ratings (e.g. text annotations using a Likert scale) in a data set. DFU, or Distance From Unimodality, is originally defined as the maximum difference of the frequency bins in a histogram, when descending sidewise from (from the right or the left of) the mode. To normalize DFU, it is divided by the mode, in order for the measure to be within the $[0,1]$ range, instead of DFU's $[0, freq_{mode}]$.
 
 \begin{table}
 	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
@@ -177,7 +177,7 @@ The non-parametric ANOVA test shows that there are significant differences betwe
 We notice the following patterns:
 
 \begin{itemize}
-	\item Moderator presence significantly influences the level of toxicity..
+	\item Moderator presence significantly (statistically and qualitatively) influences the level of toxicity..
 	
 	\item The prompting strategy significantly influences the toxicity level. The "Moderation Game" prompt keeps the conversation much more civil than the vanilla prompting strategy.
 	

@@ -270,7 +270,6 @@ From Figure \ref{fig::toxicity-annotator-significance} we can infer the existenc
 	\label{fig::toxicity-annotator-significance}
 \end{figure}
 
-%TODO: add this to thesis contributions if ok
 In order to further examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. 
 
 Let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) > 0$, but $nDFU(X_i) = 0, \forall i \in G$. This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close, but not 0. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. 
@@ -297,7 +296,7 @@ Thus, we propose a new statistical test, called the "Aposteriori Unimodality Tes
 	\end{algorithmic}
 \end{algorithm}
 
-We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p=0.996$). We also apply it selecting the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p=0.9375$). Thus, changing the instruction prompt and adding/removing the moderator meaningfully changes the toxicity level of the conversation, but the annotators stay consistent in the way toxicity changes.
+We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p=0.996$). We also apply it selecting the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p=0.9375$). This result is corroborated by the pure \ac{nDFU} values of the annotations; global \ac{nDFU} is $0.4$, while individual group \acp{nDFU} hover around the range [$0.333, 0.4$]. Thus, changing the instruction prompt and adding/removing the moderator meaningfully changes the toxicity level of the conversation, but the annotators stay consistent in the way toxicity changes.
 
 
 Finally, we manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context in which it was posted, which was in response to an overtly racist comment. While the two examples are by no means proof by themselves, they, alongside many others in the dataset, display that \textbf{annotators seem to differ in their priors}.

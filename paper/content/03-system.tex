@@ -31,7 +31,7 @@ Non-functional requirements:
 	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
-Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases, making their \ac{API} convoluted. Of course, this could be circumvented by employing the Adapter pattern \cite{gamma1995design}. The problem then would be that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases. One consequence of this, is that their \ac{API} convoluted, which could be circumvented by employing the Adapter pattern \cite{gamma1995design}. Another consequence, however, is that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
 
 Thus, the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
@@ -177,7 +177,7 @@ On the other hand, our moderator prompts were largely based on the Cornell eRule
 \subsection{"Moderation Game" prompts}
 \label{ssec:system:game-prompt}
 
-In our experiments, we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
+In our experiments, we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case, we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
 
 Thus, the user scores were defined as:
 \begin{itemize}

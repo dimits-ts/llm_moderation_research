@@ -13,7 +13,7 @@ twoside=true,               % one side or two side printing
 openright,                  % double page cleaning ends up right side
 parskip=full,               % spacing value / method for paragraphs
 chapterprefix=true,         % prefix for chapter marks
-11pt,                       % font size
+12pt,                       % font size
 headings=normal,            % size of headings
 bibliography=totoc,         % include bib in toc
 listof=totoc,               % include list of entries in toc
@@ -35,7 +35,7 @@ draft=false,                % value for draft version
 % Can't use \ac commands since they are declared below
 \newcommand{\thesisSubject}{Natural Language Processing, System Design}
 \newcommand{\thesisDate}{October 2024}
-\newcommand{\thesisVersion}{Second Draft}
+\newcommand{\thesisVersion}{Final Draft}
 
 \newcommand{\thesisSupervisor}{John Pavlopoulos }
 \newcommand{\thesisSupervisorTitle}{Assistant Prof.}
@@ -76,6 +76,8 @@ draft=false,                % value for draft version
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{fourier}
+\usepackage{longtable}
+\usepackage{amsmath}
 
 
 \usepackage[                    % clean thesis style
@@ -159,7 +161,6 @@ bibstyle=alphabetic,%
 	\tableofcontents                % display table of contents
 	\cleardoublepage
 	
-	%TODO: name
 	% --------------------------
 	% Body matter
 	% --------------------------

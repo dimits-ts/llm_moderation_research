@@ -26,31 +26,7 @@ While the \ac{SDF} is capable of holding conversations over an arbitrary number 
 	\item Pick conversation configurations such as context length, conversation length e.t.c.
 \end{enumerate}
 
-The combination of the settings above produces a set of \ac{JSON} configuration files, each containing the configuration for a single experiment. We execute all possible combinations, except for "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 Round-Robbin rounds. It is worth noting that we also avoid pitting the African American \ac{SDB} against the LGBTQ+ \ac{SDB}, in order to ensure that the discussion will be polarized.
-
-\begin{table}
-	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
-		Homosexuality, transgender sex all are deviations from normal human behavior as well. \\
-		\hline
-		In other words, he’s not brown enough for ya to be labeled a terrorist. \\
-		\hline
-		Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.\\
-		\hline
-		Are you high??? Selling someone a cake? Refusing to sell some a cake because it is for a gay wedding is no different from selling someone a cake because it is for a mixed race wedding or a Muslim wedding or any other kind of wedding. IT IS DISCRIMINATION! Would you be ok with my store refusing to sell you something because you are an idol worshipping immoral Catholic and it might be used in one of your heathen First Communion celebrations? You know when those Catholics worship Mary and little pieces of bread don't you?\\
-		\hline
-		How do you know he is not proud of his cakes? Artists do not take pride in their work? Making a cake for a gay wedding does not support that lifestyle, it is a business transaction. Period. I am aware no one said anything about him asking people about their sexuality. I am sorry that was hard for you to understand. Is he going to ask everyone that comes in if the cake is for a gay wedding? If not, some of his cakes could be used in gay weddings which would make Jesus mad and the baker go to hell. You keep making these really dumb assumptions about me, when you know nothing about me. I am not confused, you are rude. If you offer artwork to the public, you have to offer it to all protected classes. Why would black people be discriminated against? Precedent. Ridiculous? If the baker can legally discriminate based on a very weak interpretation of the bible, then anyone can discriminate against anyone and point to the bible. Satanists can discriminate against Christians...\\
-		\hline
-		well thats a no brainer hillary clinton gave huma abdein a security clearance when she has ties to a known terrorist group the muslim brotherhood, and her mother runs an anti american news paper in the middle east, debbie washed up crook shultz got the awan famaily security clearances and they were recent immigrants, had absolutely no IT experience and possible ties to terrorist groups in pakistan. its pretty clear our liberal ran government is a complete and total failure when it comes to national security. 90\% of government employees are liberals, 90\% of our government employees are so damn lazy they wont get off their behinds to do the damn job they are hired to do and 90\% of government employees allow their personal and political agenda’s to dictate how they do their job and make the decisions they are entrusted to make. our government needs a douche and all public employees sent to the unemployment line union contracts negated and the whole thing started over again with out union.\\
-		\hline
-		All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don’t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.\\
-		\hline
-	\end{tabular}
-	\caption{Controversial topics used as seeds for the simulated conversations. Excerpts selected from \citet{pavlopoulos-likas-2024-polarized}.}
-	\label{tab:topics}
-\end{table}
-
-
-\begin{table}
+\begin{table}[h!]
 	\begin{tabular}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
 		\ac{W.E.I.R.D.}\\
 		\hline
@@ -63,11 +39,34 @@ The combination of the settings above produces a set of \ac{JSON} configuration 
 	\label{tab:user-sdbs}
 \end{table}
 
+The combination of the settings above produces a set of \ac{JSON} configuration files, each containing the configuration for a single experiment. We execute all possible combinations, except for "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 Round-Robbin rounds. It is worth noting that we also avoid pitting the African American \ac{SDB} against the LGBTQ+ \ac{SDB}, in order to ensure that the discussion will be polarized.
+
+\setcounter{magicrownumbers}{0} 
+\begin{longtable}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
+	\caption{Controversial topics used as seeds for the simulated conversations. Excerpts selected from \citet{pavlopoulos-likas-2024-polarized}.}
+	\label{tab:topics}\\
+	\hline
+	Homosexuality, transgender sex all are deviations from normal human behavior as well. \\
+	\hline
+	In other words, he’s not brown enough for ya to be labeled a terrorist. \\
+	\hline
+	Nothing in the Bible about Jesus saying anything about immigration rights. [...] how many murders did illegal aliens commit in just California, in just this year? Just California. How many murders by illegal aliens? You answer that.\\
+	\hline
+	Are you high??? Selling someone a cake? Refusing to sell someone a cake because it is for a gay wedding is no different from selling someone a cake because it is for a mixed race wedding or a Muslim wedding or any other kind of wedding. IT IS DISCRIMINATION! Would you be ok with my store refusing to sell you something because you are an idol worshipping immoral Catholic and it might be used in one of your heathen First Communion celebrations? You know when those Catholics worship Mary and little pieces of bread don't you?\\
+	\hline
+	How do you know he is not proud of his cakes? Artists do not take pride in their work? Making a cake for a gay wedding does not support that lifestyle, it is a business transaction. Period. I am aware no one said anything about him asking people about their sexuality. I am sorry that was hard for you to understand. Is he going to ask everyone that comes in if the cake is for a gay wedding? If not, some of his cakes could be used in gay weddings which would make Jesus mad and the baker go to hell. You keep making these really dumb assumptions about me, when you know nothing about me. I am not confused, you are rude. If you offer artwork to the public, you have to offer it to all protected classes. Why would black people be discriminated against? Precedent. Ridiculous? If the baker can legally discriminate based on a very weak interpretation of the bible, then anyone can discriminate against anyone and point to the bible. Satanists can discriminate against Christians...\\
+	\hline
+	Well that’s a no brainer. Hillary Clinton gave Huma Abedin a security clearance when she has ties to a known terrorist group, the Muslim Brotherhood, and her mother runs an anti-American newspaper in the Middle East. Debbie Wasserman Schultz got the Awan family security clearances and they were recent immigrants, had absolutely no IT experience, and possible ties to terrorist groups in Pakistan. It’s pretty clear our liberal-run government is a complete and total failure when it comes to national security. 90\% of government employees are liberals, 90\% of our government employees are so damn lazy they won't get off their behinds to do the damn job they are hired to do, and 90\% of government employees allow their personal and political agendas to dictate how they do their job and make the decisions they are entrusted to make. Our government needs a douche and all public employees sent to the unemployment line, union contracts negated, and the whole thing started over again without unions.\\
+	\hline
+	All men are sex offenders? Really? A sexual predator is a person who attacks a victim. Typical men don’t rape or use force on women. You are obviously a person who hates men and or healthy, normal sex.\\
+	\hline
+\end{longtable}
+
 
 \subsection{Automated Dialogue Annotation}
 \label{ssec:evaluation:experimental-annotation}
 
-For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of 4.
+For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of $4$.
 
 For the purposes of analyzing inter-annotator agreement, we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the polarization of ratings (e.g. text annotations using a Likert scale) in a data set. DFU, or Distance From Unimodality, is originally defined as the maximum difference of the frequency bins in a histogram, when descending sidewise from (from the right or the left of) the mode. To normalize DFU, it is divided by the mode, in order for the measure to be within the $[0,1]$ range, instead of DFU's $[0, freq_{mode}]$.
 
@@ -108,7 +107,7 @@ We produce three synthetic datasets:
 	\item The \textbf{Controversial Comments Dataset}, containing the comments in which the annotators disagreed upon. Includes comment and conversation IDs for matching with the other datasets, the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized} score of each comment, and the individual annotations for each annotator \ac{SDB}.
 \end{itemize}
 
-Descriptive statistics for the above datasets can be found in Table \ref{tab:datasets}. Some datasets are provided in the form of sets of \ac{JSON} files, in which case we use the row and column numbers from their converted form as \code{pandas dataframes}. All datasets contain primary and foreign keys in the form of unique IDs, enabling the user to freely combine information from all three datasets.
+Descriptive statistics for the above datasets can be found in Table \ref{tab:datasets}. Some datasets are provided in the form of sets of \ac{JSON} files, in which case we use the row and column numbers from their converted form as \code{pandas dataframes} in their statistics. All datasets contain primary and foreign keys in the form of unique IDs, enabling the user to freely combine information from all three datasets.
 
 
 \begin{table}
@@ -133,12 +132,13 @@ Descriptive statistics for the above datasets can be found in Table \ref{tab:dat
 \label{sec:evaluation:analysis}
 
 \subsection{Observations on the behavior of synthetic user SDBs}
+\label{ssec:evaluation:users}
 
 The seed comments used to start the synthetic conversations were split into two political subjects; racism on the basis of racial identity, and on sexual orientation. 
 
 Table \ref{tab:user-sdb-behavior} presents the expected and actual behavior of synthetic users from different \acp{SDB} across the two polarized topics. The observations reveal notable deviations from expected behaviors.
 
-For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak, always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since traditionally, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. In contrast, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
+For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak (and thus could not be influenced by the stances of other users), always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since, in the real world, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. In contrast, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
 
 These observations should caution on the dangers of biases leaking through \acp{SDB}. Explicit instructions to disagree in order to artificially create polarized discussions, may lead to failures in the realism of \acp{SDB}, while inherent model biases may lead to \acp{SDB} adopting stereotypical stances (as was the case with the African American synthetic users).
 
@@ -166,18 +166,18 @@ These observations should caution on the dangers of biases leaking through \acp{
 \end{table}
 
 \subsection{Impact of prompting strategies and moderator presence}
-\label{ssec:evaluation:users}
+\label{ssec:evaluation:prompts}
 
 In this section, we investigate the following hypothesis: \textbf{Different prompting strategies and moderator presence influence the toxicity of the conversations with identical topic and configuration}. The strategies used are the ones described in Section \ref{sec:system:design-prompt}.
 
-Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
+Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" \footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}} (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
 
-The non-parametric ANOVA test shows that there are significant differences between strategies/moderator presence (Kruskal-Wallis $p=0$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. The color of each cell denotes the quantitative difference between the mean annotation scores, while the starts denote statistical significance. For example, the vanilla prompts without a moderator had $0.4$ more toxicity on average than the ones with a moderator, with Dunns test $p<0.001$. We thus confirm that significant deviations exist between all combinations, apart from the existence of the moderator in the "Moderation Game" prompt.
+The non-parametric ANOVA test shows that there are significant differences between strategies/moderator presence (Kruskal-Wallis $p\text{=}0$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. The color of each cell denotes the quantitative difference between the mean annotation scores, while the starts denote statistical significance. For example, the vanilla prompts without a moderator had $0.4$ more toxicity on average than the ones with a moderator, with Dunns test $p\text{<}0.001$. We thus confirm that significant deviations exist between all combinations, apart from the existence of the moderator in the "Moderation Game" prompt.
 
 We notice the following patterns:
 
 \begin{itemize}
-	\item Moderator presence significantly (statistically and qualitatively) influences the level of toxicity..
+	\item Moderator presence significantly (statistically and qualitatively) influences the level of toxicity.
 	
 	\item The prompting strategy significantly influences the toxicity level. The "Moderation Game" prompt keeps the conversation much more civil than the vanilla prompting strategy.
 	
@@ -213,7 +213,7 @@ The invariance of the LLM user's toxicity towards the presence of a moderator in
 
 In this section, we test the following hypothesis: \textbf{Different LLM annotator \ac{SDB} prompts influence the toxicity annotations \textit{for the same} given conversation, in significant qualitative and statistical terms}. 
 
-We foremost check whether disagreement exists between the various annotations. Figure \ref{fig::toxicity-ndfu} shows the  \ac{nDFU}\cite{pavlopoulos-likas-2024-polarized} scores for each synthetically created comment. The majority of comments are in perfect annotator agreement ($nDFU=0$), while a few are in perfect disagreement ($nDFU=1$).
+We first check whether disagreement exists between the various annotations. Figure \ref{fig::toxicity-ndfu} shows the  \ac{nDFU}\cite{pavlopoulos-likas-2024-polarized} scores for each synthetically created comment. The majority of comments are in perfect annotator agreement ($nDFU\text{=}0$), while a few are in perfect disagreement ($nDFU\text{=}1$).
 
 \begin{figure}
 	\centering
@@ -224,9 +224,9 @@ We foremost check whether disagreement exists between the various annotations. F
 
 Subsequently, we check where exactly these disagreements crop up. Figure \ref{fig::toxicity-annotator} shows the count of toxicity annotations by annotator \ac{SDB}. Most comments according to the LLM annotators are at least moderately toxic. This could be either attributed to a significant \textit{prior} inherent to the model used for all annotators, or to all comments being genuinely toxic to some degree. We can not discount the latter interpretation, since this was our goal when designing the LLM user prompts (Section \ref{sec:system:design-prompt}). Other deviations between annotators are almost exclusively between groups 4 and 5, indicating that toxicity is always picked up regardless of annotator \ac{SDB}, but that the latter can influence how \textit{extreme} this toxicity is perceived.
 
-Next, we investigate whether the observed differences are significant statistically and qualitatively. The non-parametric ANOVA test shows that there are significant differences between annotator \acp{SDB} (Kruskal-Wallis $p<10^{-8}$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. We confirm that significant deviations exist between annotator \acp{SDB} and, interestingly, specifically between some progressive-leaning (African American, LGBTQ+) and conservative-leaning (Blue collar) \acp{SDB}. \textit{However, this pattern does not hold for all \acp{SDB}}, for instance between the "African American" and "Gamer" prompts where no significant deviations are observed. Finally, even though there exist statistically significant deviations, these differences are not considerable. Indeed, the largest deviations only appear in the range of $\pm 0.3$ mean toxicity annotation difference.
+Next, we investigate whether the observed differences are significant statistically and qualitatively. The non-parametric ANOVA test shows that there are significant differences between annotator \acp{SDB} (Kruskal-Wallis $p\text{<}10^{-8}$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. We confirm that significant deviations exist between annotator \acp{SDB} and, interestingly, specifically between some progressive-leaning (African American\footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}}, LGBTQ+) and conservative-leaning (Blue collar) \acp{SDB}. \textit{However, this pattern does not hold for all \acp{SDB}}, for instance between the "African American" and "Gamer" prompts where no significant deviations are observed. Finally, even though there exist statistically significant deviations, these differences are not considerable. Indeed, the largest deviations only appear in the range of $\pm 0.3$ mean toxicity annotation difference.
 
-From Figure \ref{fig::toxicity-annotator-significance} we can infer the existence of behavioral clusters for each \ac{SDB}. Table \ref{tab:annotator-sdb-behavior} showcases the expected and actual clusters for each \ac{SDB} as inferred by the mean difference of annotations showcased in Figure \ref{fig::toxicity-annotator-significance}. Note that our expected behavioral model is completely different from the actual annotations, indicating that \acp{SDB} have failed to model human annotators.
+From Figure \ref{fig::toxicity-annotator-significance} we can infer the existence of behavioral clusters for each \ac{SDB}. Table \ref{tab:annotator-sdb-behavior} showcases the expected and actual clusters for each \ac{SDB}. Note that our expected behavioral model is completely different from the actual annotations, indicating that \acp{SDB} have failed to model human annotators.
 
 
 \begin{table}
@@ -270,11 +270,11 @@ From Figure \ref{fig::toxicity-annotator-significance} we can infer the existenc
 	\label{fig::toxicity-annotator-significance}
 \end{figure}
 
-In order to further examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. 
+In order to further examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. In mathematical terms, let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) > 0$, but $nDFU(X_i) = 0, \forall i \in G$. 
 
-Let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) > 0$, but $nDFU(X_i) = 0, \forall i \in G$. This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close, but not 0. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. 
+This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close, but not $0$. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. Thus, we propose a new statistical test, called the "Aposteriori Unimodality Test". 
 
-Thus, we propose a new statistical test, called the "Aposteriori Unimodality Test". Algorithm \ref{al:aposteriori_unimodality} implements a statistical test (based on aposteriori unimodality) to evaluate whether a given feature explains the observed polarization in a set of grouped annotations. First, the global \ac{nDFU} is computed by concatenating all the annotations. Next, the \ac{nDFU} is calculated individually for each factor of the selected feature. A Wilcoxon signed-rank test is then performed to assess whether the \acp{nDFU} of all factors are statistically indistinguishable from zero. Since annotation data typically does not follow a normal distribution and is often limited in quantity, the non-parametric Wilcoxon test is chosen for its robustness. The null hypothesis ($H_0$) posits that the feature does not explain the observed polarization (i.e., all \acp{nDFU} are zero), and since $nDFU(a) \in [0,1] \forall a$, the alternative hypothesis ($H_a$) is that $\exists i \in G: nDFU(X_i) > 0$. Finally, the algorithm outputs both the global \ac{nDFU} and the complement of the p-value ($1 - p$), where a low value indicates strong evidence against aposteriori unimodality, suggesting that the feature likely contributes to the observed polarization.
+Algorithm \ref{al:aposteriori_unimodality} implements a statistical test (based on aposteriori unimodality) to evaluate whether a given feature explains the observed polarization in a set of grouped annotations. First, the global \ac{nDFU} is computed by concatenating all the annotations. Next, the \ac{nDFU} is calculated individually for each factor of the selected feature. A Wilcoxon signed-rank test is then performed to assess whether the \acp{nDFU} of all factors are statistically indistinguishable from zero. Since annotation data typically does not follow a normal distribution and is often limited in quantity, the non-parametric Wilcoxon test is chosen for its robustness. The null hypothesis ($H_0$) posits that the feature does not explain the observed polarization (i.e., all \acp{nDFU} are zero), and since $nDFU(a) \in [0,1] \forall a$, the alternative hypothesis ($H_a$) is that $\exists i \in G: nDFU(X_i) > 0$. Finally, the algorithm outputs both the global \ac{nDFU} and the complement of the p-value ($1 - p$), where a low value indicates strong evidence against aposteriori unimodality, suggesting that the feature likely contributes to the observed polarization.
 
 \begin{algorithm}
 	\caption{Our proposed Aposteriori Unimodality Test}
@@ -296,11 +296,9 @@ Thus, we propose a new statistical test, called the "Aposteriori Unimodality Tes
 	\end{algorithmic}
 \end{algorithm}
 
-We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p=0.996$). We also apply it selecting the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p=0.9375$). This result is corroborated by the pure \ac{nDFU} values of the annotations; global \ac{nDFU} is $0.4$, while individual group \acp{nDFU} hover around the range [$0.333, 0.4$]. Thus, changing the instruction prompt and adding/removing the moderator meaningfully changes the toxicity level of the conversation, but the annotators stay consistent in the way toxicity changes.
-
+We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p\text{=}0.996$). We also apply it on the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p\text{=}0.9375$). This result is corroborated by the pure \ac{nDFU} values of the annotations; global \ac{nDFU} is $0.4$, while individual group \acp{nDFU} hover around the range [$0.333, 0.4$]. Thus, changing the instruction prompt and adding/removing the moderator meaningfully changes the toxicity level of the conversation, but the annotators stay consistent in the way toxicity changes.
 
 Finally, we manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context in which it was posted, which was in response to an overtly racist comment. While the two examples are by no means proof by themselves, they, alongside many others in the dataset, display that \textbf{annotators seem to differ in their priors}.
-
 
 \begin{table}
 	\centering

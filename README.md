@@ -15,11 +15,11 @@ Online discussion moderation/facilitation is crucial for discussions to flourish
 
 `The subject of this thesis; developing a framework where many LLM user-agents can simulate online discussions. We prime the LLM user-agents to lower the quality of the conversation by any means, while concurrently instructing the LLM-moderator/facilitator to keep the conversation quality as high as possible.`
 
-![Alt text](./paper/resources/research_goal_3.svg)
+![Thesis research goal](./paper/resources/research_goal_3.svg)
 
 
 `Our framework further incorporates automated LLM-based annotations of these synthetic discussions, allowing for an inexpensive comparison of the effects of various factors such as moderator strategy, moderator presence, and LLM user prompts. Ordinarily, using LLMs for annotation presents two distinct issues; the model's inherent biases and the question of how representative their annotations are in comparison with ones that would be made by humans. While the latter concern can only be conclusively addressed by a correlation study, we attempt to address the former by using annotators with different SDBs. This also allows us to assess whether and how different LLM personalities influence the annotation process.` 
-![Alt text](./paper/resources/research_goal_4.svg)
+![Thesis annotation procedure](./paper/resources/research_goal_4.svg)
 
 ## Requirements & Usage
 

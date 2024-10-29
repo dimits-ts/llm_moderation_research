@@ -40,7 +40,8 @@ def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
     ax.axvline(x=3, color="r")
     ax.set_ylabel("")
     ax.set_xlabel("")
-    ax.set_xlim(0, 5)
+    ax.set_xlim(1, 5)
+    ax.set_xticks(range(1, 6))
     ax.legend(title="Annotator Demographic", fontsize="6", title_fontsize="6.5", loc="upper right")
 
 

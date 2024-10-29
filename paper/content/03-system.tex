@@ -51,7 +51,7 @@ We use a simplified version of the LLM discussion framework outlined in \citet{a
 
 \begin{figure}
 	\centering
-	\includegraphics[width=8cm]{conversation_graph_light.png}
+	\includesvg[width=12cm]{resources/conversation_graph_part4.svg}
 	\caption{The conversation loop on which the \ac{SDF} operates. Can be generalized for N users and 0 or 1 moderators.}
 	\label{fig::conversation}
 \end{figure}
@@ -117,8 +117,8 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 
 \begin{figure}
 	\centering
-	\includegraphics[width=8cm]{annotation_graph_light.png}
-	\caption{The annotation loop on which the \ac{SDF} operates. Note the purposeful similarity of the function to Figure \ref{fig::conversation}.}
+	\includesvg[width=12cm]{resources/annotation_graph_2.svg}
+	\caption{The annotation loop on which the \ac{SDF} operates. Note the purposeful similarity of the procedure to Figure \ref{fig::conversation}.}
 	\label{fig::annotation}
 \end{figure}
 
@@ -163,7 +163,14 @@ Our facilitator prompts were largely designed on preventing these two phenomena.
 	\item Language should be short and simple.
 \end{itemize}
 
-Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective.
+Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective. An abstract overview of this process can be found in Figure \ref{fig::policy}.
+
+\begin{figure}
+	\centering
+	\includesvg[width=12cm]{resources/moderator_policy.svg}
+	\caption{The procedure with which we created our experimental moderator instructions.}
+	\label{fig::policy}
+\end{figure}
 
 Having defined the policy, we now need to instruct our LLM users on how to violate it, i.e. we generally want to encourage toxicity and personal attacks. We model their instructions according to how these phenomena occur naturally in online conversations. Specifically:
 

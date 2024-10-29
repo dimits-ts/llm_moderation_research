@@ -3,7 +3,7 @@
 \chapter{System Design and Implementation}
 \label{sec:system}
 
-A very important part of this thesis is the development of the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why commercially-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
+A very important part of this thesis is the development of the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why already-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
 
 \section{Requirements}
 \label{sec:system:requirements}
@@ -31,7 +31,7 @@ Non-functional requirements:
 	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
-Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements, as they are industrial-grade frameworks, meant for a diverse set of business use-cases. One consequence of this, is that their \ac{API} convoluted, which could be circumvented by employing the Adapter pattern \cite{gamma1995design}. Another consequence, however, is that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest.
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements. A major issue is that heir \acp{API} are convoluted, although this could be circumvented with enough effort by employing the Adapter pattern \cite{gamma1995design}. Another more serious problem, however, is that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest. Given that this thesis was developed under acute resource constraints, the latter issue could not be easily remedied.
 
 Thus, the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
@@ -46,7 +46,8 @@ The \ac{SDF} consists of two main functions; \textbf{Synthetic Dialogue Creation
 \subsection{Synthetic Dialogue Creation}
 \label{ssec:system:creation}
 
-We use a simplified version of the LLM discussion framework outlined in \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
+We use a simplified version of the LLM discussion framework outlined in \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Each actor is given his turn to speak according to a round-robin scheduling algorithm (essentially, each actor takes his turn and passes it to the next actor in line). Each time an actor is prompted to speak, we provide him with a "context window" of \code{h} previous comments in order for him to understand the context of the conversation, where \code{h} is a hyperparameter selected by the experimenter and constrained by the LLM's input context width. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
+
 
 \begin{figure}
 	\centering
@@ -55,7 +56,7 @@ We use a simplified version of the LLM discussion framework outlined in \citet{a
 	\label{fig::conversation}
 \end{figure}
 
-The two Users and the Moderator are all controlled by the same LLM instance; we only change the system prompt when each takes its turn to speak. The prompts are comprised of five parts:
+The users and the moderator are all controlled by the same LLM instance (like in \citet{park2022socialsimulacracreatingpopulated}); we only change the system prompt when each takes their turn to speak. The prompts are comprised of five parts:
 
 \begin{itemize}
 	\item \textbf{Name}, the name of the actor, used for other actors to refer to him in-conversation.
@@ -112,7 +113,7 @@ Using LLMs as annotators imposes both a challenge and an opportunity, since anno
 
 In this thesis, we use the second option.
 
-We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window of 4 for the annotator; in other words, for each comment, the annotator can see the 4 preceding comments of the conversation. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
+We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor is the system, which outputs comments made in a conversation one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window  (\code{h}) for the annotator; in other words, for each comment, the annotator can see the \code{h} preceding comments of the conversation, in order to ensure he understands the context under which each comment was made. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
 
 \begin{figure}
 	\centering
@@ -146,7 +147,25 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 
 \subsection{Defining Policy \& Environment}
 
-Our user instruction prompts in general were designed with the following criteria in mind:
+In order to create convincing prompts for both facilitators and users, we first had to define the rules of the discussion, which necessitated the definition of a policy for our virtual chat-room. We defined this policy according to how an ideal online/deliberative discussion would look like.
+
+As mentioned in Section \ref{sec:related:sec1}, our goal is neither to promote arguments that convince the most people (like in formal debates), nor to necessarily reach consensus or agreement among the participants. The goal of our platform is for the most opinions to be heard by the most people. We have already identified two key inhibitors to this goal; toxicity and personal attacks.
+
+Our facilitator prompts were largely designed on preventing these two phenomena. We also utilize some general guidelines solicited from the Cornell eRulemaking moderator manual \cite{Cornell_eRulemaking2017}:
+
+\begin{itemize}
+	\item The moderator must remain neutral and impartial. 
+	
+	\item Responses should be briefly reflected upon before being posted.
+	
+	\item Questions posed by the moderator must be purposeful, as if they have one chance to interact with the user. They can rephrase a user's point if they do not understand it.
+	
+	\item Language should be short and simple.
+\end{itemize}
+
+Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective.
+
+Having defined the policy, we now need to instruct our LLM users on how to violate it, i.e. we generally want to encourage toxicity and personal attacks. We model their instructions according to how these phenomena occur naturally in online conversations. Specifically:
 
 \begin{itemize}
 	\item Many people are unwilling to change opinions during online discussions.
@@ -159,25 +178,13 @@ Our user instruction prompts in general were designed with the following criteri
 	
 \end{itemize}
 
-Thus, user prompts are designed to promote toxicity, controversy and confrontation.
-
-On the other hand, our moderator prompts were largely based on the Cornell eRulemaking moderator manual \cite{Cornell_eRulemaking2017} which, among others, emphasizes the following guidelines:
-
-\begin{itemize}
-	\item The moderator must remain neutral and impartial. 
-	
-	\item Responses should be briefly reflected upon before being posted.
-	
-	\item Questions posed by the moderator must be purposeful, as if they have one chance to interact with the user. They can rephrase a user's point if they do not understand it.
-	
-	\item Language should be short and simple.
-\end{itemize}
+We again have to mention the resource constraints of this thesis; since the experiments were conducted locally on memory-constrained machines by small LLMs, input context width had to be strictly rationed between instruction prompts and the current conversational context.
 
 
 \subsection{"Moderation Game" prompts}
 \label{ssec:system:game-prompt}
 
-In our experiments, we used two kinds of instruction prompts for our Actors. One is a "standard" prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case, we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
+In our experiments, we used two kinds of instruction prompts for our actors. One is a "standard" instruction prompt summarizing the guidelines above. The other formulates the discussion as a scorable, non-zero sum game where the users and the moderator attempt to accomplish conflicting goals, inspired by the experiments conducted by \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. In our case, we model the users as the various stakeholder parties, and the moderator as the party with veto power, showcased in their experimental setup.
 
 Thus, the user scores were defined as:
 \begin{itemize}
@@ -196,6 +203,7 @@ and their moderator equivalents as:
 	\item Banned a participant: -5 points
 \end{itemize}
 
+The assigned actions and weights were somewhat arbitrary. In the future, we hope to use \ac{RL} or some selection strategy in order to tune them in a way that is optimal for facilitation, according to synthetic experiments.
 
 \subsection{Annotator prompts}
 \label{ssec:system:annotator-prompt}
@@ -227,7 +235,7 @@ Each of these modules contains classes and supporting code for a specific functi
 \begin{itemize}
 	\item \textbf{models.py} holds Adapter classes \cite{gamma1995design} which enable the framework to uniformly access almost any LLM instance regardless of type (as long as a suitable subclass is created).
 	
-	\item \textbf{actors.py} which holds Wrapper classes \cite{gamma1995design}, containing Model Adapter classes from \textbf{models.py} and provide them with prompt templates.
+	\item \textbf{actors.py} which holds Wrapper classes \cite{gamma1995design}, containing Model Adapter classes from \textbf{models.py} and providing them with prompt templates.
 	
 	\item \textbf{conversation.py} uses Actor classes in order to execute and serialize the conversation.
 \end{itemize}

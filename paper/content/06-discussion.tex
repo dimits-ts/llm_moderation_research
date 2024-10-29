@@ -3,10 +3,12 @@
 \chapter{Discussion}
 \label{sec:discusision}
 
-The initial goal of this thesis was to develop a framework for generating synthetic dialogues to support research into automated moderation techniques. As the project evolved, a key concern arose: whether the synthetic dialogue setup was truly representative of human interaction. This prompted us to conduct our own experiments to explore this issue in more detail.
+The initial goal of this thesis was to develop a framework for generating synthetic dialogues to support research into automated moderation/facilitation techniques. As the project evolved, a key concern arose: whether the synthetic dialogue setup was truly representative of human interaction. This prompted us to conduct our own experiments to explore this issue in more detail.
 
 Our findings were promising. We observed that interventions by LLM moderators had a notable impact on reducing toxicity within synthetic discussions. Additionally, we found that LLMs, when provided with only a \ac{SDB} prompt, were able to convincingly adopt and maintain specific positions in the conversations. This provides us with a concrete incentive to continue development, and experimentation on, synthetic dialogues.
 
-However, several inconsistencies were also observed in the behavior of both the LLM-generated users and the annotators involved in the experiments. These inconsistencies could be traced back to multiple factors, including non-optimal prompt design, potential bias in the models, and limitations inherent in the models themselves. A significant constraint in our research was the use of a smaller and now outdated LLM, driven by resource limitations. Additionally, our proposed statistical test can be significantly improved by modifying the null hypothesis ($H_0$). 
+However, several inconsistencies were also observed in the behavior of both the LLM-generated users and the annotators involved in the experiments. These inconsistencies could be traced back to multiple factors, including non-optimal prompt design, potential bias in the models, and limitations inherent in the models themselves. A significant constraint in our research was the use of a smaller and now outdated LLM, driven by resource limitations. This constrained both the quality of the synthetic conversations and the input context width available to us. 
+
+Additionally, our need for automated annotation led us to explore ways with which to gauge and attribute polarization among different annotator features. While promising, our proposed statistical test can be significantly improved by modifying the null hypothesis ($H_0$).
 
 We thus expect that addressing the issues in our approach, as well as using larger, more advanced models, would improve outcomes, both in generating and annotating discussions with \ac{SDB} prompts.

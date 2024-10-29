@@ -39,7 +39,7 @@ While the \ac{SDF} is capable of holding conversations over an arbitrary number 
 	\label{tab:user-sdbs}
 \end{table}
 
-The combination of the settings above produces a set of \ac{JSON} configuration files, each containing the configuration for a single experiment. We execute all possible combinations, except for "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 Round-Robbin rounds. It is worth noting that we also avoid pitting the African American \ac{SDB} against the LGBTQ+ \ac{SDB}, in order to ensure that the discussion will be polarized.
+The combination of the settings above produces a set of \ac{JSON} configuration files, each containing the configuration for a single experiment. We execute all possible combinations, except for "freezing" conversation-specific configurations. As such, we use a window of 4 comments and a conversation length of 3 round-robin rounds. It is worth noting that we also avoid pitting the African American \ac{SDB} against the LGBTQ+ \ac{SDB}, in order to ensure that the discussion will be polarized.
 
 \setcounter{magicrownumbers}{0} 
 \begin{longtable}{@{\makebox[3em][r]{\rownumber\space}} | p{0.8\linewidth}}
@@ -66,7 +66,9 @@ The combination of the settings above produces a set of \ac{JSON} configuration 
 \subsection{Automated Dialogue Annotation}
 \label{ssec:evaluation:experimental-annotation}
 
-For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of $4$.
+As established in Section \ref{sec:related:measures}, there is no common, computational metric available with which to gauge discussion quality. As such, we use toxicity as a proxy for discussion quality, due to toxicity detection being a well-explored area of \ac{NLP} research, as well as toxicity being one of the prime identified inhibitors of online/deliberative discussions (as discussed in Section \ref{sec:system:design-prompt}). 
+
+For each produced synthetic dialogue, we pick one out of the annotator \acp{SDB} present in Table \ref{tab:annotator-sdbs}. We then annotate each comment in the discussion using a context window of \code{h=4}.
 
 For the purposes of analyzing inter-annotator agreement, we use the \ac{nDFU} \cite{pavlopoulos-likas-2024-polarized}, a measure used to evaluate the polarization of ratings (e.g. text annotations using a Likert scale) in a data set. DFU, or Distance From Unimodality, is originally defined as the maximum difference of the frequency bins in a histogram, when descending sidewise from (from the right or the left of) the mode. To normalize DFU, it is divided by the mode, in order for the measure to be within the $[0,1]$ range, instead of DFU's $[0, freq_{mode}]$.
 
@@ -134,13 +136,13 @@ Descriptive statistics for the above datasets can be found in Table \ref{tab:dat
 \subsection{Observations on the behavior of synthetic user SDBs}
 \label{ssec:evaluation:users}
 
-The seed comments used to start the synthetic conversations were split into two political subjects; racism on the basis of racial identity, and on sexual orientation. 
+In this section, we investigate the following hypothesis: \textbf{LLM chat users change their behavior according to the supplied \ac{SDB}}.
 
-Table \ref{tab:user-sdb-behavior} presents the expected and actual behavior of synthetic users from different \acp{SDB} across the two polarized topics. The observations reveal notable deviations from expected behaviors.
+The seed comments used to start the synthetic conversations were split into two political subjects; racism on the basis of racial identity, and on the basis of sexual orientation. Table \ref{tab:user-sdb-behavior} presents the expected and actual behavior of synthetic users from different \acp{SDB} across the two polarized topics. On the one hand, it's clear that \acp{SDB} significantly alter the behavior of our synthetic users. On the other hand, our observations reveal notable deviations from expected behaviors.
 
-For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak (and thus could not be influenced by the stances of other users), always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since, in the real world, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. In contrast, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
+For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak (and thus could not be influenced by the stances of other users), always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since, in the real world, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. We hypothesize that this discrepancy is caused by the LLM's societal and political biases; the model may have assumed that, since African-Americans are a minority, they should also be progressive in other social issues. In contrast to the other \acp{SDB}, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
 
-These observations should caution on the dangers of biases leaking through \acp{SDB}. Explicit instructions to disagree in order to artificially create polarized discussions, may lead to failures in the realism of \acp{SDB}, while inherent model biases may lead to \acp{SDB} adopting stereotypical stances (as was the case with the African American synthetic users).
+These observations should caution on the dangers of biases leaking through \acp{SDB}. Explicit instructions to disagree in order to artificially create polarized discussions, may lead to failures in the realism of \acp{SDB}, while inherent model biases may lead to \acp{SDB} adopting stances influenced from the model's own biases (as was the case with the African American synthetic users).
 
 \begin{table}
 	\begin{tabular}
@@ -168,7 +170,7 @@ These observations should caution on the dangers of biases leaking through \acp{
 \subsection{Impact of prompting strategies and moderator presence}
 \label{ssec:evaluation:prompts}
 
-In this section, we investigate the following hypothesis: \textbf{Different prompting strategies and moderator presence influence the toxicity of the conversations with identical topic and configuration}. The strategies used are the ones described in Section \ref{sec:system:design-prompt}.
+In this section, we investigate the following hypothesis: \textbf{Different prompting strategies and moderator presence influence the toxicity of the conversations with identical topics and configurations}. The strategies used are the ones described in Section \ref{sec:system:design-prompt}.
 
 Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" \footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}} (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
 

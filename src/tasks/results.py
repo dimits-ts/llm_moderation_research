@@ -7,7 +7,7 @@ import matplotlib.axes
 import seaborn as sns
 
 
-def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
+def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes, color_palette: dict[str, list]):
     """
     Create a bar plot displaying the mean toxicity scores for different conversation variants, 
     grouped by annotator prompts.
@@ -31,9 +31,10 @@ def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
 
     sns.barplot(
         data=df,
-        y="conv_variant",
         x="toxicity",
+        y="annotator_prompt",
         hue="annotator_prompt",
+        palette=color_palette,
         estimator=np.mean,
         ax=ax,
     )
@@ -42,7 +43,6 @@ def toxicity_barplot(df: pd.DataFrame, ax: matplotlib.axes.Axes):
     ax.set_xlabel("")
     ax.set_xlim(1, 5)
     ax.set_xticks(range(1, 6))
-    ax.legend(title="Annotator Demographic", fontsize="6", title_fontsize="6.5", loc="upper right")
 
 
 def pvalue_heatmap(

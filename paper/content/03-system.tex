@@ -3,7 +3,7 @@
 \chapter{System Design and Implementation}
 \label{sec:system}
 
-A very important part of this thesis is the development of the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why already-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
+A very important part of this thesis is the development of the \ac{SDF}, a lightweight, specialized python framework which supports the automatic creation, annotation and analysis of dialogues through LLMs. In this section we explain in detail the initial requirements for this framework and why already-available alternatives do not fit these requirements (Section \ref{sec:system:requirements}), the system's design and concept (Section \ref{sec:system:design-system}), the prompt templates and strategies used (Section \ref{sec:system:design-prompt}) and finally the actual implementation of the \ac{SDF} (Section \ref{sec:system:implementation}).
 
 \section{Requirements}
 \label{sec:system:requirements}
@@ -31,7 +31,7 @@ Non-functional requirements:
 	\item The system must support a diverse and flexible array of annotation criteria.
 \end{enumerate}
 
-Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements. A major issue is that heir \acp{API} are convoluted, although this could be circumvented with enough effort by employing the Adapter pattern \cite{gamma1995design}. Another more serious problem, however, is that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest. Given that this thesis was developed under acute resource constraints, the latter issue could not be easily remedied.
+Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023GenerativeAM} and LangChain \cite{langchain} fit, or can be made to fit, all functional requirements listed above. They however fail in almost all non-functional requirements. A major issue is that their \acp{API} are convoluted, although this could be circumvented with enough effort by employing the Adapter pattern \cite{gamma1995design}. Another more serious problem, however, is that their internal components frequently necessitate computer resources (dedicated RAM, GPU VRAM e.t.c.) which, for a smaller application such as ours, will most likely not be used to their fullest. Given that this thesis was developed under acute resource constraints, the latter issue could not be easily resolved.
 
 Thus, the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
@@ -51,7 +51,7 @@ We use a simplified version of the LLM discussion framework outlined in \citet{a
 
 \begin{figure}
 	\centering
-	\includegraphics[width=8cm]{conversation_graph_light.png}
+	\includesvg[width=12cm]{resources/conversation_graph_part4.svg}
 	\caption{The conversation loop on which the \ac{SDF} operates. Can be generalized for N users and 0 or 1 moderators.}
 	\label{fig::conversation}
 \end{figure}
@@ -60,7 +60,7 @@ The users and the moderator are all controlled by the same LLM instance (like in
 
 \begin{itemize}
 	\item \textbf{Name}, the name of the actor, used for other actors to refer to him in-conversation.
-	\item \textbf{Role}, the role of the actor within the conversation (user, moderator).
+	\item \textbf{Role}, the role of the actor within the conversation (user or moderator).
 	\item \textbf{Attributes}, a list of actor attributes, primarily used for giving the actor an \ac{SDB}.
 	\item \textbf{Context}, information known to all users.
 	\item \textbf{Instructions}, potentially unique to each actor. 
@@ -83,7 +83,7 @@ The users and the moderator are all controlled by the same LLM instance (like in
 		\State logs.add([user.name(), response])
 		\State history.add([user.name(), response])
 		\State
-		\State moderator.speak(history)
+		\State response = moderator.speak(history)
 		\State logs.add([moderator.name(), response])
 		\State history.add([moderator.name(), response])
 		\EndFor
@@ -104,7 +104,7 @@ As per the non-functional requirements of Section \ref{sec:system:requirements},
 
 In order to bypass this restriction, we can use LLMs to also handle the annotation step. LLM inference is practically constant-time with a fixed input length, since adding a new annotation metric would only impose a computational penalty equal to the output's increased number of tokens - which is negligible. 
 
-Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional \ac{ML} and even \ac{DL} models, we can't explain a LLM's decision). Thus, we are faced with two different approaches:
+Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective (unlike traditional \ac{ML} and even \ac{DL} models, we can't reliably explain a LLM's decision). Thus, we are faced with two different approaches:
 
 \begin{itemize}
 	\item Attempt to find a prompt which produces results closer to what would be expected of a human annotator.
@@ -117,8 +117,8 @@ We re-use the conversation paradigm of Section \ref{ssec:system:creation} to fac
 
 \begin{figure}
 	\centering
-	\includegraphics[width=8cm]{annotation_graph_light.png}
-	\caption{The annotation loop on which the \ac{SDF} operates. Note the purposeful similarity of the function to Figure \ref{fig::conversation}.}
+	\includesvg[width=12cm]{resources/annotation_graph_2.svg}
+	\caption{The annotation loop on which the \ac{SDF} operates. Note the purposeful similarity of the procedure to Figure \ref{fig::conversation}.}
 	\label{fig::annotation}
 \end{figure}
 
@@ -163,7 +163,14 @@ Our facilitator prompts were largely designed on preventing these two phenomena.
 	\item Language should be short and simple.
 \end{itemize}
 
-Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective.
+Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective. An abstract overview of this process can be found in Figure \ref{fig::policy}.
+
+\begin{figure}
+	\centering
+	\includesvg[width=12cm]{resources/moderator_policy.svg}
+	\caption{The procedure with which we created our experimental moderator instructions.}
+	\label{fig::policy}
+\end{figure}
 
 Having defined the policy, we now need to instruct our LLM users on how to violate it, i.e. we generally want to encourage toxicity and personal attacks. We model their instructions according to how these phenomena occur naturally in online conversations. Specifically:
 

@@ -40,7 +40,19 @@ Our framework further incorporates automated LLM-based annotations of these synt
 
 Having set up our framework, we experiment with various prompt strategies and configurations to evaluate how they affect conversation quality, using toxicity as a proxy. Finally, we analyze the content of the discussions alongside the LLM annotations and generate an annotated synthetic dataset which includes the discussions, their annotations, and the inter-annotator agreement. Both source code and datasets can be found in the project's repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
 
-Alongside the creation of this framework to aid in experimentation for online LLM facilitation, we try to answer the following two research questions: \textbf{Q1:} Can LLMs convincingly argue against each other when supplied with only a controversial topic and differing \acp{SDB}? \textbf{Q2}: Do LLM annotators change their judgments according to different \acp{SDB}?
+Alongside the creation of this framework to aid in experimentation for online LLM facilitation, we try to answer the following Research Questions:
+
+\begin{itemize}
+	\item \textbf{RQ1}: Do LLM chat users change their behavior according to the supplied \ac{SDB} in a way consistent with humans holding the same \ac{SDB}?
+	
+	\item \textbf{RQ2}: Does the use of different LLM user-agent/facilitator prompts influence the toxicity of the synthetic conversations?
+	
+	\item \textbf{RQ3}: Does moderator presence influence the toxicity of the conversations with identical topics and configurations?
+	
+	\item \textbf{RQ4}: DO different LLM annotator \ac{SDB} prompts influence the toxicity annotations in a way consistent with humans holding the same \ac{SDB}?
+\end{itemize}
+
+
 
 \section{Thesis Structure}
 \label{sec:intro:structure}

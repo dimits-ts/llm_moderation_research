@@ -140,7 +140,7 @@ In this section, we investigate the following Research Question \textbf{RQ1}: Do
 
 Table \ref{tab:user-sdb-behavior} presents the expected and actual behavior of synthetic users from different \acp{SDB} across the two polarized topics. The seed comments used to start the synthetic conversations were split into two political subjects; racism on the basis of racial identity, and on the basis of sexual orientation. On the one hand, it's clear that \acp{SDB} significantly alter the behavior of our synthetic users. On the other hand, our observations reveal notable deviations from expected behaviors.
 
-For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was neutral. However, the actual behavior exhibited by these users skewed conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. The truly unexpected behavior was that African American users, who were always the first to speak (and thus could not be influenced by the stances of other users), always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since, in the real world, many African Americans may adopt conservative stances \cite{lockerbie2013race, mckenzie2013shades}. We hypothesize that this discrepancy is caused by the LLM's societal and political biases; the model may have assumed that, since African-Americans are a minority, they should also be progressive in other social issues. In contrast to the other \acp{SDB}, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
+For \ac{W.E.I.R.D.} users, the expected behavior for both LGBTQ+ rights and racism was expected to be fairly neutral. However, the actual behavior exhibited by these users skewed significantly conservative for both topics. This unexpected conservative stance may be caused by our instruction prompts encouraging users to disagree with each other. Another perhaps unexpected behavior was that African American users always adopted a progressive stance in topics concerning the LGBTQ+. This is not a behavior which necessarily matches with reality, since, in the real world, some African Americans may adopt conservative stances in various issues not directly related to ethnicity \cite{lockerbie2013race, mckenzie2013shades}. Unlike the \ac{W.E.I.R.D.} users, who might have been influenced who were always the first to speak (and thus could not be influenced by the stances of other users), We hypothesize that this discrepancy is caused by the LLM's societal and political biases; the model may have assumed that, since African-Americans are a minority, they should also be progressive in other social issues (in our case LGBTQ+ rights). In contrast to the other \acp{SDB}, users from the LGBTQ+ community displayed alignment between expected and actual behavior, showing progressive stances on both LGBTQ+ rights and racism. 
 
 These observations should caution on the dangers of biases leaking through \acp{SDB}. Explicit instructions to disagree in order to artificially create polarized discussions may lead to failures in the realism of \acp{SDB}, while inherent model biases may lead to \acp{SDB} adopting stances influenced from the model's own biases (as was the case with the African American synthetic users).
 
@@ -172,7 +172,7 @@ These observations should caution on the dangers of biases leaking through \acp{
 
 In this section, we investigate the following Research Questions: \textbf{RQ2}: Does the use of different LLM user-agent/facilitator prompts influence the toxicity of the synthetic conversations? \textbf{RQ3}: Does moderator presence influence the toxicity of the conversations with identical topics and configurations?
 
-Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line shows the expected observed toxicity of the conversation (3-Moderately toxic). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" \footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}} (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
+Figure \ref{fig::toxicity-strategy} shows the mean toxicity for each prompting strategy, with or without moderator, for each annotator \ac{SDB}. The red line exists for ease of comparison and is set at average toxicity 3 ("Moderately toxic"). We note that the "Moderation Game" prompt displays lower toxicity scores compared to the vanilla prompts. We also note that moderator presence accounts for a significant reduction in toxicity in the vanilla prompt, but not on the "Moderation Game" prompt. Finally, we note that some annotator \acp{SDB} generally gravitate towards different annotation scores; progressive \acp{SDB} such as the "African American" \footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}} (green) and "LGBTQ+" (gray) annotators are more likely to mark a comment as toxic, than more conservative ones such as the "Blue Collar Worker" (brown).
 
 The non-parametric ANOVA test shows that there are significant differences between strategies/moderator presence (Kruskal-Wallis $p\text{=}0$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. The color of each cell denotes the quantitative difference between the mean annotation scores, while the starts denote statistical significance. For example, the vanilla prompts without a moderator had $0.4$ more toxicity on average than the ones with a moderator, with Dunns test $p\text{<}0.001$. We thus confirm that significant deviations exist between all combinations, apart from the existence of the moderator in the "Moderation Game" prompt.
 
@@ -213,7 +213,28 @@ The invariance of the LLM user's toxicity towards the presence of a moderator in
 \subsection{Impact of SDBs in LLM annotators}
 \label{ssec:evaluation:annotators}
 
-In this section, we test the following Research Question \textbf{RQ4}: DO different LLM annotator \ac{SDB} prompts influence the toxicity annotations in a way consistent with humans holding the same \ac{SDB}?
+In this section, we test the following Research Question \textbf{RQ4}: Do different LLM annotator \ac{SDB} prompts influence the toxicity annotations in a way consistent with humans holding the same \ac{SDB}?
+
+This question can be framed in statistical terms as such: Let $A_i, i\text{=}1,2,\dots ,m$ be the annotators with $SDB_i$, $X_j, j\text{=}1,2,\dots n$ be the contents of each comment (including the contents of the $h$ previous comments, where $h$ is the window context length of the annotator, as presented in Section \ref{ssec:system:annotation}) and $Y_{ij}$ their annotations for each comment.
+Then, we can assume that for annotation level $r$ (e.g., $r \text{=} 3 \equiv toxicity\text{=}3$), the annotator's decision hinges on some combination of the annotator's general preference towards high or low annotation scores $p(Y_{ij} \text{=} r | A_i)$ and how that annotator will react to the specific content and context of the message $p(Y_{ij} \text{=} r | X_j, A_i)$. Thus, we arrive at Equation \ref{eq:rq_annotation}.
+
+\begin{equation}
+	\label{eq:rq_annotation}
+	p(Y_{ij} \text{=} r) \text{=} f(p(Y_{ij} \text{=} r | A_i) p(Y_{ij} \text{=} r | X_j, A_i)) 
+\end{equation}
+
+
+Our Research Question can thus be framed as three premises: (a) $p(Y_{ij} \text{=} r)$ changes when $A_i$ changes (b) $p(Y_{ij} \text{=} r | X_j, A_i)$ is significant in deciding $p(Y_{ij} \text{=} r)$? (c) This change reflects the expected behavior of a human with $SDB_i$? Obviously, (c) => (b) => (a) but it does NOT hold that (b) => (c) or (a) => (b).
+
+% something redefined "\hat" here
+\def\hat{\mathaccent "705E\relax}
+
+Of couse, since we use LLMs for deciding $p(Y_{ij} \text{=} r)$, we don't have access to the probabilities themselves, and can only observe $\hat{Y}_{ij} \text{=} argmax_{r}p(Y_{ij} = r)$. Asking the LLM to give us these probabilities would be erroneous, since it would demand post-hoc explanations for a decision the LLM has already taken. Additionally, we have no way of analytically deriving the latent combination function $f$. Thus, we can only attempt to answer the above sub-questions by observing qualitative changes in the annotators' responses.
+
+% subsubsection not supported by template
+\textbf{Do SDBs influence the annotator judgements in general?}
+
+In this subsection we check the validity of premise (a): $p(Y_{ij} \text{=} r)$ changes when $A_i$ changes in Equation \ref{eq:rq_annotation}.
 
 We first check whether disagreement exists between the various annotations. Figure \ref{fig::toxicity-ndfu} shows the  \ac{nDFU}\cite{pavlopoulos-likas-2024-polarized} scores for each synthetically created comment. The majority of comments are in perfect annotator agreement ($nDFU\text{=}0$), while a few are in perfect disagreement ($nDFU\text{=}1$).
 
@@ -228,35 +249,7 @@ Subsequently, we check where exactly these disagreements crop up. Figure \ref{fi
 
 Next, we investigate whether the observed differences are significant statistically and qualitatively. The non-parametric ANOVA test shows that there are significant differences between annotator \acp{SDB} (Kruskal-Wallis $p\text{<}10^{-8}$). Figure \ref{fig::toxicity-annotator-significance} shows the mean differences between each annotator \ac{SDB}, accompanied by Dunn's posthoc test for multiple comparisons. We confirm that significant deviations exist between annotator \acp{SDB} and, interestingly, specifically between some progressive-leaning (African American\footnote{See caveat on whether African Americans can be considered progressive in Section \ref{ssec:evaluation:users}}, LGBTQ+) and conservative-leaning (Blue collar) \acp{SDB}. \textit{However, this pattern does not hold for all \acp{SDB}}, for instance between the "African American" and "Gamer" prompts where no significant deviations are observed. Finally, even though there exist statistically significant deviations, these differences are not considerable. Indeed, the largest deviations only appear in the range of $\pm 0.3$ mean toxicity annotation difference.
 
-From Figure \ref{fig::toxicity-annotator-significance} we can infer the existence of behavioral clusters for each \ac{SDB}. Table \ref{tab:annotator-sdb-behavior} showcases the expected and actual clusters for each \ac{SDB}. Note that our expected behavioral model is completely different from the actual annotations, indicating that \acp{SDB} have failed to model human annotators.
-
-
-\begin{table}
-	\begin{tabular}
-		{ |p{3cm}|p{3cm}|p{3cm}|}
-		\hline
-		\cellcolor{blue!25}\textbf{LLM user SDB} & \cellcolor{blue!25}\textbf{Expected cluster} & \cellcolor{blue!25}\textbf{Actual cluster}\\
-		\hline
-		Blue Collar & Conservative & 1 \\
-		\hline
-		Grandma & Conservative & 2\\
-		\hline
-		LGBTQ+ & Progressive & 2\\
-		\hline
-		\ac{W.E.I.R.D.} & Neutral & 3\\
-		\hline
-		African American & Progressive & 3\\
-		\hline
-		Professor & Neutral & 3\\
-		\hline
-		Control & Neutral & 3\\
-		\hline
-		Gamer & Conservative & 3\\
-		\hline
-	\end{tabular}
-	\caption{Expected and observed clusters of synthetic annotators during our experiments by \ac{SDB}.}
-	\label{tab:annotator-sdb-behavior}
-\end{table}
+Thus, we conclude that the premise (a) is valid. $p(Y_{ij} \text{=} r)$ changes when $A_i$ changes, although the extent of this change is qualitatively small.
 
 \begin{figure}
 	\centering
@@ -272,15 +265,21 @@ From Figure \ref{fig::toxicity-annotator-significance} we can infer the existenc
 	\label{fig::toxicity-annotator-significance}
 \end{figure}
 
-In order to further examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. In mathematical terms, let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) > 0$, but $nDFU(X_i) = 0, \forall i \in G$. 
+\textbf{Can annotator polarization be explained by SDBs?}
 
-This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close, but not $0$. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. Thus, we propose a new statistical test, called the "Aposteriori Unimodality Test". 
+In this subsection we check the validity of premise (b): $p(Y_{ij} \text{=} r | X_j, A_i)$ is significant in deciding $p(Y_{ij} \text{=} r)$ in Equation \ref{eq:rq_annotation}. Instead of testing premise (b) directly, we can answer the following premise ($\hat{b}$): Annotators with the same \acp{SDB} generally agree with each other, but disagree with annotators with differing \acp{SDB}. This is possible, since ($\hat{b}$) => (b), and thus if ($\hat{b}$) does not hold, neither should (b).
+
+In order to examine whether annotator \acp{SDB} prompts are the cause of the polarization in toxicity classifications, we can use the aposteriori unimodality measure introduced in \citet{pavlopoulos-likas-2024-polarized}. This measure compares the \ac{nDFU} of the set comprising all the annotations, with the \acp{nDFU} of each individual annotation set, partitioned by the factors of a selected feature. In mathematical terms, let $X$ the set with all annotations and $X_i, i \in G$ the set comprising all annotations where the annotator has characteristic $i$, and $G$ the set of all characteristics (factors) within a feature. Then, feature $G$ explains the polarization in $X$ if $nDFU(X) \text{>} 0$, but $nDFU(X_i) \text{=} 0, \forall i \in G$. 
+
+This criterion is intuitive and explainable, but does not cover cases where $nDFU(X_i)$ is close to, but not $0$. It also lacks a quantifiable measure for when a feature is likely the cause of polarization. Thus, we propose a new statistical test, called the "Aposteriori Unimodality Test". 
 
 Algorithm \ref{al:aposteriori_unimodality} implements a statistical test based on aposteriori unimodality that attempts to evaluate whether a given feature explains the observed polarization in a set of annotations made by people with different \acp{SDB}. First, the global \ac{nDFU} is computed and should be qualitatively larger than $0$ ($nDFU(X_{global}) \text{>} 0$). Next, we calculate the \ac{nDFU} for each set of annotations characterized by each factor (value) of the selected feature. For example, if we want to test whether the gender of the annotators influences annotations, we have to calculate $nDFU(X_{men}), nDFU(X_{women})$, where $X_{men}$ is the set of all annotations made by male annotators. 
 
-A Wilcoxon signed-rank test is then performed to assess whether the \acp{nDFU} of all factors are statistically indistinguishable from zero (e.g. $nDFU(X_{men}) \text{=} nDFU(X_{women}) \text{=} 0$). Since annotation data typically do not follow a normal distribution and are often limited in number, the non-parametric Wilcoxon test is chosen for its robustness \cite{Rey2011}. The null hypothesis ($H_0$) posits that the feature does not explain the observed polarization (i.e., all \acp{nDFU} are zero), and since $nDFU(a) \in [0,1] \forall a$, the alternative hypothesis ($H_a$) is that $\exists i \in G: nDFU(X_i) > 0$. Finally, the algorithm outputs both the global \ac{nDFU} and the complement of the p-value ($1 - p$), where a low value indicates strong evidence against aposteriori unimodality, suggesting that the feature likely contributes to the observed polarization. In our example, we can not claim that \textit{gender} influences annotation polarization if $nDFU(X_{men}) \text{>} 0 \text{ or } nDFU(X_{women}) \text{>} \text{ or } nDFU_{global} \approx 0$.
+Since annotation data typically do not follow a normal distribution and are often limited in number, the non-parametric Wilcoxon signed-rank test is chosen for its robustness \cite{Rey2011}. We apply this test to assess whether the \acp{nDFU} of all factors are statistically indistinguishable from zero (e.g. $nDFU(X_{men}) \text{=} nDFU(X_{women}) \text{=} 0$). The null hypothesis ($H_0$) posits that the feature does not explain the observed polarization (i.e., all \acp{nDFU} are zero), and since $nDFU(a) \in [0,1] \forall a$, the alternative hypothesis ($H_a$) is that $\exists i \in G: nDFU(X_i) > 0$. Finally, the algorithm outputs both the global \ac{nDFU} and the complement of the p-value ($1 - p$), where a low value indicates strong evidence against aposteriori unimodality, suggesting that the feature likely contributes to the observed polarization. In our example, we can not claim that \textit{gender} influences annotation polarization if $nDFU(X_{men}) \text{>} 0 \text{ or } nDFU(X_{women}) \text{>} 0 \text{ or } nDFU_{global} \approx 0$.
 
 This of course constitutes a very weak statistical test, since it will not detect many cases where most, but not all of the polarization is explained by a certain feature. For example, if $nDFU_{global} \text{=} 0.6$ but  $nDFU(X_{men}) \text{=} 0.1 \text{ and } nDFU(X_{women}) \text{=} 0.2$, then the feature clearly contributes to polarization, but will not be flagged by our test (since it only checks whether $nDFU(X_{men}) \text{=} nDFU(X_{women}) \text{=} 0$. In technical terms, while our test will almost never falsely flag a feature as polarizing when it is not (Type I error), it will frequently ignore features that do actually contribute to polarization (Type II error). A much more robust test would check whether the \acp{nDFU} of the individual factors are statistically smaller than the global (e.g. $nDFU(X_{men}) \text{<} nDFU(X_{global}) \text{ or } nDFU(X_{women}) \text{<} nDFU(X_{global})$.
+
+Additionally, our test groups all observations across all tests, instead of isolating as many latent variables as possible. For example, inherently toxic discussions are grouped with non-toxic ones. Thus, this test is of limited practical value in datasets where many variables other than annotator features influence the annotations. We hope that better approaches to aposteriori unimodality can be developed in the future based on our approach.
 
 \begin{algorithm}
 	\caption{Our proposed Aposteriori Unimodality Test}
@@ -302,9 +301,19 @@ This of course constitutes a very weak statistical test, since it will not detec
 	\end{algorithmic}
 \end{algorithm}
 
-We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p\text{=}0.996$). We also apply it on the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p\text{=}0.9375$). This result is corroborated by the pure \ac{nDFU} values of the annotations; global \ac{nDFU} is $0.4$, while individual group \acp{nDFU} hover around the range [$0.333, 0.4$]. Thus, changing the instruction prompt and adding/removing the moderator meaningfully changes the toxicity level of the conversation, but the annotators stay consistent in the way toxicity changes.
+We apply the Aposteriori Unimodality Test to the Automated Annotation Dataset with \ac{SDB} as the selected feature, and find that \acp{SDB} are not the cause of the polarization between the annotators ($p\text{=}0.996$). We also apply it on the "instruction prompt / moderator presence" feature, which curiously also does not explain the polarization between annotators ($p\text{=}0.9375$). This result can be verified by the pure \ac{nDFU} values of the annotations (bypassing any possible methodological issues of our test); global \ac{nDFU} is $0.4$, while individual group \acp{nDFU} hover around the range [$0.333, 0.4$]. 
 
-Finally, we manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context in which it was posted, which was in response to an overtly racist comment. While the two examples are by no means proof by themselves, they, alongside many others in the dataset, display that \textbf{annotators seem to differ in their priors}.
+In conclusion, we can NOT prove that premise ($\hat{b}$) (\textit{"$p(Y_{ij} \text{=} r | X_j, A_i)$ is significant in deciding $p(Y_{ij} \text{=} r)$"}) holds, and therefore hold no evidence that premise (b) (\textit{"Annotators with the same \acp{SDB} generally agree with each other, but disagree with annotators with differing \acp{SDB}}") does either. These findings suggest that annotator judgements differ \textbf{only in their priors} (from Equation \ref{eq:rq_annotation}: $p(Y_{ij} \text{=} r) \text{=} f(p(Y_{ij} \text{=} r | A_i)$). 
+
+\textbf{Do the observed changes correspond to what would be expected of human annotators?}
+
+In this subsection we answer subquestion (c): The change in $p(Y_{ij} \text{=} r)$ reflects the expected behavior of a human with $SDB_i$? While we have already established that we can not prove the validity of premise (b), while (b) => (c), we think it is worth examining premise (c) anyway.
+
+We manually check the Controversial Discussions Dataset (see Section \ref{sec:evaluation:datasets}). We showcase two interesting comments in Table \ref{tab:ndfu-anomaly}. The comment on the left is clearly conservative-leaning, while the one on the right, progressive-leaning. Both comments are clearly extremely toxic, yet the conservative-leaning annotators consistently mark them as "moderately toxic". Furthermore, the progressive-leaning annotators do not afford the 2nd comment any leeway, despite the context in which it was posted, which was in response to an overtly racist comment. 
+
+While the two examples are by no means proof by themselves, they, alongside many others in the dataset, suggest that the LLM annotators do not follow expected behaviors according to their \ac{SDB}. Thus, we can NOT prove that premise (c) is valid.
+
+\textbf{In the end, we can not claim that RQ4 (\textit{"Do different LLM annotator \ac{SDB} prompts influence the toxicity annotations in a way consistent with humans holding the same \ac{SDB}?}") holds, since two of its three premises can not be verified.}
 
 \begin{table}
 	\centering
@@ -339,3 +348,4 @@ Finally, we manually check the Controversial Discussions Dataset (see Section \r
 	\caption{Examples of annotations showcasing that \acp{SDB} influence annotators in a constant way, regardless of message content and context.}
 	\label{tab:ndfu-anomaly}
 \end{table}
+

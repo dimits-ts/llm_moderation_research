@@ -13,10 +13,10 @@ This project is a part of a wider research effort exploring the use of synthetic
 Functional requirements:
 \begin{enumerate}
 	\item The system must support multiple LLM types, with potentially different libraries handling them.
-	\item The system must support a conversation with at least two LLM users.
+	\item The system must support a discussion with at least two LLM users.
 	\item The system must support \acp{SDB} to be given to LLM users.
 	\item The system must support the existence and absence of a third LLM user, posing as a moderator.
-	\item The moderator must be able to intervene at any point in the conversation.
+	\item The moderator must be able to intervene at any point in the discussion.
 	\item The moderator must be able to "ban" users, preventing them from further commenting.
 	\item The output of the system must be serializable and easily parsable.
 	\item The system must support automated annotation.
@@ -35,7 +35,7 @@ Current LLM discussion frameworks such as Concordia \cite{Vezhnevets2023Generati
 
 LangChain is a toolkit for creating applications that use LLMs to talk between themselves, use tools and interact with humans. It revolves around the use of multiple platforms; notably LangCloud to host the models, LangGraph to set up how the LLM user-agents will interact with each other and human users, and LangSmith which handles model evaluation, testing and debugging. While LangChain does allow locally running LLMs, it has to rely on 3rd party libraries to handle loading and communicating with the LLM. It also still requires the use of three different platforms, making it unwieldy for experimentation.
 
-Concordia is an open-source Python framework designed to facilitate synthetic conversations between LLM user-agents. Given that Concordia is loaded as a Python module and not as a set of individual platforms like LangChain, it is much easier to use. However, it still requires the use of multiple components, which may not be needed for the relatively simple experimental setups this thesis needs. The largest obstacle however, is that many of these components have large computational requirements, allocating computational resources such as GPU VRAM which are precious for low-end, local systems. Given that this thesis was developed under acute resource constraints, the latter issue could not be easily resolved.
+Concordia is an open-source Python framework designed to facilitate synthetic discussions between LLM user-agents. Given that Concordia is loaded as a Python module and not as a set of individual platforms like LangChain, it is much easier to use. However, it still requires the use of multiple components, which may not be needed for the relatively simple experimental setups this thesis needs. The largest obstacle however, is that many of these components have large computational requirements, allocating computational resources such as GPU VRAM which are precious for low-end, local systems. Given that this thesis was developed under acute resource constraints, the latter issue could not be easily resolved.
 
 Thus, the solution of building our own framework is the only practical way of satisfying all the requirements above.
 
@@ -52,21 +52,21 @@ The \ac{SDF} consists of two main functions; \textbf{Synthetic Dialogue Creation
 
 We use a simplified version of the LLM discussion framework outlined in \citet{abdelnabi2024cooperationcompetitionmaliciousnessllmstakeholders}. Each actor is given his turn to speak according to a round-robin scheduling algorithm (essentially, each actor takes his turn and passes it to the next actor in line). This of course, stands in contrast to actual online discussions, where different users can jump in at any point.
 
-Each time an actor is prompted to speak, we provide them with a "context window" of \code{h} previous comments in order for them to understand the context of the conversation, where \code{h} is a hyperparameter selected by the experimenter and constrained by the LLM's input context width. Figure \ref{fig::conversation} shows a simplified version of a conversation involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
+Each time an actor is prompted to speak, we provide them with a "context window" of \code{h} previous comments in order for them to understand the context of the discussion, where \code{h} is a hyperparameter selected by the experimenter and constrained by the LLM's input context width. Figure \ref{fig::conversation} shows a simplified version of a discussion involving only two users and the moderator. A more general overview of the discussion creation loop can be found in Algorithm \ref{al::dialogue-creation}.
 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=12cm]{conversation_graph_part4.png}
-	\caption{The conversation loop on which the \ac{SDF} operates. Can be generalized for N users and 0 or 1 moderators.}
+	\caption{The discussion loop on which the \ac{SDF} operates. Can be generalized for N users and 0 or 1 moderators.}
 	\label{fig::conversation}
 \end{figure}
 
 The users and the moderator are all controlled by the same LLM instance (like in \citet{park2022socialsimulacracreatingpopulated}); we only change the system prompt when each takes their turn to speak. The prompts are comprised of five parts:
 
 \begin{itemize}
-	\item \textbf{Name}, the name of the actor, used for other actors to refer to them in-conversation.
-	\item \textbf{Role}, the role of the actor within the conversation (user or moderator).
+	\item \textbf{Name}, the name of the actor, used for other actors to refer to them in the discussion.
+	\item \textbf{Role}, the role of the actor within the discussion (user or moderator).
 	\item \textbf{Attributes}, a list of actor attributes, primarily used for giving the actor an \ac{SDB} (e.g. "calm", "collected", "supportive").
 	\item \textbf{Context}, information known to all users ("You are in an online chatroom...").
 	\item \textbf{Instructions}, potentially unique to each actor. 
@@ -77,7 +77,7 @@ The users and the moderator are all controlled by the same LLM instance (like in
 	\caption{Synthetic Dialogue Creation algorithm} 
 	\label{al::dialogue-creation}
 	\hspace*{\algorithmicindent} \textbf{Input} users, maxTurns, historyLength\\
-	\hspace*{\algorithmicindent} \textbf{Output} the conversation logs
+	\hspace*{\algorithmicindent} \textbf{Output} the discussion logs
 	\begin{algorithmic}[1]	
 		\State turn = 0
 		\State logs = list()
@@ -106,7 +106,7 @@ The users and the moderator are all controlled by the same LLM instance (like in
 \subsection{Automated Dialogue Annotation}
 \label{ssec:system:annotation}
 
-As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed conversations. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be based on traditional \ac{ML} techniques instead of \ac{DL} ones \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. 
+As per the non-functional requirements of Section \ref{sec:system:requirements}, we need a mechanism which can automatically annotate already-executed discussions. This could be achieved by using specialized classification models such as a model for toxicity classification, another for argument quality, and so on. However, these usually differ not only on their exact architecture, but also on their fundamental type; for instance, in toxicity classification, competitive models can be based on traditional \ac{ML} techniques instead of \ac{DL} ones \cite{anjum2024hate}. Using a diverse set of specialized models, with their own libraries, preprocessing requirements and effectiveness would severely restrict our ability to rapidly change annotation criteria at-scale. 
 
 In order to bypass this restriction, we can use LLMs to also handle the annotation step. Using LLMs as annotators imposes both a challenge and an opportunity, since annotations are no longer objective. Thus, we are faced with two different approaches:
 
@@ -117,7 +117,7 @@ In order to bypass this restriction, we can use LLMs to also handle the annotati
 
 In this thesis, we use the second option.
 
-We re-use the conversation paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor simply outputs comments made in a conversation one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window  (\code{h}) for the annotator; in other words, for each comment, the annotator can see the \code{h} preceding comments of the conversation, in order to ensure they understand the context under which each comment was made. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
+We re-use the discussion paradigm of Section \ref{ssec:system:creation} to facilitate annotation. One pseudo-actor simply outputs comments made in a discussion one-by-one. The other is a LLM actor, which responds with the classification rating for each comment (toxicity in these experiments).  We use a context window  (\code{h}) for the annotator; in other words, for each comment, the annotator can see the \code{h} preceding comments of the discussion, in order to ensure they understand the context under which each comment was made. The annotation loop is succinctly demonstrated in Figure \ref{fig::annotation} and in Algorithm \ref{al::dialogue-annotation}.
 
 \begin{figure}
 	\centering
@@ -169,7 +169,7 @@ Our facilitator prompts were largely designed to prevent these two phenomena. We
 
 Finally, we discourage the facilitator from intervening too many times. Should this happen, we can reasonably assume that the facilitator's interventions are not effective.
 
-Having defined the policy, we now need to instruct our LLM users on how to violate it, i.e. we generally want to encourage toxicity and personal attacks. We model their instructions according to how these phenomena occur naturally in online conversations. Specifically:
+Having defined the policy, we now need to instruct our LLM users on how to violate it, i.e. we generally want to encourage toxicity and personal attacks. We model their instructions according to how these phenomena occur naturally in online discussions. Specifically:
 
 \begin{itemize}
 	\item Many people are unwilling to change opinions during online discussions.
@@ -240,14 +240,14 @@ The annotator prompt can be found in Table \ref{tab:annotator_prompts}. Note the
 	\centering
 	\begin{tabular}{|c|p{9cm}|}
 		\hline
-		Standard Instructions & "You, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the conversation's toxicity as it continues.\newline
+		Standard Instructions & "You, the annotator, will be given a series of comments made on an online discussion. You, the annotator, are tasked with annotating the discussion's toxicity as it continues.\newline
 		The possible labels are:\newline
 		1: Not Toxic \newline
 		2: Barely Toxic \newline
 		3: Almost Toxic \newline
 		4: Toxic \newline
 		5: Extremely Toxic\newline
-		Your output, as the annotator, is only of the form "Toxicity=<number>", do NOT write anything else but the number of your annotation. As the annotator, annotate the following conversation without engaging with it:" \\ \hline
+		Your output, as the annotator, is only of the form "Toxicity=<number>", do NOT write anything else but the number of your annotation. As the annotator, annotate the following discussion without engaging with it:" \\ \hline
 	\end{tabular}
 	\caption{Instruction prompt given to the LLM annotator.}
 	\label{tab:annotator_prompts}
@@ -279,7 +279,7 @@ A high-level overview of the system can be found in Figure \ref{fig::system}. Th
 
 The procedure described in the figure enables us to produce a large amount of data, annotate them, analyze them, and produce concrete results (graphs, statistical tests etc.) with little-to-no manual intervention. Subsequently, these results enable us to change the prompts used by the Actors to refine results or test new hypotheses.
 
-Each processing step (\colorSystemProcessing{pink shapes}) additionally creates entries on our generated dataset, be it the conversation logs with rich meta-data (\colorSystemProcessing{"Generate Conversation"}), multi-annotator, multidimensional annotations (\colorSystemProcessing{"Generate Annotation"}) or controversial comments (\colorSystemProcessing{"Data Analysis"}).
+Each processing step (\colorSystemProcessing{pink shapes}) additionally creates entries on our generated dataset, be it the discussion logs with rich meta-data (\colorSystemProcessing{"Generate Conversation"}), multi-annotator, multidimensional annotations (\colorSystemProcessing{"Generate Annotation"}) or controversial comments (\colorSystemProcessing{"Data Analysis"}).
 
 \begin{figure}
 	\centering

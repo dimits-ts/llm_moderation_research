@@ -8,7 +8,7 @@
 
 \acp{LLM} have revolutionized the field of \ac{NLP}, especially after the introduction of ChatGPT in 2022. Their ability to not only convincingly produce human-like text, but also to respond to user queries and execute tasks such as summarization, annotation and classification \cite{ts2024, tan2024largelanguagemodelsdata}, have led many established companies, startups and research groups around the globe to scramble and identify useful use-cases for this novel technology \cite{HadiASO, Zhou2024LargeLM, Hutchinson2024LLMAssistedVA}.
 
-One such identified case is their use in online discussions. The online environment is essential to  healthy democratic discourse \cite{WrightDemocracy, Janssen2005, Papacharissi2004DemocracyOC} and deliberative discussions \cite{small2021polis}, whose goal is for citizens to share opinions in order to make informed decisions. However, because of the anonymity online discussions offer \cite{Avalle2024PersistentIP}, they are often characterized by aggression and toxicity \cite{XiaToxicity}, which often leads to low-quality discourse \cite{WrightDemocracy} (although the latter position is contested \cite{Papacharissi2004DemocracyOC}). Thus, discussions are often overseen by \textit{"discourse moderators"}, people whose responsibility is to uphold the rules of the discussion and discipline users. In more formal environments \textit{"discourse facilitators"} may be present, ensuring equal participation and helping the participants coordinate with one another. Other equally essential parts of facilitation are promoting even participation, dynamically summarizing the discussion, encouraging the sharing of ideas and opinions, and keeping discussions on-point \cite{Harvard2024, Wang2008StudentfacilitatorsRI}.
+One such identified case is their use in online discussions. The online environment is essential to healthy democratic discourse \cite{WrightDemocracy, Janssen2005, Papacharissi2004DemocracyOC} and deliberative discussions \cite{small2021polis}, whose goal is for citizens to share opinions in order to make informed decisions. However, because of the anonymity online discussions offer \cite{Avalle2024PersistentIP}, they are often characterized by aggression and toxicity \cite{XiaToxicity}, which often leads to low-quality discourse \cite{WrightDemocracy} (although the latter position is contested \cite{Papacharissi2004DemocracyOC}). Thus, discussions are often overseen by \textit{"discourse moderators"}, people whose responsibility is to uphold the rules of the discussion and discipline users. In more formal environments \textit{"discourse facilitators"} may be present, ensuring equal participation and helping the participants coordinate with one another. Other equally essential parts of facilitation are promoting even participation, dynamically summarizing the discussion, encouraging the sharing of ideas and opinions, and keeping discussions on-point \cite{Harvard2024, Wang2008StudentfacilitatorsRI}.
 
 Nevertheless, human facilitation is expensive, time-consuming and often relies on specialized staff \cite{small-polis-llm}. LLMs are perfectly positioned to aid in facilitating discussions \cite{small-polis-llm}, since they are relatively inexpensive, can be scaled easily, and their summarization and text-generation abilities are ideal for the facilitation tasks we outlined above. However, finding the correct prompts and configurations (e.g. which model family, whether to use pretrained or finetuned models, ...) by use of robust experiments with human subjects can be very difficult, and similarly expensive on the researchers' side, because of the heavy use of human participants. This effort represents the wider research context within which this thesis exists, and is illustrated in Figure \ref{fig::goals_2}.
 
@@ -19,12 +19,12 @@ Nevertheless, human facilitation is expensive, time-consuming and often relies o
 	\label{fig::goals_2}
 \end{figure}
 
-In this thesis, we aim to address this limitation by leveraging \acp{LLM} to generate synthetic online discussions at scale. We develop a framework that can automatically produce synthetic discussions at scale, involving users with diverse \acp{SDB} at relatively low cost and within reasonable time constraints. The ability to generate these synthetic discussions easily offers opportunities for low-cost experimentation, prototyping, and A/B testing. Additionally, the creation of a large synthetic dataset has potential applications for large-scale data analysis. In the context of prompt engineering, this effort can be seen as an adversarial procedure where some of the LLM user-agents try to derail the conversation, while the LLM moderator/facilitator attempts to keep it civil (Figure \ref{fig::goals_3}).
+In this thesis, we aim to address this limitation by leveraging \acp{LLM} to generate synthetic online discussions at scale. We develop a framework that can automatically produce synthetic discussions at scale, involving users with diverse \acp{SDB} at relatively low cost and within reasonable time constraints. The ability to generate these synthetic discussions easily, offers opportunities for low-cost experimentation, prototyping, and A/B testing. Additionally, the creation of a large synthetic dataset has potential applications for large-scale data analysis. In the context of prompt engineering, this effort can be seen as an adversarial procedure where some of the LLM user-agents try to derail the discussion, while the LLM moderator/facilitator attempts to keep it civil (Figure \ref{fig::goals_3}).
 
 \begin{figure}
 	\centering
 	\includesvg[width=14cm]{resources/research_goal_3.svg}
-	\caption{The subject of this thesis; developing a framework where many LLM user-agents can simulate online discussions. We prime the LLM user-agents to uphold their personal opinions, even if doing so lowers the quality of the conversation. At the same time, we instruct the LLM-moderator/facilitator to keep the conversation quality as high as possible.}
+	\caption{The subject of this thesis; developing a framework where many LLM user-agents can simulate online discussions. We prime the LLM user-agents to uphold their personal opinions, even if doing so lowers the quality of the discussion. At the same time, we instruct the LLM-moderator/facilitator to keep the discussion quality as high as possible.}
 	\label{fig::goals_3}
 \end{figure}
 
@@ -38,16 +38,16 @@ Our framework further incorporates automated LLM-based annotations of these synt
 \end{figure}
 
 
-Having set up our framework, we experiment with various prompt strategies and configurations to evaluate how they affect conversation quality, using toxicity as a proxy. Finally, we analyze the content of the discussions alongside the LLM annotations and generate an annotated synthetic dataset which includes the discussions, their annotations, and the inter-annotator agreement. Both source code and datasets can be found in the project's repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
+Having set up our framework, we experiment with various prompt strategies and configurations to evaluate how they affect discussion quality, using toxicity as a proxy. Finally, we analyze the content of the discussions alongside the LLM annotations and generate an annotated synthetic dataset which includes the discussions, their annotations, and the inter-annotator agreement. Both source code and datasets can be found in the project's repository \footnote{\url{https://github.com/dimits-ts/llm_moderation_research}}.
 
 Alongside the creation of this framework to aid in experimentation for online LLM facilitation, we try to answer the following Research Questions:
 
 \begin{itemize}
 	\item \textbf{RQ1}: Do LLM chat users change their behavior according to the supplied \ac{SDB} in a way consistent with humans holding the same \ac{SDB}?
 	
-	\item \textbf{RQ2}: Does the use of different LLM user-agent/facilitator prompts influence the toxicity of the synthetic conversations?
+	\item \textbf{RQ2}: Does the use of different LLM user-agent/facilitator prompts influence the toxicity of the synthetic discussions?
 	
-	\item \textbf{RQ3}: Does moderator presence influence the toxicity of the conversations with identical topics and configurations?
+	\item \textbf{RQ3}: Does moderator presence influence the toxicity of the discussions with identical topics and configurations?
 	
 	\item \textbf{RQ4}: Do different LLM annotator \ac{SDB} prompts influence the toxicity annotations in a way consistent with humans holding the same \acp{SDB}?
 \end{itemize}
@@ -65,11 +65,11 @@ This chapter reviews the relevant literature in the field. In Section \ref{sec:r
 In this chapter, we describe the inner mechanisms of our framework. Section \ref{sec:system:requirements} (Requirements) outlines the functional and non-functional requirements for our new framework, explaining why existing frameworks fail to meet these needs. Section \ref{sec:system:design-system} (System Design) provides a high-level overview of the framework, detailing the synthetic discussion creation loop, the various user-configurable options, as well as the automated LLM annotation process. In Section \ref{sec:system:design-prompt} (Prompt Design), we discuss the different prompt templates and strategies used in both the synthetic creation and annotation processes. Lastly, Section \ref{sec:system:implementation} (Implementation) describes the framework's codebase, \ac{API}, and technical implementation details.
 
 \textbf{Chapter \ref{sec:evaluation}} \\[0.2em]
-This chapter details the experiments conducted in this thesis and their outcomes. In Section \ref{sec:evaluation:experimental} (Experimental Setup) we describe the configurations and setup for the synthetic discussion creation and annotation tasks. Section \ref{sec:evaluation:datasets} (Produced Datasets)  presents the synthetic datasets generated by the framework during the experiments.  Finally, in Section \ref{sec:evaluation:analysis} (Results) we analyze the annotation results and examine how various factors impacted the quality (specifically, toxicity) of the synthetic conversations.
+This chapter details the experiments conducted in this thesis and their outcomes. In Section \ref{sec:evaluation:experimental} (Experimental Setup) we describe the configurations and setup for the synthetic discussion creation and annotation tasks. Section \ref{sec:evaluation:datasets} (Produced Datasets)  presents the synthetic datasets generated by the framework during the experiments.  Finally, in Section \ref{sec:evaluation:analysis} (Results) we analyze the annotation results and examine how various factors impacted the quality (specifically, toxicity) of the synthetic discussions, answering the Research Questions posed above.
 
 
 \textbf{Chapter \ref{sec:conclusions}} \\[0.2em]
 This chapter summarizes the objectives and findings of the thesis. We address the research questions outlined in the introduction and highlight key patterns and conclusions drawn from the analysis of our experiments. Finally, we discuss the possible research avenues this thesis opens for future exploration.
 
-\textbf{Chapter \ref{sec:discussion}} \\[0.2em]
-We briefly talk about the challenges and limitations of this thesis, both on a theoretical, and practical level. We also discuss the potential of our findings, and how we hope to build upon them.
+\textbf{Chapter \ref{sec:limitations}} \\[0.2em]
+Finally, we discuss the constraints in resources and methodologies facing this thesis, as well as the limits of our proposed metric.
